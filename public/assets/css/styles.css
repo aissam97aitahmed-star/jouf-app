@@ -1,0 +1,3431 @@
+/* #################### START GLOBAL STYLE  #################### */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.praimary-bg {
+    background-color: #00471F;
+    border-color: #00471F;
+}
+
+.tajawal-extralight {
+    font-family: "Tajawal", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+}
+
+.tajawal-light {
+    font-family: "Tajawal", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.tajawal-regular {
+    font-family: "Tajawal", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+.tajawal-medium {
+    font-family: "Tajawal", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.tajawal-bold {
+    font-family: "Tajawal", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.tajawal-extrabold {
+    font-family: "Tajawal", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+}
+
+.tajawal-black {
+    font-family: "Tajawal", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+}
+
+body {
+    direction: rtl;
+}
+
+.alert-danger ul li {
+    font-family: "Tajawal", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+a {
+    text-decoration: none;
+    transition: transform 0.3s ease, color 0.3s ease;
+
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+p {
+    margin: 0px;
+}
+
+.fs-12 {
+    font-size: 12px;
+}
+
+.fs-14 {
+    font-size: 14px;
+}
+
+.fs-16 {
+    font-size: 16px;
+}
+
+.fs-18 {
+    font-size: 18px;
+}
+
+.fs-20 {
+    font-size: 20px;
+}
+
+.fs-24 {
+    font-size: 24px;
+}
+
+.fs-30 {
+    font-size: 30px;
+}
+
+.fs-36 {
+    font-size: 30px;
+}
+
+ul {
+    list-style: none;
+}
+
+.fs-36 {
+    font-size: 36px;
+}
+
+.fs-48 {
+    font-size: 48px;
+}
+
+.ml-2 {
+    margin-left: 10px;
+}
+
+.text-main {
+    color: #00471F !important;
+}
+
+.label__color {
+    color: #374151;
+}
+
+.gray_border {
+    border-color: #D1D5DB;
+}
+
+.m-0 {
+    margin: 0;
+}
+
+.mr-12 {
+    margin-right: 12px;
+}
+
+.z-1 {
+    z-index: 1;
+}
+
+.z-1 {
+    z-index: 2;
+}
+
+.z-1 {
+    z-index: 3;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -4px;
+    /* Adjust top positioning */
+    right: -4px;
+    /* Adjust right positioning */
+
+    /* Styling for the red circle and the number */
+    background-color: #F80054;
+    /* Pink/Red color similar to the image */
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 18px;
+    /* Same as height and width to center the number */
+
+    /* Shape and size */
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    /* Makes it a perfect circle */
+    text-align: center;
+}
+
+/* Container for the form to ensure proper alignment */
+.form-example-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.p-sticky {
+    position: sticky;
+}
+
+/* ----------------------------------------------- */
+/* Custom Select Styling */
+/* ----------------------------------------------- */
+.custom-select-wrapper {
+    position: relative;
+    /* Ensures the select input looks like the one in the image */
+    height: 50px;
+}
+
+.custom-select-wrapper .form-select {
+    height: 50px;
+    padding-right: 1rem;
+    /* Adjust padding to keep text clear of the icon */
+    padding-left: 2.5rem;
+    /* Ensure padding on the left for the custom icon */
+
+    /* HIDE THE DEFAULT ARROW (critical for custom icon) */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: white;
+}
+
+.custom-select-icon {
+    position: absolute;
+    top: 50%;
+    /* Position the icon on the left for RTL layout */
+    left: 1rem;
+    transform: translateY(-50%);
+    pointer-events: none;
+    /* Make sure the icon doesn't block clicks on the select */
+    color: #495057;
+    /* Icon color */
+    font-size: 1rem;
+    z-index: 2;
+}
+
+.to__top {
+    width: 64px;
+    height: 64px;
+    border-radius: 9999px;
+    background: linear-gradient(149.3deg, #00471F 7.86%, #00AD4C 92.72%);
+    box-shadow: 0px 10px 15px -3px #0000001A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    cursor: pointer;
+    opacity: 0;
+    bottom: 35px;
+    right: 25px;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 9999;
+
+}
+
+.to__top img {
+    pointer-events: none;
+}
+
+/* show button */
+.to__top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* hover effect */
+.to__top:hover {
+    transform: translateY(-5px);
+}
+
+/* #################### END GLOBAL STYLE  #################### */
+
+/* #################### START INDEX PAGE STYLE  #################### */
+.home {
+    background-image: url(../images/home_bg.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.overieed {
+    background: linear-gradient(180deg, rgba(0, 71, 31, 0.2) 0%, rgba(0, 125, 55, 0.5) 46.15%, rgba(0, 71, 31, 0.8) 100%);
+}
+
+.home h1.home__title {
+    font-size: 60px;
+    line-height: 75px;
+    font-weight: bold;
+    color: #000;
+}
+
+.home h1.home__title span {
+    background-image: linear-gradient(90deg, #FACC15 0%, #FB923C 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.home p.home__desc {
+    font-size: 24px;
+}
+
+.f-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #1fc05f, #0b9f68);
+    color: white;
+    border: none;
+    border-radius: 11px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.s-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #FFFFFF, #B8D5C3);
+    color: white;
+    border: none;
+    border-radius: 11px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.bi-person-fill-check,
+.bi-ticket {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(135deg, #1fc05f, #0b9f68);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    border-radius: 10px;
+}
+
+.bi-ticket {
+    background: linear-gradient(135deg, #FFFFFF, #B8D5C3);
+    color: #00471F;
+}
+
+.home .card {
+    background: #ffffff26;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.home .features i {
+    font-size: 30px;
+    background: #58896d;
+    padding: 16px;
+    border-radius: 10px
+}
+
+.home i.bi-ticket-detailed,
+.home i.bi-arrow-right-circle {
+    vertical-align: -webkit-baseline-middle;
+    margin-left: 12px;
+    display: flex;
+    font-size: 22px;
+}
+
+/* #################### END INDEX PAGE STYLE  #################### */
+
+
+/* #################### START EMPLOYEES LOGIN PAGE STYLE  #################### */
+.employee .left-section {
+    background: url('../images/employ_bg.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+}
+
+.employee .left-section .over {
+    height: 100%;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.6) 0%, rgba(30, 41, 59, 0.4) 50%, rgba(30, 58, 138, 0.6) 100%);
+}
+
+.employee .left-section p {
+    font-size: 1rem;
+}
+
+.employee .left-section i {
+    font-size: 28px;
+    background: #616d7173;
+    padding: 16px;
+    border-radius: 10px;
+}
+
+.employee .right-section {
+    background: white;
+    padding: 30px;
+}
+
+.employee .right-section .new {
+    width: 122.65625px;
+    height: 36px;
+    /* angle: 0 deg; */
+    opacity: 1;
+    padding-top: 8px;
+    padding-right: 12px;
+    padding-bottom: 8px;
+    padding-left: 12px;
+    border-radius: 8px;
+
+}
+
+.employee .right-section .sign {
+    height: 48px;
+    opacity: 1;
+    padding-top: 12px;
+    padding-right: 16px;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    border-radius: 8px;
+
+}
+
+.employee .logo {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.employee .card {
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.employee .btn-custom {
+    background-color: #006400;
+    color: white;
+    font-weight: bold;
+}
+
+.employee .form-control {
+    border-radius: 10px;
+    height: 50px;
+}
+
+.line-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.line-container .line {
+    flex-grow: 1;
+    border-top: 1px solid #D1D5DB;
+}
+
+.line-container .text {
+    margin: 0 10px;
+    text-align: center;
+}
+
+/* #################### END EMPLOYEES LOGIN PAGE STYLE  #################### */
+
+
+/* #################### END OVERVIEW PAGE STYLE  #################### */
+.circle__bg {
+    width: 233px;
+    height: 160px;
+    background-color: #126635;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 1;
+    filter: blur(22px);
+}
+
+header.overveiw {
+    background: linear-gradient(90deg, #166534 0%, #13803C 48.56%, #16A34A 100%);
+    padding: 8px;
+}
+
+header.overveiw strong.key {
+    background: linear-gradient(180deg, #FFFFFF 0%, #B8D5C3 100%);
+    color: #00471F;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 18px;
+    margin-left: 15px;
+}
+
+header.overveiw p.emptype {
+    color: #FFFFFF80;
+
+}
+
+header.overveiw .experience {
+    background: #ffffff;
+    padding: 5px 15px;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+.experience span {
+    color: #00471F;
+    ;
+}
+
+header.overveiw .experience__time {
+    color: #16A34A;
+    border-radius: 5px;
+    margin: 0 8px;
+    font-weight: 500;
+}
+
+header.overveiw .experience__icons i {
+    background: #416f56;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 25px;
+    margin-left: 10px;
+    width: 48px;
+    height: 48px;
+    display: flex
+}
+
+.experience__icons i.bi-box-arrow-left {
+    background: white !important;
+    color: red;
+
+}
+
+.main__nav {
+    background-image: url('../images/nav_bg.png');
+    /* background-repeat: no-repeat;
+    background-size: cover; */
+}
+
+.main__nav ul {
+    padding: 30px;
+}
+
+.main__nav ul li a {
+    color: #6B7280;
+    ;
+}
+
+.main__nav ul li.active {
+
+    font-size: 20px;
+}
+
+.main__nav ul li.active a {
+    color: #00471F !important;
+}
+
+.main__nav ul li a i {
+    font-size: 13px;
+    margin-left: 4px;
+}
+
+.general .welcome {
+    background: linear-gradient(105.06deg, #16A34A 3.82%, #16843F 38.96%, #167B3C 65.32%, #166534 100%);
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.general .welcome strong {
+    color: #E0E7FF;
+    ;
+}
+
+.general .welcome i.bi-rocket-takeoff {
+    background: #45b46e;
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.general .welcome .row {
+    display: flex;
+    justify-content: space-between;
+    /* توزيع الأعمدة بالتساوي */
+    flex-wrap: nowrap;
+    /* منع الأعمدة من النزول لسطر جديد */
+}
+
+.general .welcome .row .stat {
+    flex: 1;
+    /* كل عمود يأخذ مساحة متساوية */
+    margin: 0 5px;
+    /* مسافة صغيرة بين الأعمدة */
+    background: #45b46e;
+    padding: 15px 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.general .welcome a.learn {
+    background: #FFFFFF;
+    color: #C3B433;
+    padding: 19px 25px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.general .quickly__actions a {
+    text-align: center;
+    display: block;
+    background: #8CB453;
+    width: 334px;
+    height: 49px;
+    border-radius: 12px;
+    padding: 12px;
+    color: white;
+    font-family: "Tajawal", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.general .quickly__actions a:nth-of-type(2) {
+    background: #06572A;
+    ;
+    /* ضع اللون الذي تريده */
+}
+
+.general .quickly__actions a:nth-of-type(3) {
+    background: #BEB637;
+    ;
+    /* ضع اللون الذي تريده */
+}
+
+
+/* #################### END OVERVIEW PAGE STYLE  #################### */
+
+
+/* #################### START MAP PAGE STYLE  #################### */
+.map .rounded-pill {
+    background-color: #c5e8d2 !important;
+    color: #00471F !important;
+    padding: 7px 20px;
+}
+
+.map .box i.location__icon {
+    background: linear-gradient(90deg, #F97316 0%, #DC2626 100%);
+    color: white;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 24px;
+    margin-left: 15px;
+}
+
+.map .box span.disp {
+    background-color: #c5e8d2 !important;
+    color: #00471F !important;
+    padding: 7px 20px;
+}
+
+.map .box .info {
+    background-color: #F9FAFB;
+    padding: 16px;
+    border-radius: 12px;
+}
+
+/* #################### END MAP PAGE STYLE  #################### */
+
+
+/* #################### START VEDIOS PAGE STYLE  #################### */
+.vedios__learning .actions button {
+    background-color: #00471F !important;
+    border-color: #00471F;
+    color: white !important;
+    padding: 7px 15px;
+}
+
+.vedios__learning .actions button.active {
+    background-color: white !important;
+    border: white;
+    color: #4B5563 !important;
+}
+
+.vedios__learning .actions button.count {
+    background-color: #c5e8d2 !important;
+    border-color: #c5e8d2 !important;
+    color: #4B5563 !important;
+    border-radius: 9999px;
+}
+
+.vedios__content .card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #0000001A;
+    box-shadow: 0px 1px 2px 0px #0000000D;
+    backdrop-filter: blur(4px);
+    border-radius: 16px;
+}
+
+.vedios__content .badge-live {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #EF4444;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 9999px;
+    font-size: 12px;
+    z-index: 10;
+}
+
+.vedios__content img.card-img-fixed {
+    width: 100%;
+    height: 192px;
+    object-fit: cover;
+}
+
+.vedios__content .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 192px;
+    background: rgba(0, 0, 0, 0.55);
+    opacity: 0;
+    transition: 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.vedios__content .play-icon {
+    color: #00471F;
+    background: #ffffff99;
+    font-size: 50px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    opacity: 0;
+    transition: 0.5s ease;
+}
+
+.vedios__content .card:hover .card-overlay {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.vedios__content .card:hover .play-icon {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.vedios__content .actions span.pdg {
+    background-color: #FFEDD5;
+    color: #9A3412;
+    padding: 4px 11px;
+    border-radius: 9999px;
+}
+
+.vedios__content .actions a {
+    color: #4F46E5;
+}
+
+/* MODAL STYLE  */
+.vedios__modal .modal-header {
+    padding: 32px;
+}
+
+.vedios__modal .modal-header i.bi-play-circle {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(133.96deg, #00471F 7.67%, #00AD4C 93.64%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 28px;
+    margin-left: 16px;
+
+}
+
+.vedios__modal .modal-header i.close {
+    color: #4B5563;
+    cursor: pointer;
+}
+
+.vedios__modal .modal-header span {
+    margin-left: 16px;
+}
+
+.vedios__modal .modal-header span.category,
+.vedios__modal .modal-header span.required {
+    background-color: #DBEAFE;
+    color: #1E40AF;
+    padding: 4px 12px;
+    border-radius: 9999px;
+
+}
+
+.vedios__modal .modal-header span.required {
+    background-color: #FEE2E2;
+    color: #991B1B;
+}
+
+.vedios__modal .modal-body div.play {
+    width: fit-content;
+    margin: auto;
+    border: 20px solid #FFFFFF1A;
+    border-radius: 9999px;
+}
+
+.vedios__modal .modal-body div.play i {
+    background: #FFFFFF33;
+    width: 96px;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    font-size: 38px !important;
+}
+
+.vedios__modal .modal-body button.start__play i,
+.vedios__modal .modal-body button.start__download i {
+    font-size: 13px !important;
+    margin-left: 12px;
+
+}
+
+.vedios__modal .modal-body button.start__play,
+.vedios__modal .modal-body button.start__download {
+    background: linear-gradient(133.96deg, #00471F 7.67%, #00AD4C 93.64%);
+    border-radius: 12px;
+    border: none;
+    padding: 16px 40px;
+}
+
+.vedios__modal .modal-body button.start__download {
+    background: #FFFFFF1A;
+}
+
+.vedios__modal .modal-footer {
+    padding: 32px;
+    background: linear-gradient(90deg, #F9FAFB 0%, #FFFFFF 100%);
+}
+
+.vedios__modal .modal-footer h5 i {
+    margin-left: 8px;
+    color: #4F46E5;
+    font-size: 16px;
+}
+
+.vedios__modal .modal-footer .details .item {
+    background: #FFFFFF;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0px 1px 2px 0px #0000000D;
+    margin-bottom: 16px;
+}
+
+.vedios__modal .modal-footer .details i {
+    width: 48px;
+    height: 49px;
+    background: #DBEAFE;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2563EB;
+    margin-left: 15px;
+}
+
+.vedios__modal .modal-footer .details i.views {
+    background-color: #DCFCE7;
+    color: #16A34A;
+}
+
+.vedios__modal .modal-footer .details i.category {
+    background-color: #F3E8FF;
+    color: #9333EA;
+}
+
+.vedios__modal .modal-footer .details i.type {
+    background-color: #FEE2E2;
+    color: #DC2626;
+}
+
+.vedios__modal .modal-footer .learn {
+    background: #FFFFFF;
+    padding: 25px;
+    border: 1px solid #F3F4F6;
+    border-radius: 16px;
+    box-shadow: 0px 1px 2px 0px #0000000D;
+}
+
+.vedios__modal .modal-footer .learn ul {
+    padding-left: 0;
+}
+
+.vedios__modal .modal-footer .learn ul li {
+    border-radius: 12px;
+    opacity: 1;
+    padding: 12px;
+    background: linear-gradient(90deg, #DBEAE0 0%, #FDFFFD 95.67%);
+}
+
+.vedios__modal .modal-footer .learn ul li i {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(180deg, #00471F 0%, #00AD4C 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.vedios__modal .modal-footer .learn h6 i {
+    color: #EA580C;
+    margin-left: 8px
+}
+
+.vedios__modal .modal-footer .learn div.adv {
+    border-radius: 12px;
+    border-width: 1px;
+    padding: 17px;
+    background: linear-gradient(90deg, #FEFCE8 0%, #FFF7ED 100%);
+    border: 1px solid #FEF08A;
+}
+
+/* #################### END VEDIOS PAGE STYLE  #################### */
+
+/* #################### START EMPLOYEES LIST PAGE STYLE  #################### */
+.employees__list .badge {
+    background-color: #f5f3de !important;
+    color: #C3B433 !important;
+    padding: 10px 15px;
+}
+
+.employees__list .box {
+    border: 1px solid #0000001A;
+    backdrop-filter: blur(4px);
+    box-shadow: 0px 2px 2px 0px #0000001A;
+    border-radius: 16px;
+    padding: 25px;
+
+}
+
+.employees__list .box .key {
+    background: linear-gradient(180deg, #00471F 0%, #00AD4C 100%);
+    color: white;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    margin-left: 15px;
+}
+
+.employees__list ul.info li {
+    color: #374151;
+}
+
+.employees__list ul.info li i {
+    color: #9CA3AF;
+}
+
+.employees__list .actions a {
+    background-color: #166534;
+    border: #166534;
+    border-radius: 12px;
+}
+
+.employees__list .actions a:last-child {
+    background-color: #F3F4F6;
+    color: #374151;
+}
+
+.employees__call .modal-content,
+.employees__message .modal-content {
+    border-radius: 24px;
+    border: none;
+    box-shadow: 0px 25px 50px -12px #00000040;
+
+}
+
+.employees__call .modal-header,
+.employees__message .modal-header {
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    height: 240px;
+    background: linear-gradient(108.94deg, #00471F 5.92%, #007C36 54.11%, #00AD4C 100%);
+    padding: 32px;
+}
+
+.employees__call .modal-header span,
+.employees__message .modal-header span {
+    width: 96px;
+    height: 96px;
+    display: flex;
+    background: #FFFFFF33;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    color: #FFFFFF;
+}
+
+.employees__call .modal-body .item {
+    background: #F9FAFB;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+.employees__call .modal-body .item i {
+    width: 48px;
+    height: 48px;
+    background: #DBEAFE;
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2563EB;
+    border-radius: 12px;
+}
+
+.employees__call .modal-body .item i.mail {
+    background: #DCFCE7;
+    color: #16A34A;
+}
+
+.employees__call .modal-body .item i.map {
+    background: #FFEDD5;
+    color: #EA580C;
+}
+
+.employees__call .modal-body a.action {
+    background: linear-gradient(90deg, #22C55E 0%, #059669 100%);
+    box-shadow: 0px 10px 15px -3px #0000001A !important;
+    border: none;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.employees__call .modal-body a.action i {
+    margin-left: 12px;
+    font-size: 13px;
+}
+
+.employees__call .modal-body a.action:nth-of-type(2) {
+    background: linear-gradient(90deg, #3B82F6 0%, #4F46E5 100%);
+
+}
+
+.employees__call .modal-body a.action:nth-of-type(3) {
+    background: #F3F4F6;
+    color: #374151;
+    box-shadow: none !important;
+
+}
+
+.employees__call .modal-body .add {
+    padding: 17px;
+    background: linear-gradient(90deg, #EEF2FF 0%, #FAF5FF 100%);
+    border-radius: 12px;
+    border: 1px solid #E0E7FF;
+}
+
+.employees__message .modal-body form input::placeholder,
+.employees__message .modal-body form textarea::placeholder,
+.employees__message .modal-body form input {
+    font-family: "Tajawal", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14px;
+    color: #9CA3AF;
+}
+
+.employees__message .modal-body form input {
+    color: #111827;
+}
+
+.employees__message .modal-body .templates {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.employees__message .modal-body .templates .item {
+    border-radius: 12px;
+    padding: 13px;
+    border-width: 1px;
+    background-color: #F6FFFA;
+    border: 1px solid #00471F80
+}
+
+.employees__message .modal-body form .priority div span {
+    border-radius: 12px;
+    padding-top: 8px;
+    padding-right: 12px;
+    padding-bottom: 8px;
+    padding-left: 12px;
+    background: #DCFCE7;
+    color: #166534;
+}
+
+.employees__message .modal-body form .priority div span i {
+    font-size: 11px;
+}
+
+.employees__message .modal-body form .priority div span:nth-of-type(2) {
+    background: #FEF9C3;
+    color: #854D0E;
+}
+
+.employees__message .modal-body form .priority div span:nth-of-type(3) {
+    background: #FEE2E2;
+    color: #991B1B;
+}
+
+.employees__message .modal-body form .action button {
+    border-radius: 16px;
+    padding-top: 16px;
+    padding-right: 24px;
+    padding-bottom: 16px;
+    padding-left: 24px;
+    background: #F3F4F6;
+    color: #374151;
+    border: none;
+}
+
+.employees__message .modal-body form .action button i {
+    margin-left: 10px;
+    font-size: 12px;
+}
+
+.employees__message .modal-body form .action button.first-btn {
+    border-radius: 16px;
+    opacity: 0.5;
+    padding-top: 16px;
+    padding-right: 24px;
+    padding-bottom: 16px;
+    padding-left: 24px;
+    background: linear-gradient(90deg, #16A34A 0%, #083D1C 100%);
+    box-shadow: 0px 10px 15px -3px #0000001A;
+    box-shadow: 0px 4px 6px -4px #0000001A;
+    color: #FFFFFF;
+
+}
+
+.employees__message .modal-body form .end {
+    border-radius: 12px;
+    padding: 17px;
+    border-width: 1px;
+    border: 1px solid #00471F80;
+    background-color: #F6FFFA;
+}
+
+.employees__message .modal-body form .end h6 {
+    color: #00471F;
+}
+
+.employees__message .modal-body form .end h6 i {
+    margin-left: 10px;
+    font-size: 12px;
+}
+
+.employees__message .modal-body form .end ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+}
+
+.employees__message .modal-body form .end ul li {
+    color: #166534;
+}
+
+.employees__message .modal-body form .end ul li i {
+    margin-left: 10px;
+    font-size: 12px;
+}
+
+/* #################### END EMPLOYEES LIST PAGE STYLE  #################### */
+
+/* #################### START POLICY PAGE STYLE  #################### */
+.policy span.disp {
+    background-color: #DCFCE7 !important;
+    color: #4B5563 !important;
+    padding: 12px 15px;
+}
+
+.policy h5 {
+    color: #111827;
+}
+
+.policy ul.cats li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.policy ul.cats li a {
+    color: #111827;
+}
+
+.policy ul.cats li span {
+    background-color: #DBEAFE;
+    color: #1E40AF;
+    border-radius: 100%;
+    font-size: 12px;
+    width: 22px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* إخفاء السهم في Chrome + Edge + Safari */
+.policy form .select-wrapper select {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+}
+
+/* إخفاء السهم في Firefox */
+.policy form .select-wrapper select {
+    -moz-appearance: none !important;
+}
+
+/* إخفاء سهم الإنترنت إكسبلورر (لو موجود) */
+.policy form .select-wrapper select::-ms-expand {
+    display: none;
+}
+
+/* إضافة مساحة للأيقونة */
+.policy form .select-wrapper select {
+    padding-left: 40px !important;
+    text-align: right;
+    background: #efefef;
+    border-radius: 12px;
+}
+
+/* الأيقونة */
+.policy form .select-wrapper .select-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 12px;
+    color: black;
+}
+
+.policy form select:has(option[value="value1"]:checked) {
+    font-family: "Tajawal", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+}
+
+.policy span.key {
+    background: #3B82F6;
+    /* background: linear-gradient(180deg, #00471F 0%, #00AD4C 100%); */
+    color: white;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    margin-left: 15px;
+}
+
+.policy .box h4 span {
+    background: #FFEDD5 !important;
+    color: #C2410C !important;
+    padding: 5px 11px;
+    border-radius: 9999px;
+}
+
+.policy .box .details li {
+    margin-left: 20px;
+}
+
+.policy .box .actions a {
+    background-color: #00471F;
+    border: none;
+    border-radius: 12px;
+    padding: 8px 20px;
+    color: white;
+    margin-left: 10px;
+}
+
+.policy .box .actions a:nth-child(2) {
+    background-color: #16A34A !important;
+    /* example color */
+}
+
+.policy .box .actions a:nth-child(3) {
+    background-color: #F3F4F6 !important;
+    /* example color */
+    color: #374151 !important;
+}
+
+.policy .box .actions a.last {
+    background: #FFEDD5 !important;
+    color: #C2410C !important;
+    margin-left: 0;
+}
+
+.policy .box .progress__rate {
+    background-color: #F9FAFB;
+    padding: 16px;
+    border-radius: 12px;
+}
+
+.policy .box .progress__rate strong.percent {
+    color: #00471F;
+}
+
+.policy .box .progress__rate .progress-bar {
+    background-color: linear-gradient(180deg, #00471F 0%, #00AD4C 100%) !important;
+}
+
+/* #################### END POLICY PAGE STYLE  #################### */
+
+/* #################### START BOT PAGE STYLE  #################### */
+.bot span.disp {
+    background-color: #DCFCE7 !important;
+    color: #00471F !important;
+    padding: 12px 15px;
+}
+
+.bot .chat {
+    background: linear-gradient(90.76deg, #00471F -7.22%, #00AD4C 116.57%);
+    border-radius: 12px;
+    padding: 24px;
+    color: white;
+}
+
+.bot .chat .chat_icon {
+    width: 48px;
+    height: 48px;
+    background: #33ad69;
+    padding: 14px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px;
+}
+
+.bot .chat i.fa-circle {
+    font-size: 12px;
+    color: #4ADE80;
+}
+
+.bot .chat_body {
+    width: fit-content;
+    background: linear-gradient(90deg, #F3F4F6 0%, #E5E7EB 100%);
+    padding: 16px;
+    border-radius: 16px;
+}
+
+.bot .chat_body i {
+    color: #00471F;
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+.bot .chat_body h6 span {
+    color: #00471F;
+}
+
+.bot .chat_body p {
+    color: #1F2937;
+}
+
+.bot .questions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.bot .questions p {
+    border-radius: 12px;
+    border-width: 1px;
+    padding-top: 9px;
+    padding-right: 13px;
+    padding-bottom: 9px;
+    padding-left: 13px;
+    background: #F4FFF8;
+    border: 1px solid #16A34A;
+    animation-timing-function: ease-in;
+    animation-duration: 300ms;
+    color: #00471F;
+}
+
+.bot .questions p i {
+    font-size: 10px;
+    color: #00471F;
+    border: 1px solid #00471F;
+    padding: 1px 3px;
+    border-radius: 50%;
+    margin-left: 5px;
+}
+
+.bot form input {
+    border-radius: 12px;
+    border-width: 1px;
+    flex: 1;
+    margin-left: 15px;
+    padding: 10px;
+    border: 1px solid #E5E7EB;
+    background: #F9FAFB;
+
+}
+
+.bot form input::placeholder {
+    color: #9CA3AF;
+}
+
+.bot form button.sent {
+    background: linear-gradient(142.02deg, #00471F 25.91%, #00AD4C 93.7%);
+    border: none;
+    border-radius: 12px;
+    padding: 12px 15px;
+    color: white;
+    opacity: .5;
+}
+
+.bot .stat div i {
+    background: linear-gradient(90deg, #3B82F6 0%, #4F46E5 100%);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border-radius: 12px;
+    margin-left: 10px;
+}
+
+.bot .stat div i.quest {
+    background: linear-gradient(90deg, #22C55E 0%, #059669 100%);
+}
+
+.bot .stat div i.resp {
+    background: linear-gradient(90deg, #F97316 0%, #DC2626 100%);
+
+}
+
+.bot .repeat ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-radius: 12px;
+    background: #F9FAFB;
+    margin-bottom: 10px;
+    color: #111827;
+}
+
+.bot .repeat ul li strong {
+    width: 29px;
+    height: 24px;
+    opacity: 1;
+    padding-top: 4px;
+    padding-right: 8px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    border-radius: 9999px;
+    background: #EAFFF2;
+    color: #00471F;
+
+}
+
+.bot .settings button {
+    background: linear-gradient(90deg, #3B82F6 0%, #4F46E5 100%);
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+.bot .settings button:nth-child(2) {
+    background: linear-gradient(90deg, #22C55E 0%, #059669 100%);
+}
+
+.bot .settings button:nth-child(3) {
+    background: linear-gradient(90deg, #A855F7 0%, #DB2777 100%);
+
+}
+
+.bot .user__message,
+.bot .bot__message {
+    width: 400px;
+}
+
+.bot .user__message {
+    background: linear-gradient(99.64deg, #00471F 0%, #00AD4C 94.45%);
+}
+
+.bot__modal .modal-header {
+    background: linear-gradient(91.15deg, #00471F 2.18%, #00AD4C 121.37%);
+    padding: 32px;
+}
+
+.bot__modal .modal-header i.bi-gear {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF33;
+    border-radius: 16px;
+    color: #FFFFFF;
+    font-size: 24px;
+    margin-left: 15px;
+}
+
+.bot__modal .modal-header i.bi-x {
+    width: 48px;
+    height: 48px;
+    background: #FFFFFF33;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.bot__modal .modal-body {
+    padding: 32px;
+}
+
+.bot__modal .modal-body .box {
+    border: 1px solid #DBEAFE;
+    background: linear-gradient(135deg, #EFF6FF 0%, #EEF2FF 100%);
+    border-radius: 16px;
+    padding: 25px;
+    border-width: 1px;
+    margin-bottom: 24px;
+
+}
+
+.bot__modal .modal-body .box:nth-of-type(2) {
+    background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 100%);
+    border: 1px solid #DCFCE7
+}
+
+.bot__modal .modal-body .base {
+    background: linear-gradient(135deg, #FFF7ED 0%, #FEF2F2 100%);
+    border: 1px solid #FFEDD5;
+}
+
+
+
+.bot__modal .modal-body .box h4 i {
+    margin-left: 8px;
+    font-size: 12px;
+}
+
+.bot__modal .modal-body .box .content select,
+.bot__modal .modal-body .box .content input[type="text"],
+.bot__modal .modal-body .box .content textarea {
+    border-radius: 12px;
+    padding-top: 13px;
+    padding-right: 17px;
+    padding-bottom: 13px;
+    padding-left: 17px;
+    border-width: 1px;
+    background: #FFFFFF;
+    border: 1px solid #D1D5DB;
+    color: #000000;
+}
+
+.bot__modal .modal-body .box .content select:has(option[value="arabic"]:checked) {
+    font-family: "Tajawal", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+}
+
+.bot__modal .modal-body .box .status {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    padding: 17px;
+    border-radius: 12px;
+}
+
+/* إزالة الشكل الافتراضي */
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    background: #ddd;
+    /* لون الشريط غير المعبأ */
+    border-radius: 10px;
+    outline: none;
+}
+
+/* شريط المدى (اللون المعبأ) — Chrome */
+input[type="range"]::-webkit-slider-runnable-track {
+    height: 6px;
+    background: linear-gradient(to right, #007BFF var(--value), #ddd var(--value));
+    border-radius: 10px;
+}
+
+/* المقبض */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #007BFF;
+    /* لون المقبض */
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -6px;
+}
+
+/* Firefox */
+input[type="range"]::-moz-range-track {
+    height: 6px;
+    background: #ddd;
+    border-radius: 10px;
+}
+
+input[type="range"]::-moz-range-progress {
+    height: 6px;
+    background: #007BFF;
+    /* الجزء المعبأ */
+    border-radius: 10px;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: #007BFF;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.bot__modal .modal-body .box .status .reponse .form-check-input:checked {
+    background-color: #16A34A;
+    border-color: #16A34A;
+}
+
+.bot__modal .modal-body .base .count span {
+    background: #F3E8FF;
+    color: #6B21A8;
+    padding: 6px 8px;
+    border-radius: 9999px;
+}
+
+.bot__modal .modal-body .box a.action {
+    border: none;
+    padding: 8px 16px;
+}
+
+.bot__modal .modal-body .box a.action i {
+    margin-left: 6px;
+    font-size: 12px;
+}
+
+.bot__modal .modal-body .box a.action__edit {
+    background: #9333EA;
+}
+
+.bot__modal .modal-body .box a.action__manage {
+    background: #2563EB;
+}
+
+.bot__modal .modal-body .box a.action__info {
+    background: #16A34A;
+}
+
+.bot__modal .modal-body .box a.action__download {
+    background: #EA580C;
+    padding: 12px 24px;
+}
+
+.bot__modal .modal-body .stat {
+    background: linear-gradient(135deg, #FAF5FF 0%, #FDF2F8 100%) !important;
+    border: 1px solid #F3E8FF !important
+}
+
+.bot__modal .modal-body .stat .item {
+    background: #FFFFFF;
+    padding: 17px;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.bot__modal .modal-body .box .status .act .form-check-input:checked {
+    background-color: #EA580C;
+    border-color: #EA580C;
+}
+
+.bot__modal .modal-body .options a {
+    border-radius: 12px;
+    padding-top: 12px;
+    padding-right: 24px;
+    padding-bottom: 12px;
+    padding-left: 24px;
+    background: #F3F4F6;
+    border: none;
+
+}
+
+.bot__modal .modal-body .options a.return {
+    background: #CA8A04;
+}
+
+.bot__modal .modal-body .options a.save {
+    background: #16A34A;
+}
+
+.bot__modal .modal-body .options a.test {
+    background: #2563EB;
+}
+
+.bot__modal .modal-body .options a i {
+    vertical-align: -webkit-baseline-middle;
+    margin-left: 8px;
+}
+
+.bot__modal .modal-body .footer {
+    border-radius: 12px;
+    padding: 17px;
+    border-width: 1px;
+    background: linear-gradient(90deg, #EEF2FF 0%, #EFF6FF 100%);
+    border: 1px solid #E0E7FF
+}
+
+/* #################### END BOT PAGE STYLE  #################### */
+
+
+/* #################### START HOME VISITOR PAGE STYLE  #################### */
+.home__visitor {
+    background: linear-gradient(90deg, #166534 0%, #13803C 48.56%, #16A34A 100%);
+    color: white;
+    padding-top: 10px;
+}
+
+.home__visitor i.bi-person-add,
+header.security i.bi-shield-check {
+    background: linear-gradient(180deg, #FFFFFF 0%, #B8D5C3 100%);
+    width: 48px;
+    height: 48px;
+    color: #00471F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    border-radius: 12px;
+    margin-left: 12px;
+}
+
+.home__visitor a.link {
+    border-radius: 12px;
+    padding-top: 12px;
+    padding-right: 24px;
+    padding-bottom: 12px;
+    padding-left: 24px;
+    background: linear-gradient(180deg, #FFFFFF 0%, #B8D5C3 100%);
+    box-shadow: 0px 10px 15px -3px #0000001A;
+    box-shadow: 0px 4px 6px -4px #0000001A;
+    border: none;
+    margin-right: 16px;
+}
+
+.home__visitor a.link i {
+    vertical-align: -webkit-baseline-middle;
+    margin-left: 8px;
+
+}
+
+.hero {
+    position: relative;
+    width: 100%;
+    min-height: 90vh;
+    /* يمكنك التعديل */
+    background-image: url('../images/hero.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+/* الـ Overlay */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+            rgba(17, 24, 39, 0.6) 0%,
+            rgba(9, 47, 35, 0.7) 50%,
+            rgba(18, 129, 59, 0.8) 100%);
+    z-index: 1;
+}
+
+.hero .content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+}
+
+.hero h1 {
+    background: linear-gradient(90deg, #FACC15 0%, #FB923C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero .data .text-center {
+    margin-left: 24px;
+}
+
+.hero .actions a {
+    padding: 16px 32px;
+    border: none;
+    border-radius: 16px;
+    margin-left: 16px;
+}
+
+.hero .actions a i {
+    vertical-align: -webkit-baseline-middle;
+    margin-left: 8px;
+}
+
+.hero .actions a:nth-child(1) {
+    background: linear-gradient(90deg, #EAB308 0%, #F97316 100%);
+    box-shadow: 0px 25px 50px -12px #00000040;
+
+}
+
+.hero .actions a:nth-child(2) {
+    background: #FFFFFF1A;
+    border: 1px solid #FFFFFF33;
+    backdrop-filter: blur(4px)
+}
+
+.hero .statistic {
+    border-radius: 24px;
+    padding: 33px;
+    border-width: 1px;
+    background: #FFFFFF1A;
+    border: 1px solid #FFFFFF33;
+    backdrop-filter: blur(12px)
+}
+
+.hero .statistic .item {
+    background: #FFFFFF1A;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+
+}
+
+.hero .statistic .item i {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #22C55E33;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 15px;
+    color: #4ADE80;
+    font-size: 20px;
+
+
+}
+
+.visits {
+    padding: 80px 0px;
+}
+
+.visits .item {
+    border-radius: 24px;
+    padding: 33px;
+    border-width: 1px;
+    background: #FFFFFF;
+    border: 1px solid #F3F4F6;
+    box-shadow: 0px 10px 15px -3px #0000001A;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.visits .item i.start {
+    width: 80px;
+    height: 80px;
+    border-radius: 16px;
+    background: linear-gradient(90deg, #3B82F6 0%, #4F46E5 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 30px;
+
+}
+
+.visits .item i.bi-clock {
+    color: #3B82F6;
+    margin-left: 8px;
+    font-size: 13px;
+    vertical-align: -webkit-baseline-middle;
+
+}
+
+.visits .item i.bi-check {
+    color: #22C55E;
+    font-size: 20px;
+    vertical-align: -webkit-baseline-middle;
+
+}
+
+.visits .item a.apply {
+    border: none;
+    border-radius: 12px;
+    padding-top: 12px;
+    padding-right: 24px;
+    padding-bottom: 12px;
+    padding-left: 24px;
+    background: linear-gradient(90deg, #3B82F6 0%, #4F46E5 100%);
+
+}
+
+.visits .item i.bi-arrow-left {
+    margin-right: 10px;
+    font-size: 15px;
+    vertical-align: -webkit-baseline-middle;
+}
+
+.gradient__2 {
+    background: linear-gradient(90deg, #22C55E 0%, #059669 100%) !important;
+}
+
+.gradient__3 {
+    background: linear-gradient(90deg, #F97316 0%, #DC2626 100%) !important;
+}
+
+.gradient__4 {
+    background: linear-gradient(90deg, #A855F7 0%, #DB2777 100%) !important;
+
+}
+
+.system {
+    background: linear-gradient(135deg, #F8FFFB 0%, #F3FFF8 100%);
+    padding: 80px 0px;
+
+}
+
+.system .item {
+    border-radius: 24px;
+    padding: 32px;
+    background: #FFFFFF;
+    box-shadow: 0px 10px 15px -3px #0000001A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.system .item .icon-container {
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(180deg, #00471F 0%, #00AD4C 100%);
+    /* Green gradient */
+    border-radius: 18px;
+    /* Rounded corners */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* Needed for positioning the badge */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.system .item .number {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+}
+
+.system .item .badge {
+    position: absolute;
+    top: -5px;
+    /* Adjust as needed */
+    right: -5px;
+    /* Adjust as needed */
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(to bottom right, #ffa500, #ff8c00);
+    /* Orange gradient */
+    border-radius: 50%;
+    /* Makes it a circle */
+    border: 3px solid white;
+    /* White border */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style the Bootstrap Icon */
+.system .item .badge i {
+    color: white;
+    font-size: 12px;
+}
+
+.system a.export__permit {
+    border: none;
+    padding-top: 16px;
+    padding-right: 32px;
+    padding-bottom: 16px;
+    padding-left: 32px;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #00471F 0%, #00AD4C 100%);
+    box-shadow: 0px 10px 15px -3px #0000001A;
+    animation-duration: 0ms;
+
+}
+
+.system a.export__permit i {
+    margin-left: 12px;
+}
+
+.creating {
+    padding: 80px 0;
+}
+
+.creating .item {
+    text-align: center;
+    /* توسيط النص */
+    display: flex;
+    /* تفعيل فليكس */
+    flex-direction: column;
+    /* العناصر تحت بعض */
+    align-items: center;
+    /* توسيط أفقي */
+    justify-content: center;
+    /* توسيط عمودي */
+    height: 100%;
+}
+
+.creating .item i {
+    width: 80px;
+    height: 80px;
+    border-radius: 16px;
+    background: linear-gradient(90deg, #E2FFEF 0%, #F2FFF8 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00471F;
+    font-size: 25px;
+
+}
+
+footer.end {
+    padding: 80px;
+    background: linear-gradient(180deg, #00471F 0%, #00AD4C 100%);
+}
+
+footer.end a {
+    padding: 16px 32px;
+    border-radius: 16px;
+    box-shadow: 0px 10px 15px -3px #0000001A;
+    margin-right: 24px;
+    border: none;
+}
+
+footer.end a i {
+    margin-left: 16px;
+}
+
+footer.end a.apply {
+    background: #FFFFFF;
+    color: #00471F;
+}
+
+footer.end a.contact {
+    border: 1px solid #FFFFFF33;
+    background: #FFFFFF1A;
+
+}
+
+/* #################### END BOT VISITOR STYLE  #################### */
+
+
+/* #################### END LOGIN VISITOR STYLE  #################### */
+.visitor__login .bg-box {
+    position: relative;
+    background-image: url('../images/logn_bg.jpg');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    /* vertical center */
+    justify-content: center;
+    /* horizontal center */
+    text-align: center;
+}
+
+/* Black overlay */
+.visitor__login .bg-box::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(135deg,
+            rgba(15, 23, 42, 0.6) 0%,
+            rgba(30, 41, 59, 0.4) 50%,
+            rgba(30, 58, 138, 0.6) 100%);
+    z-index: 1;
+}
+
+/* Make content appear above overlay */
+.visitor__login .bg-box .content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+}
+
+.visitor__login .bg-box .content .item i {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    background: #FFFFFF33;
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    margin-bottom: 13px;
+}
+
+.visitor__login form {
+    width: 446px;
+    border-radius: 30px;
+    padding: 30px;
+    border-width: 1px;
+    background: #FFFFFF;
+    border: 1px solid #0000000D;
+    box-shadow: 0px 4px 4px 0px #00000040;
+
+}
+
+.visitor__login form .type a {
+    padding-top: 8px;
+    padding-right: 12px;
+    padding-bottom: 8px;
+    padding-left: 12px;
+    border-radius: 8px;
+    background: #F3F4F6;
+    color: #374151;
+    border: none;
+
+}
+
+.visitor__login form .type a.active {
+    background: #00471F;
+    color: #FFFFFF;
+}
+
+.visitor__login form .input-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #D1D5DB;
+    padding: 10px 15px;
+    max-width: 400px;
+    background-color: #fff;
+    direction: rtl;
+    border-radius: 12px;
+
+}
+
+.visitor__login form .input-icon {
+    color: #aaa;
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.visitor__login form .visitor-input {
+    border: none;
+    outline: none;
+    width: 100%;
+    /* Ensures placeholder text aligns correctly */
+    text-align: right;
+    background-color: transparent;
+}
+
+.visitor__login form .visitor-input::placeholder {
+    color: #aaa;
+    /* Specific styles for placeholder text */
+}
+
+.visitor__login form input.remember__me {
+    margin-left: 10px;
+    opacity: .5;
+    width: 18px;
+    height: 18px;
+    outline: none;
+}
+
+.visitor__login form button.submit {
+    padding: 12px 16px;
+    border-radius: 8px;
+    background: #00471F;
+    box-shadow: 0px 10px 15px -3px #0000001A;
+    border: none;
+}
+
+.visitor__login form .form__footer a {
+    color: #374151;
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    padding: 13px 17px;
+    border-radius: 12px;
+    border-width: 1px;
+
+}
+
+.visitor__login form .form__footer a i {
+    vertical-align: -webkit-baseline-middle;
+    margin-left: 8px;
+
+}
+
+/* #################### END LOGIN VISITOR STYLE  #################### */
+
+/* #################### END ORDER FORMS STYLE  #################### */
+.order__header {
+    height: 135px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    background: linear-gradient(to right,
+            #1e5b32 0%,
+            #227c3d 25%,
+            #3b9756 50%,
+            #227c3d 75%,
+            #1e5b32 100%);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.order__header .bi-person-add {
+    margin-left: 12px;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #FFFFFF 0%, #B8D5C3 100%);
+    color: #00471F !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+}
+
+.order__header a {
+    border-radius: 12px;
+    padding: 8px 16px;
+    background: #FFFFFF;
+    color: #00471F;
+    border: none;
+    transition: .4s;
+}
+.order__header a:hover {
+    background: #00471F;
+
+}
+.order__header a i {
+    vertical-align: -webkit-baseline-middle;
+    margin-left: 8px;
+}
+.order__header button.btn i {
+    vertical-align: -webkit-baseline-middle;
+
+}
+
+.order__application .form-container {
+    max-width: 996px;
+    margin: 50px auto;
+    padding: 32px;
+}
+
+/* Step Indicator Styles */
+.order__application .step-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    position: relative;
+    flex-direction: row-reverse;
+}
+
+.order__application .step-item {
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.order__application .step-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    color: #9CA3AF;
+    border: 2px solid #D1D5DB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-left: 12px;
+
+}
+
+.order__application .step-circle i {
+    font-size: 18px;
+}
+
+.order__application .step-item.active .step-circle {
+    background-color: #00471F;
+    border: 2px solid #00471F;
+    width: 48px;
+    height: 48px;
+    color: white;
+}
+
+.order__application .step-item.done .step-circle {
+    background-color: #00471F;
+    color: white;
+    /* Success Green (Completed) */
+}
+
+.order__application .step-item.active,
+.order__application .step-item.done {
+    color: #05492d;
+    font-weight: bold;
+}
+
+/* Form Styling */
+.order__application .form-title {
+    text-align: right;
+    padding-bottom: 15px;
+    color: #111827;
+}
+
+.order__application .form-control,
+.order__application .form-select {
+    height: 50px;
+    text-align: right;
+    padding: 13px 17px;
+    border-radius: 12px;
+    border-width: 1px;
+    border: 1px solid #D1D5DB
+}
+
+.order__application .form-control::placeholder {
+    color: #9CA3AF;
+    font-family: "Tajawal", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 16px;
+}
+
+.order__application .form-label {
+    color: #374151;
+    text-align: right;
+    width: 100%;
+    font-family: "Tajawal", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    margin-bottom: 8px;
+}
+
+.order__application .step-content {
+    display: none;
+    padding: 0px 30px;
+    /* All steps hidden by default */
+}
+
+.order__application .step-content.active {
+    display: block;
+    padding: 0px 30px;
+    /* Active step is shown */
+}
+
+.order__application button.next-btn,
+.order__application button.prev-btn {
+    background: #00471F;
+    font-family: "Tajawal", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+    padding: 12px 24px;
+    border-radius: 12px;
+
+}
+
+.order__application button.prev-btn {
+    background: #4B5563;
+    color: white;
+}
+
+.order__application button.next-btn i {
+    margin-right: 8px;
+    vertical-align: sub;
+}
+
+.order__application button.prev-btn i {
+    margin-left: 8px;
+    vertical-align: sub;
+}
+
+.order__application button.disable {
+    background: #F3F4F6;
+    color: #9CA3AF;
+}
+.toast-container .toast-body-title,
+.order__application select,
+select option,
+select:has(option:checked:not([value=""])),
+.order__application select:has(option[value="*"]:checked),
+.order__application select:has(option[value="YE"]:checked) {
+    font-family: "Tajawal", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 16px;
+}
+
+.order__application .form-select {
+    background: #EFEFEF;
+
+}
+
+.order__application .review {
+    padding: 24px;
+    border-radius: 12px;
+    background: #F9FAFB;
+
+}
+
+.order__application .review span.key__name {
+    color: #6B7280;
+}
+
+.order__application .review p.value__name {
+    color: #111827;
+}
+
+.order__application .form-check-input,
+.visitor__login .form-check-input {
+    margin-left: 15px;
+    width: 20px;
+    height: 20px;
+    margin-top: 0px;
+}
+
+.order__application .form-check-input:checked,
+.visitor__login .form-check-input:checked {
+    background-color: #00471F !important;
+    /* green */
+    border-color: #00471F !important;
+    border: 2px solid #00471F
+}
+
+.order__application .conditions {
+    padding: 17px;
+    border-radius: 12px;
+    border-width: 1px;
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE
+}
+
+.order__application .conditions p {
+    color: #1E40AF;
+}
+
+
+
+.order__application .arabic-date-wrapper {
+    position: relative;
+    width: 300px;
+    height: 48px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    direction: rtl;
+    width: 100%;
+}
+
+.order__application .arabic-date-input {
+    width: 100%;
+    height: 100%;
+    font-family: inherit;
+    font-size: 16px;
+    text-align: right;
+    color: #333;
+    border: none;
+    background: transparent;
+    outline: none;
+    padding-right: 15px;
+    padding-left: 45px;
+}
+
+.order__application .custom-calendar-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.25rem;
+    color: #555;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.order__application .arabic-date-input::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+}
+
+.order__application .arabic-date-input {
+    appearance: none;
+    -moz-appearance: none;
+}
+
+.order__application .submit__success {
+    width: 448px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 0px;
+}
+
+.order__application .submit__success i.bi-check {
+    width: 80px;
+    height: 80px;
+    border-radius: 9999px;
+    background: #DCFCE7;
+    color: #16A34A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 45px;
+}
+
+.order__application .order__number {
+    padding: 17px;
+    border-radius: 12px;
+    border-width: 1px;
+    background: #F0FDF4;
+    border: 1px solid #BBF7D0;
+    width: 100%;
+    text-align: center;
+}
+
+.order__application a.go__home {
+    padding: 12px 16px;
+    background: #00471F;
+    border: none;
+    border-radius: 12px;
+}
+
+/* #################### END ORDER FORMS STYLE  #################### */
+
+/* #################### END SCAN QR CODE MODAL STYLE  #################### */
+.scaan__qr .modal-content {
+    border-radius: 12px;
+    text-align: center;
+    padding: 24px;
+}
+
+.scaan__qr .modal-body>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.scaan__qr .bi-upc-scan {
+    font-size: 24px;
+    color: #10B981;
+    background-color: #DCFFEB;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    color: #00471F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scaan__qr #qr-box {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    max-width: 300px;
+    margin: 20px auto;
+    border: 2px dashed #9CA3AF;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scaan__qr .qr-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.scaan__qr .qr-overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow:
+        -2px -2px 0 0 #10B981,
+        2px -2px 0 0 #10B981,
+        -2px 2px 0 0 #10B981,
+        2px 2px 0 0 #10B981;
+    border-width: 20px;
+    border-style: solid;
+    border-color: transparent;
+    -webkit-mask:
+        linear-gradient(to bottom right, transparent 20px, black 20px),
+        linear-gradient(to bottom left, transparent 20px, black 20px),
+        linear-gradient(to top right, transparent 20px, black 20px),
+        linear-gradient(to top left, transparent 20px, black 20px);
+    mask:
+        linear-gradient(to bottom right, transparent 20px, black 20px),
+        linear-gradient(to bottom left, transparent 20px, black 20px),
+        linear-gradient(to top right, transparent 20px, black 20px),
+        linear-gradient(to top left, transparent 20px, black 20px);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 50% 50%;
+    mask-size: 50% 50%;
+    -webkit-mask-position: top left, top right, bottom left, bottom right;
+    mask-position: top left, top right, bottom left, bottom right;
+    border: none;
+}
+
+.scaan__qr #qr-loading-text {
+    color: #9CA3AF;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 500;
+}
+
+.scaan__qr #reader video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+}
+
+.scaan__qr #reader div[data-v-00000000] {
+    display: none !important;
+}
+
+/* #################### END SCAN QR CODE MODAL STYLE  #################### */
+
+/* #################### START SECURITY OFICER 01 STYLE  #################### */
+header.security .actions a {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: #FFFFFF33;
+    box-shadow: 0px 10px 15px -3px #0000001A;
+    backdrop-filter: blur(4px);
+    border: none;
+    margin-right: 10px;
+}
+
+header.security .actions a i {
+    vertical-align: -webkit-baseline-middle;
+    font-size: 20px;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -6px;
+    right: 33px;
+    background-color: #ff3b5f;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1;
+    padding: 6px 7px;
+    border-radius: 50%;
+    z-index: 10;
+    min-width: 14px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(90deg, #EF4444 0%, #EC4899 100%);
+    font-size: 12px;
+}
+
+.notification-icon {}
+
+section.statistic__security {
+    padding: 35px 0px;
+}
+
+section.statistic__security .item {
+    border-radius: 16px;
+    border-width: 1px;
+    padding: 17px;
+    background: #F8F9FB;
+    border: 1px solid #FFFFFF33;
+    backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section.statistic__security .item i {
+    background: linear-gradient(90deg, #3B82F6 0%, #4F46E5 100%);
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    color: white;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+
+}
+
+nav.navbar__security .navbar {
+    background-image: url('../images/nav_bg.png');
+    margin: 30px 0px;
+    height: 117px;
+}
+
+nav.navbar__security .navbar ul {
+    padding: 0;
+    margin-bottom: 0px;
+    display: flex;
+}
+
+nav.navbar__security .navbar ul li {
+    margin-right: 42px;
+}
+
+nav.navbar__security .navbar a {
+    color: #6B7280;
+}
+
+
+nav.navbar__security .navbar a i {
+    margin-left: 8px;
+    font-size: 19px;
+    vertical-align: -webkit-baseline-middle;
+
+}
+
+nav.navbar__security .navbar a.active {
+    color: #00471F;
+    font-family: "Tajawal", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 18px !important;
+}
+
+nav.navbar__security .navbar a.active i {
+    color: #00471F;
+}
+
+section.overview__security {
+    padding: 30px 0px;
+}
+
+section.overview__security .box {
+    height: 705px;
+    border-radius: 16px;
+    border-width: 1px;
+    padding: 25px;
+    background: #F8F9FBCC;
+    border: 1px solid #FFFFFF33;
+    backdrop-filter: blur(4px);
+}
+
+section.overview__security .box span.count {
+    border-radius: 9999px;
+    padding: 4px 12px;
+    background: #DCFCE7;
+    color: #166534;
+}
+
+section.overview__security .visitor {
+    border-radius: 12px;
+    border-width: 1px;
+    padding: 17px;
+    background: linear-gradient(90deg, #F0FDF4 0%, #ECFDF5 100%);
+    border: 1px solid #BBF7D0;
+    margin-top: 24px;
+
+}
+
+section.overview__security .visitor i {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #22C55E 0%, #059669 100%);
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+section.overview__security a.scan__link {
+    height: 60px;
+    opacity: 1;
+    border-radius: 12px;
+    padding-top: 16px;
+    padding-right: 24px;
+    padding-bottom: 16px;
+    padding-left: 24px;
+    background: linear-gradient(180deg, #00471F 0%, #00AD4C 100%);
+    border: none;
+    width: 100%;
+}
+
+section.overview__security a.scan__link i {
+    vertical-align: -webkit-baseline-middle;
+    margin-left: 12px;
+}
+
+section.overview__security .alert {
+    border-radius: 12px;
+    border-width: 1px;
+    padding: 13px;
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+    display: flex;
+}
+
+section.overview__security .alert i {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #EF4444 0%, #E11D48 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 12px;
+}
+
+section.overview__security a.quikly__link {
+    height: 49px;
+    border-radius: 12px;
+    padding: 12px 16px;
+    background: #2563EB;
+    margin-bottom: 12px;
+}
+
+/* #################### END SECURITY OFICER 01 STYLE  #################### */
+
+/* #################### START SECURITY OFICER 02 STYLE  #################### */
+section.scanner__security div.scanner {
+    height: 576px;
+    border-radius: 16px;
+    border-width: 1px;
+    padding: 33px;
+    background: #F8F9FBCC;
+    border: 1px solid #FFFFFF33;
+    backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section.scanner__security .start__scan {
+    width: 256px;
+    height: 256px;
+    opacity: 1;
+    border-radius: 16px;
+    border-width: 4px;
+    padding: 4px;
+    border-style: dashed;
+    background: linear-gradient(91.64deg, rgba(255, 255, 255, 0.5) 7.8%, rgba(184, 213, 195, 0.5) 87.61%);
+    border: 4px dashed #B4FFD5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+section.scanner__security .start__scan i.bi-qr-code {
+    font-size: 60px;
+    color: #9CA3AF;
+}
+
+section.scanner__security a.scan__link {
+    height: 60px;
+    border-radius: 12px;
+    padding-top: 16px;
+    padding-right: 32px;
+    padding-bottom: 16px;
+    padding-left: 32px;
+    background: linear-gradient(180deg, #00471F 0%, #00AD4C 100%);
+    border: none;
+}
+
+section.scanner__security .previous__scan {
+    width: 526;
+    height: 82;
+    opacity: 1;
+    border-radius: 12px;
+    border-width: 1px;
+    padding: 17px;
+    background: #F0FDF4;
+    border: 1px solid #BBF7D0
+}
+
+section.scanner__security ul.Instructions__use li strong {
+    width: 40px;
+    height: 40px;
+    opacity: 1;
+    border-radius: 12px;
+    margin-left: 15px;
+    background: linear-gradient(90deg, #3B82F6 0%, #4F46E5 100%);
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+section.scanner__security .notes__requirement {
+    height: 106px;
+    border-radius: 12px;
+    border-width: 1px;
+    padding: 17px;
+    background: #FEFCE8;
+    border: 1px solid #FEF08A
+}
+
+section.scanner__security .notes__requirement i {
+    margin-left: 8px;
+    vertical-align: -webkit-baseline-middle;
+}
+
+/* #################### END SECURITY OFICER 02 STYLE  #################### */
+
+/* #################### START SECURITY OFICER 03 STYLE  #################### */
+.visitors__security form input {
+    width: 236px;
+    height: 42px;
+    border-radius: 12px;
+    border-width: 1px;
+    padding: 9px 17px;
+    background: #FFFFFF;
+    border: 1px solid #D1D5DB
+}
+
+.order__application .arabic-date-input::placeholder,
+.visitors__security form input::placeholder {
+    color: #9CA3AF !important;
+    font-size: 16px !important;
+    font-family: "Tajawal", sans-serif !important;
+    font-weight: 500 !important;
+    font-style: normal !important;
+}
+
+.arabic-date-input.flatpickr-input.active,
+.arabic-date-input {
+  font-family: "Tajawal", sans-serif !important;
+  font-weight: 500 !important;
+  font-style: normal !important;
+}
+/* تطبيق الخط على كافة أيام التقويم */
+.flatpickr-calendar .flatpickr-day {
+    font-family: "Tajawal", sans-serif;
+}
+
+/* التأكد من تطبيق الوزن والنمط على اليوم المحدد تحديداً */
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover,
+.flatpickr-day.startRange,
+.flatpickr-day.startRange:hover,
+.flatpickr-day.endRange,
+.flatpickr-day.endRange:hover,
+.flatpickr-day.today,
+.flatpickr-day.today:hover {
+    font-family: "Tajawal", sans-serif !important;
+    font-weight: 500 !important; /* الوزن 500 هو المطلوب */
+    font-style: normal !important;
+}
+
+.visitors__security form button {
+    margin-right: 12px;
+    width: 85px;
+    border-radius: 12px;
+    padding: 8px 16px;
+    background: #00471F;
+    color: white;
+    border: none;
+}
+
+.visitors__security form button i {
+    font-size: 11px;
+    margin-left: 4px;
+    vertical-align: -webkit-baseline-middle;
+}
+
+.visitors__security .data__vistors {
+    padding: 30px 0px;
+}
+
+.visitors__security .data__vistors table thead tr th {
+    background: #F9FAFB;
+    height: 48px;
+    border-bottom: none;
+    vertical-align: middle;
+    color: #6B7280;
+    font-size: 12px;
+    font-family: "Tajawal", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.visitors__security .data__vistors table .visitor__info i {
+    margin-left: 12px;
+    width: 40px;
+    height: 40px;
+    opacity: 1;
+    border-radius: 12px;
+    background: linear-gradient(180deg, #00471F 0%, #00AD4C 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.visitors__security .data__vistors table tbody tr td {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    vertical-align: middle;
+}
+
+.visitors__security .data__vistors table tbody tr td p {
+    color: #111827;
+}
+
+.visitors__security .data__vistors table tbody tr td p i {
+    margin-left: 8px;
+    vertical-align: -webkit-baseline-middle;
+    color: #9CA3AF;
+    font-size: 17px;
+}
+
+.visitors__security .data__vistors table tbody tr td span.status {
+    color: #166534;
+    width: 73px;
+    height: 24px;
+    border-radius: 9999px;
+    padding: 4px 8px;
+    background: #DCFCE7;
+    vertical-align: baseline;
+}
+
+.visitors__security .data__vistors table tbody tr td .actions a {
+    margin-left: 8px;
+}
+
+/* #################### END SECURITY OFICER 03 STYLE  #################### */
+
+/* #################### START SECURITY OFICER 04 STYLE  #################### */
+.alerts__security {
+    margin: 20px 0px;
+}
+
+.alerts__security a.read__all,
+.reports__security a.download__reports {
+    height: 41px;
+    opacity: 1;
+    border-radius: 12px;
+    padding: 8px 16px;
+    background: #00471F;
+    border: none;
+}
+
+.alerts__security a.read__all i,
+.reports__security a.download__reports i {
+    vertical-align: -webkit-baseline-middle;
+}
+
+.alerts__security .alerts__security__all .alert__single {
+    height: 138px;
+    border-radius: 16px;
+    border-width: 1px;
+    padding: 25px;
+    background: #F8F9FBCC;
+    border: 1px solid #FFFFFF33;
+    backdrop-filter: blur(4px);
+    margin-bottom: 15px;
+}
+
+.alerts__security .alerts__security__all .alert__info i {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #EF4444 0%, #E11D48 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 12px;
+    color: white;
+
+
+}
+
+.alerts__security .alerts__security__all {
+    margin: 30px 0px;
+}
+
+.alerts__security .alerts__security__all h3 span {
+    color: #991B1B;
+    background: #FEE2E2;
+    border-radius: 9999px;
+    padding: 4px 8px;
+    margin-right: 10px;
+
+}
+
+.alerts__security .alerts__security__all .alert__status a {
+    height: 36px;
+    border-radius: 12px;
+    padding: 8px 16px;
+    background: #00471F;
+    border: none;
+    margin-right: 8px;
+
+}
+
+.alerts__security .alerts__security__all .alert__status a.details {
+    background: #F3F4F6;
+    color: #374151;
+}
+
+.alerts__security .alerts__security__all .alert__status a i {
+    vertical-align: -webkit-baseline-middle;
+}
+
+/* #################### END SECURITY OFICER 04 STYLE  #################### */
+
+/* #################### START SECURITY OFICER 05 STYLE  #################### */
+.reports__security {}
+
+.reports__security .reports__security_details {
+    margin: 30px 0px;
+}
+
+.reports__security .report__single {
+    height: 202px;
+    border-radius: 16px;
+    border-width: 1px;
+    padding: 25px;
+    background: #F8F9FBCC;
+    border: 1px solid #FFFFFF33;
+    backdrop-filter: blur(4px);
+    margin: 0px 15px;
+}
+
+.reports__security .report__single i {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #3B82F6 0%, #4F46E5 100%);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* #################### END SECURITY OFICER 05 STYLE  #################### */
+
+/* #################### START SECURITY OFICER MODAL STYLE  #################### */
+.modal__security .global__info {}
+
+.modal__security .visit__data {
+    border-radius: 12px;
+    padding: 16px;
+    background: #F9FAFB;
+
+}
+
+.modal__security .visit__data ul li {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal__security span.visit___status {
+    border-radius: 9999px;
+    padding: 4px 12px;
+    background: #F3E8FF;
+    color: #6B21A8;
+}
+
+.modal__security textarea {
+    border-radius: 12px;
+    border-width: 1px;
+    padding: 13px 17px;
+    background: #FFFFFF;
+    border: 1px solid #D1D5DB
+}
+
+.modal__security textarea::placeholder {
+    font-family: "Tajawal", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14px;
+}
+
+/* #################### END SECURITY OFICER MODAL STYLE  #################### */
+
+
+/* #################### END SECURITY MANAGER 02 STYLE  #################### */
+.list__sec__manager {}
+
+.list__sec__manager form {
+    position: relative;
+    display: inline-block;
+}
+
+.list__sec__manager form input {
+    width: 448px;
+    height: 50px;
+    opacity: 1;
+    border-radius: 12px;
+    background: #FFFFFF;
+    border: 1px solid #D1D5DB;
+    padding-right: 17px;
+    padding-left: 41px;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    box-sizing: border-box;
+    direction: rtl;
+    text-align: right;
+}
+
+.list__sec__manager form input::placeholder {
+    color: #9CA3AF;
+    font-size: 16px;
+    font-family: "Tajawal", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.list__sec__manager form i.bi-search {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9CA3AF;
+    font-size: 18px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.list__sec__manager .actions a {
+    border-radius: 12px;
+    padding: 8px 16px;
+    background: #F3F4F6;
+    color: #374151;
+    border: none;
+    margin-right: 8px;
+}
+
+.list__sec__manager .actions a.active {
+    background: #00471F;
+    color: #FFFFFF;
+}
+
+.list__sec__manager .all__orders .order__single {
+    border-radius: 16px;
+    padding: 20px;
+    border-top-width: 1px;
+    border-right-width: 4px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    background: #F8F9FB;
+    box-shadow: 0px 1px 2px 0px #0000000D;
+    border-width: 1px, 4px, 1px, 1px;
+    border-style: solid;
+    border-color: #FFFFFF33;
+    backdrop-filter: blur(4px)
+}
+
+.list__sec__manager .all__orders .order__single span.status {
+    opacity: 1;
+    border-radius: 9999px;
+    padding: 4px 12px;
+    background: #FEF9C3;
+    color: #854D0E;
+
+}
+
+.list__sec__manager .all__orders .order__single span.id {
+    border-radius: 9999px;
+    padding: 4px 8px;
+    background: #F3F4F6;
+    color: #6B7280;
+}
+
+.list__sec__manager .all__orders .order__single .note p {
+    color: #374151;
+    border-radius: 8px;
+    border-width: 1px;
+    padding: 13px;
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE
+}
+
+.list__sec__manager .all__orders .order__single .btns a {
+    border-radius: 12px;
+    padding-top: 12px 24px;
+    border: none;
+
+}
+
+.list__sec__manager .all__orders .order__single .btns a i {
+    vertical-align: -webkit-baseline-middle;
+}
+
+.list__sec__manager .all__orders .order__single .btns a:first-child {
+    color: #B91C1C;
+    background: #FEE2E2;
+}
+
+.list__sec__manager .all__orders .order__single .btns a:nth-child(2) {
+    color: #FFFFFF;
+    background: #16A34A;
+}
+
+/* #################### END SECURITY MANAGER 02 STYLE  #################### */
+
+/* #################### END SECURITY MANAGER MODALS STYLE  #################### */
+.modal__mng_accept {}
+
+.modal__mng_accept .order__details {
+    border-radius: 12px;
+    padding: 24px;
+    background: #F9FAFB;
+}
+
+.modal__mng_accept .options a {
+    border-radius: 12px;
+    padding-top: 12px 24px;
+
+}
+
+.modal__mng_accept .options a:first-child {
+    border: 1px solid #D1D5DB;
+    background: none;
+    color: #374151;
+}
+
+.modal__mng_accept .options a:nth-child(2) {
+    background: #16A34A;
+    border: 1px solid #16A34A;
+
+}
+
+.modal__mng_accept textarea {
+    border-radius: 12px;
+    border-width: 1px;
+    padding: 13px 17px;
+    background: #FFFFFF;
+    border: 1px solid #D1D5DB
+}
+
+.modal__mng_accept textarea::placeholder {
+    font-family: "Tajawal", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14px;
+}
+
+.modal__mng_accept .options a.reject {
+    background: #DC2626;
+    border: 1px solid #DC2626;
+    opacity: .5;
+}
+
+/* #################### END SECURITY MANAGER MODALS STYLE  #################### */
