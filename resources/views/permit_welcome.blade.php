@@ -38,8 +38,8 @@
                 <div class="">
                     <a href="{{ route('visitor.apply') }}" class="btn btn-primary tajawal-regular fs-16 link" style="color: #00471F;"><i
                             class="bi bi-plus"></i> طلب تصريح جديد</a>
-                    <a href="" class="btn btn-primary tajawal-regular fs-16 link" style="color: #00471F;"><i
-                            class="bi bi-box-arrow-right"></i> طلب تصريح جديد</a>
+                    <a href="{{ route('officer_security.login') }}" class="btn btn-primary tajawal-regular fs-16 link" style="color: #00471F;"><i
+                            class="bi bi-box-arrow-right"></i>تسجيل دخول الموظفين</a>
                 </div>
             </div>
 

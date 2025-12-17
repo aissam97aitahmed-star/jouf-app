@@ -7,7 +7,10 @@ use App\Http\Controllers\Employee\VideoController;
 use App\Http\Controllers\Employee\PrivacyController;
 use App\Http\Controllers\Employee\EmployeesListController;
 
-Route::prefix('employee')->name('employee.')->group(function () {
+Route::middleware(['auth', 'role:employee'])->prefix('employee')->name('employee.')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('employees.dashboard');
+    })->name('dashboard');
     Route::get('/map', [MapController::class, 'index'])->name('map');
     Route::get('/videos', [VideoController::class, 'index'])->name('videos');
     Route::get('/employees_list', [EmployeesListController::class, 'index'])->name('employeeslist');
@@ -15,3 +18,11 @@ Route::prefix('employee')->name('employee.')->group(function () {
     Route::get('/chat_bot', [BotController::class, 'index'])->name('bot');
 });
 
+
+// Route::prefix('employee')->name('employee.')->group(function () {
+//     Route::get('/map', [MapController::class, 'index'])->name('map');
+//     Route::get('/videos', [VideoController::class, 'index'])->name('videos');
+//     Route::get('/employees_list', [EmployeesListController::class, 'index'])->name('employeeslist');
+//     Route::get('/privacy', [PrivacyController::class, 'index'])->name('privacy');
+//     Route::get('/chat_bot', [BotController::class, 'index'])->name('bot');
+// });

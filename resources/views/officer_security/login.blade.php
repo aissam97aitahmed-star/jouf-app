@@ -48,9 +48,9 @@
                                     المستخدم</label>
                                 <div class="type d-grid gap-3"
                                     style="grid-template-columns: repeat(3, 1fr); width: 100%;">
-                                    <a href="{{ route('manager.login') }}" class="btn btn-primary tajawal-medium fs-14 w-100 active">مدير
+                                    <a href="{{ route('manager.login') }}" class="btn btn-primary tajawal-medium fs-14 w-100">مدير
                                         الامن</a>
-                                    <a href="{{ route('officer_security.login') }}" class="btn btn-primary tajawal-medium fs-14 w-100 ">موظف الامن</a>
+                                    <a href="{{ route('officer_security.login') }}" class="btn btn-primary tajawal-medium fs-14 w-100 active">موظف الامن</a>
                                     <a href="{{ route('visitor.login') }}" class="btn btn-primary tajawal-medium fs-14 w-100 ">زائر</a>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
                                     الوظيفي</label><br>
                                 <div class="input-container">
                                     <span class="input-icon"><i class="bi bi-person"></i></span>
-                                    <input type="text" placeholder="ادخل الرقم الوظيفي" name="username" value="Aljouf009"
+                                    <input type="text" placeholder="ادخل الرقم الوظيفي" name="username" value="Aljouf067655"
                                         required autofocus autocomplete="username" class="visitor-input tajawal-medium fs-14">
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                                 </label><br>
                                 <div class="input-container">
                                     <input type="text" placeholder="********" name="password" required
-                                        class="visitor-input tajawal-medium fs-14" value="Aljouf1897900">
+                                        class="visitor-input tajawal-medium fs-14" value="Aljouf5465757">
                                     <span class="input-icon"><i class="bi bi-eye"></i></span>
                                 </div>
                             </div>

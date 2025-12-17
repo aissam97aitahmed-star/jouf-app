@@ -1,17 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Manager;
+namespace App\Http\Controllers\Officer;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-
     public function showLoginForm()
     {
-        return view('manager_security.login');
+        return view('officer_security.login');
     }
-
 }

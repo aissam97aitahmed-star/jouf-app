@@ -109,6 +109,12 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+         'managers' => [
+            'provider' => 'managers',
+            'table' =>'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
     ],
 
     /*
@@ -125,3 +131,4 @@ return [
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
 ];
+

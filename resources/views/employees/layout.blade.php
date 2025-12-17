@@ -74,8 +74,8 @@
 
     <nav class="main__nav">
         <ul class="d-flex justify-content-between align-items-center">
-            <li class="tajawal-medium fs-18 {{ request()->routeIs('dashboard') ? 'active' : '' }}"><a
-                    href="{{ route('dashboard') }}"><i class="bi bi-columns-gap"></i>
+            <li class="tajawal-medium fs-18 {{ request()->routeIs('employee.dashboard') ? 'active' : '' }}"><a
+                    href="{{ route('employee.dashboard') }}"><i class="bi bi-columns-gap"></i>
                     نظرة عامة</a></li>
             <li class="tajawal-medium fs-18 {{ request()->routeIs('employee.map') ? 'active' : '' }}"><a
                     href="{{ route('employee.map') }}"><i class="bi bi-map"></i>

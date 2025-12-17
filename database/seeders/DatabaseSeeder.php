@@ -19,14 +19,29 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        $this->call([
-            ManagerSeeder::class,
-        ]);
-        // User::create([
-        //     'name' => 'عمرو زيد',
-        //     'username' => 'Amr',
-        //     'email' => 'amr@gmail.com',
-        //     'password' => Hash::make('Aljouf106000'), // ضع كلمة المرور التي تريدها
+        // $this->call([
+        //     ManagerSeeder::class,
         // ]);
+        User::create([
+            'role' => 'employee',
+            'name' => 'عمرو زيد',
+            'username' => 'Amr',
+            'email' => 'amr@gmail.com',
+            'password' => Hash::make('Aljouf106000'), // ضع كلمة المرور التي تريدها
+        ]);
+        User::create([
+            'role' => 'security_manager',
+            'name' => 'احمد زيد',
+            'username' => 'Aljouf009',
+            'email' => 'sec@gmail.com',
+            'password' => Hash::make('Aljouf1897900'), // ضع كلمة المرور التي تريدها
+        ]);
+          User::create([
+            'role' => 'security_officer',
+            'name' => 'احمد زيد',
+            'username' => 'Aljouf067655',
+            'email' => 'red@gmail.com',
+            'password' => Hash::make('Aljouf5465757'), // ضع كلمة المرور التي تريدها
+        ]);
     }
 }
