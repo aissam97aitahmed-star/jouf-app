@@ -11,12 +11,28 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
         rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    @stack('css')
+    <style>
+        #bot-form .sent.active {
+            opacity: 1;
+            /* يصبح واضح عند وجود نص */
+        }
+
+        .main__chat {
+            height: 90vh;
+            overflow: auto;
+        }
+    </style>
 </head>
 
 <body>
@@ -114,7 +130,6 @@
         const toTop = document.getElementById("toTop");
 
         window.addEventListener("scroll", () => {
-            console.log(window.scrollY);
 
             if (window.scrollY > 300) {
                 toTop.classList.add("show");
@@ -130,7 +145,7 @@
             });
         });
     </script>
-
+    @stack('js')
 </body>
 
 </html>

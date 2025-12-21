@@ -157,6 +157,34 @@ ul {
     z-index: 3;
 }
 
+/* تغيير لون الشريط بالكامل */
+::-webkit-scrollbar {
+    width: 10px; /* عرض الشريط */
+}
+
+/* لون الشريط الخلفي */
+::-webkit-scrollbar-track {
+    background: #f0f0f0; /* خلفية المسار */
+    border-radius: 10px;
+}
+
+/* لون المقبض */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #166534 0%, #13803C 48.56%, #16A34A 100%);
+    border-radius: 10px;
+}
+
+/* عند المرور على المقبض */
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg, #16A34A 0%, #13803C 48.56%, #166534 100%);
+}
+
+/* اختياري: الشريط نفسه عند الضغط */
+::-webkit-scrollbar-thumb:active {
+    background: #0F3D26;
+}
+
+
 .notification-badge {
     position: absolute;
     top: -4px;
@@ -678,11 +706,13 @@ header.overveiw .experience__icons i {
     color: white !important;
     padding: 7px 15px;
 }
-
+.vedios__learning .actions button i {
+    vertical-align: -webkit-baseline-middle;
+}
 .vedios__learning .actions button.active {
     background-color: white !important;
-    border: white;
     color: #4B5563 !important;
+    border: 1px solid #00471F;
 }
 
 .vedios__learning .actions button.count {
@@ -1406,6 +1436,7 @@ header.overveiw .experience__icons i {
     animation-timing-function: ease-in;
     animation-duration: 300ms;
     color: #00471F;
+    cursor: pointer;
 }
 
 .bot .questions p i {
@@ -1487,7 +1518,7 @@ header.overveiw .experience__icons i {
 
 }
 
-.bot .settings button {
+.bot .settings button, .bot .settings a {
     background: linear-gradient(90deg, #3B82F6 0%, #4F46E5 100%);
     border: none;
     border-radius: 12px;
@@ -2900,7 +2931,7 @@ section.overview__security a.quikly__link {
 
 /* #################### START SECURITY OFICER 02 STYLE  #################### */
 section.scanner__security div.scanner {
-    height: 576px;
+    /* height: 576px; */
     border-radius: 16px;
     border-width: 1px;
     padding: 33px;
@@ -2933,7 +2964,7 @@ section.scanner__security .start__scan i.bi-qr-code {
     color: #9CA3AF;
 }
 
-section.scanner__security a.scan__link {
+section.scanner__security button.scan__link {
     height: 60px;
     border-radius: 12px;
     padding-top: 16px;

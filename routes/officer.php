@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Officer\QrController;
 use App\Http\Controllers\Officer\LoginController;
 use App\Http\Controllers\Officer\PagesController;
 
@@ -12,5 +13,7 @@ Route::prefix('officer_security')->name('officer_security.')->group(function () 
         Route::get('/visitors', [PagesController::class, 'visitors'])->name('visitors');
         Route::get('/notification', [PagesController::class, 'notification'])->name('notification');
         Route::get('/reports', [PagesController::class, 'reports'])->name('reports');
+        Route::post('/scan-qr', [QrController::class, 'scan'])->name('qr.scan');
+
     });
 });

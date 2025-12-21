@@ -1,21 +1,20 @@
 @extends('employees.layout')
 
 @section('content')
-
     <section class="bot">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center py-5">
-                <h4 class="tajawal-bold">البوت التفاعلي</h4>
+                <h4 class="tajawal-bold">{{ $settings->bot_name }}</h4>
                 <span class="badge rounded-pill text-bg-success tajawal-bold fs-14 disp">مساعد ذكي متاح 24/7</span>
             </div>
 
             <div class="row pb-5">
-                <div class="col-md-8 mb-5">
+                <div class="col-md-8 mb-5 ">
                     <div class="chat mb-4">
                         <header class="d-flex align-items-center">
                             <i class="bi bi-chat-heart-fill chat_icon"></i>
                             <div style="flex: 1;">
-                                <h5 class="tajawal-bold fs-18 m-0">المساعد الذكي</h5>
+                                <h5 class="tajawal-bold fs-18 m-0">{{ $settings->bot_name }}</h5>
                                 <p class="tajawal-regular fs-14">جاهز للإجابة على استفساراتك</p>
                             </div>
                             <p> <i class="fa fa-circle" aria-hidden="true"></i>&nbsp; <span
@@ -23,63 +22,92 @@
                         </header>
 
                     </div>
+
                     <div class="chat_body">
-                        <h6><i class="fa fa-info" aria-hidden="true"></i> <span class="tajawal-medium fs-12">المساعد
-                                الذكي</span></h6>
-                        <p class="tajawal-regular fs-14">مرحباً! أنا هنا لمساعدتك في أي استفسارات حول الشركة أو إجراءات
-                            <br> العمل. كيف يمكنني
-                            مساعدتك؟
-                        </p>
+                        <h6><i class="fa fa-info" aria-hidden="true"></i> <span
+                                class="tajawal-medium fs-12">{{ $settings->bot_name }}
+                            </span></h6>
+                        <p class="tajawal-regular fs-14"> {{ $settings->welcome_message }}</p>
                         <span class="tajawal-regular fs-12" style="color: #6B7280;">١١:٠٦:٠٥ ص</span>
                     </div>
                     <hr class="my-5" style="color: #d0d1d5;">
-                    <div class="questions">
-                        <p class="tajawal-regular fs-14"> <i class="fa fa-question" aria-hidden="true"></i> ما هي
-                            ساعات
-                            العمل الرسمية؟</p>
-                        <p class="tajawal-regular fs-14"> <i class="fa fa-question" aria-hidden="true"></i>كيف أستطيع
-                            الوصول إلى السكن؟</p>
-                        <p class="tajawal-regular fs-14"> <i class="fa fa-question" aria-hidden="true"></i>ما هي
-                            المستندات المطلوبة؟</p>
-                        <p class="tajawal-regular fs-14"> <i class="fa fa-question" aria-hidden="true"></i>كيف أتواصل
-                            مع
-                            الموارد البشرية؟</p>
-                        <p class="tajawal-regular fs-14"> <i class="fa fa-question" aria-hidden="true"></i>ما هي
-                            إجراءات
-                            السلامة المطلوبة؟</p>
+                    <div class="chat_body_content main__chat">
+
+                        @if ($conversations->isEmpty())
+                            <div class="questions">
+                                @foreach ($faqs as $faq)
+                                    <p class="tajawal-regular fs-14 question-item" data-question="{{ $faq->question }}"> <i
+                                            class="fa fa-question" aria-hidden="true"></i> {{ $faq->question }}
+                                    </p>
+                                @endforeach
+                            </div>
+                        @else
+                            @foreach ($conversations as $conv)
+                                {{-- Employee Question --}}
+                                <div class="d-flex justify-content-end">
+                                    <div class="chat_body mb-4 user__message">
+                                        <div class="bot__msg__content">
+                                            <p class="tajawal-regular fs-14 text-white">{{ $conv->question }}</p>
+                                            <span class="tajawal-regular fs-12 text-white"
+                                                style="color: #6B7280;">{{ $conv->created_at->locale('ar')->diffForHumans() }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- Bot Answer --}}
+                                <div>
+                                    <div class="chat_body mb-4 bot__message">
+                                        <div class="bot__msg__content">
+                                            <h6><i class="fa fa-info" aria-hidden="true"></i> <span
+                                                    class="tajawal-medium fs-12">{{ $settings->bot_name }}
+                                                    </span></h6>
+                                            <p class="tajawal-regular fs-14">{{ $conv->answer }}</p>
+                                            <span class="tajawal-regular fs-12"
+                                                style="color: #6B7280;">{{ $conv->created_at->locale('ar')->diffForHumans() }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
+
+
                     <hr class="my-5" style="color: #d0d1d5;">
-                    <form action="">
+                    <form id="bot-form">
                         <div class="d-flex">
-                            <input type="text" class="tajawal-medium fs-14"
+                            <input type="text" name="question" id="question" class="tajawal-medium fs-14"
                                 placeholder="اكتب سؤالك أو استفسارك هنا...">
                             <button class="sent" type="submit"><i class="fa fa-paper-plane"
                                     aria-hidden="true"></i></button>
                         </div>
                     </form>
                 </div>
+
+
                 <div class="col-md-4">
+
                     <div class="stat mb-5">
                         <h4 class="tajawal-bold fs-18 mb-3">إحصائيات البوت</h4>
                         <div class="d-flex align-items-center mb-3">
                             <i class="fa fa-commenting" aria-hidden="true"></i>
                             <div>
                                 <p style="color: #4B5563;" class="tajawal-regular fs-14">المحادثات اليوم</p>
-                                <strong style="color: #111827;">127</strong>
+                                <strong style="color: #111827;">{{ $todayConversations }}</strong>
                             </div>
                         </div>
                         <div class="d-flex align-items-center mb-3">
                             <i class="fa fa-check quest" aria-hidden="true"></i>
                             <div>
                                 <p style="color: #4B5563;" class="tajawal-regular fs-14 ">الأسئلة المحلولة</p>
-                                <strong style="color: #111827;">95%</strong>
+                                <strong style="color: #111827;">{{ $resolvedPercentage }} %</strong>
                             </div>
                         </div>
                         <div class="d-flex align-items-center mb-3">
                             <i class="fa fa-clock resp" aria-hidden="true"></i>
                             <div>
                                 <p style="color: #4B5563;" class="tajawal-regular fs-14 ">متوسط الرد</p>
-                                <strong style="color: #111827;">2.3 ثانية</strong>
+                                <strong style="color: #111827;">{{ $settings->response_delay }} ثانية</strong>
                             </div>
                         </div>
                     </div>
@@ -87,27 +115,28 @@
                     <div class="repeat mb-5">
                         <h4 class="tajawal-bold fs-18 mb-3">الأسئلة الأكثر تكراراً</h4>
                         <ul class="p-0">
-                            <li class="tajawal-medium fs-14"><span>ما هي ساعات العمل؟</span> <strong
-                                    class="tajawal-regular fs-12 ">43</strong></li>
-                            <li class="tajawal-medium fs-14"><span> كيف أغير كلمة المرور؟</span> <strong
-                                    class="tajawal-regular fs-12 ">43</strong></li>
-                            <li class="tajawal-medium fs-14"><span> أين موقف السيارات؟</span> <strong
-                                    class="tajawal-regular fs-12 ">43</strong></li>
-                            <li class="tajawal-medium fs-14"><span> كيف أطلب إجازة؟</span> <strong
-                                    class="tajawal-regular fs-12 ">43</strong></li>
-                            <li class="tajawal-medium fs-14"><span> معلومات الراتب</span> <strong
-                                    class="tajawal-regular fs-12 ">43</strong></li>
+                            @foreach ($faqs as $faq)
+                            @php
+                                $count = \App\Models\BotConversation::where('question', $faq->question)->count();
+                            @endphp
+                                @if($count >= 1)
+                                    <li class="tajawal-medium fs-14"><span>{{ $faq->question }}</span> <strong
+                                            class="tajawal-regular fs-12 ">{{ $count }}</strong></li>
+
+                                @endif
+                            @endforeach
                         </ul>
                     </div>
                     <div class="settings">
                         <h4 class="tajawal-bold fs-18 mb-3">أدوات البوت</h4>
                         <div>
-                            <button class="btn btn-primary w-100 tajawal-regular fs-16" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
-                                    class="fa fa-cog" aria-hidden="true"></i> &nbsp; <span>إعدادات
+                            <button class="btn btn-primary w-100 tajawal-regular fs-16" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal"><i class="fa fa-cog" aria-hidden="true"></i> &nbsp;
+                                <span>إعدادات
                                     البوت</span></button>
-                            <button class="btn btn-primary w-100 tajawal-regular fs-16" type="submit"><i
+                            <a href="{{ route('employee.bot.export') }}" class="btn btn-primary w-100 tajawal-regular fs-16" type="submit"><i
                                     class="fa fa-download" aria-hidden="true"></i> &nbsp; <span>تصدير
-                                    المحادثات</span></button>
+                                    المحادثات</span></a>
                             <button class="btn btn-primary w-100 tajawal-regular fs-16" type="submit"><i
                                     class="fa fa-bar-chart" aria-hidden="true"></i> &nbsp; <span>إحصائيات مفصلة
                                 </span></button>
@@ -120,7 +149,7 @@
     </section>
 
 
-     <!-- المودال -->
+    <!-- المودال -->
     <div class="modal fade bot__modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-xl bot__modal__settings" style="    width: 896px;">
@@ -392,3 +421,163 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script>
+        const questionInput = document.getElementById('question');
+        const sendButton = document.querySelector('#bot-form .sent');
+
+        // عند الكتابة في input
+        questionInput.addEventListener('input', function() {
+            if (this.value.trim().length > 0) {
+                sendButton.classList.add('active'); // يصبح واضح
+            } else {
+                sendButton.classList.remove('active'); // باهت إذا فارغ
+            }
+        });
+
+        function scrollChatToBottom() {
+            const chatContainer = document.querySelector('.main__chat');
+            if (chatContainer) {
+                chatContainer.scrollTo({
+                    top: chatContainer.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', scrollChatToBottom);
+
+
+        const chatBody = document.querySelector('.chat_body_content'); // مكان عرض المحادثات
+
+        document.getElementById('bot-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const questionInput = document.getElementById('question');
+            const questionText = questionInput.value.trim();
+            if (!questionText) return;
+
+            // ✅ إضافة رسالة المستخدم فورًا
+            addUserMessage(questionText, new Date());
+
+            fetch("{{ route('employee.bot.ask') }}", {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        question: questionText
+                    })
+                })
+                .then(async res => {
+                    const data = await res.json();
+
+                    // ❌ Validation Error
+                    if (!res.ok && data.status === 'validation_error') {
+                        console.error('Validation Error:', data.errors);
+                        alert(Object.values(data.errors)[0][0]);
+                        return;
+                    }
+
+                    // ❌ Server / DB Error
+                    if (!res.ok) {
+                        console.error('Server Error:', data.message);
+                        alert('خطأ في النظام:\n' + data.message);
+                        return;
+                    }
+
+                    // ✅ Success: إضافة رسالة البوت بعد الرد
+                    addBotMessage(data.answer, new Date());
+                    scrollChatToBottom();
+                    // تنظيف حقل الإدخال
+                    questionInput.value = '';
+                })
+                .catch(error => {
+                    console.error('Fetch Error:', error);
+                    alert('خطأ في الاتصال بالخادم');
+                });
+        });
+
+        // دالة لإضافة رسالة المستخدم
+        function addUserMessage(message, time) {
+            const html = `
+        <div class="d-flex justify-content-end">
+            <div class="chat_body mb-4 user__message">
+                <div class="bot__msg__content">
+                    <p class="tajawal-regular fs-14 text-white">${message}</p>
+                    <span class="tajawal-regular fs-12 text-white" style="color: #6B7280;">${formatTime(time)}</span>
+                </div>
+            </div>
+        </div>`;
+            chatBody.insertAdjacentHTML('beforeend', html);
+            scrollToBottom();
+        }
+
+        // دالة لإضافة رسالة البوت تدريجيًا
+        function addBotMessage(message, time) {
+            const wrapper = document.createElement('div');
+            wrapper.innerHTML = `
+        <div class="chat_body mb-4 bot__message">
+            <div class="bot__msg__content">
+                <h6><i class="fa fa-info" aria-hidden="true"></i>
+                    <span class="tajawal-medium fs-12">{{ $settings->bot_name }}</span>
+                </h6>
+                <p class="tajawal-regular fs-14 bot_typing"></p>
+                <span class="tajawal-regular fs-12" style="color: #6B7280;">${formatTime(time)}</span>
+            </div>
+        </div>
+    `;
+            chatBody.appendChild(wrapper);
+            scrollToBottom();
+
+            const p = wrapper.querySelector('.bot_typing');
+            typeWriter(p, message, 50); // 50ms لكل حرف
+        }
+
+        // دالة الكتابة تدريجيًا
+        function typeWriter(element, text, speed) {
+            let i = 0;
+
+            function typing() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    scrollToBottom();
+                    setTimeout(typing, speed);
+                }
+            }
+            typing();
+        }
+
+        // دالة لتنسيق الوقت
+        function formatTime(date) {
+            const d = new Date(date);
+            let hours = d.getHours();
+            let minutes = d.getMinutes();
+            let seconds = d.getSeconds();
+            const ampm = hours >= 12 ? 'م' : 'ص';
+            hours = hours % 12 || 12;
+            return `${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)} ${ampm}`;
+        }
+
+        function padZero(n) {
+            return n < 10 ? '0' + n : n;
+        }
+
+        // دالة للتمرير للأسفل بعد إضافة رسالة
+        function scrollToBottom() {
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        // اختيار أسئلة FAQ تلقائيًا
+        document.querySelectorAll('.question-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.getElementById('question').value = this.dataset.question;
+            });
+        });
+    </script>
+@endpush

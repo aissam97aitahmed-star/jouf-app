@@ -36,12 +36,20 @@ class DatabaseSeeder extends Seeder
             'email' => 'sec@gmail.com',
             'password' => Hash::make('Aljouf1897900'), // ضع كلمة المرور التي تريدها
         ]);
-          User::create([
+        User::create([
             'role' => 'security_officer',
             'name' => 'احمد زيد',
             'username' => 'Aljouf067655',
             'email' => 'red@gmail.com',
             'password' => Hash::make('Aljouf5465757'), // ضع كلمة المرور التي تريدها
+        ]);
+
+        User::create([
+            'role' => 'admin',
+            'name' => 'علي زيد',
+            'username' => 'AljoufAdmin043',
+            'email' => 'ali@gmail.com',
+            'password' => Hash::make('AljoufAdmin32443'), // ضع كلمة المرور التي تريدها
         ]);
     }
 }

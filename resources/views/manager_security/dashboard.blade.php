@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
         header.security .actions a i {
@@ -56,7 +57,9 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
-                    <a href="javascript:void(0)" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="bi bi-box-arrow-left"></i></a>
+                    <a href="javascript:void(0)" class="btn btn-primary"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
+                            class="bi bi-box-arrow-left"></i></a>
                 </div>
             </div>
         </div>
@@ -68,7 +71,7 @@
                 <div class="col-6 col-sm-6 col-md-3">
                     <div class="item">
                         <i class="bi bi-card-list"></i>
-                        <strong style="color: #111827;" class="tajawal-bold fs-24">5</strong>
+                        <strong style="color: #111827;" class="tajawal-bold fs-24">{{ $orders->count() }}</strong>
                         <p class="tajawal-regular fs-12" style="color: #4B5563;">إجمالي الطلبات</p>
                     </div>
                 </div>
@@ -76,7 +79,8 @@
                     <div class="item">
                         <i class="bi bi-clock"
                             style="background: linear-gradient(90deg, #EAB308 0%, #F97316 100%);"></i>
-                        <strong style="color: #111827;" class="tajawal-bold fs-24">5</strong>
+                        <strong style="color: #111827;"
+                            class="tajawal-bold fs-24">{{ DB::table('orders')->where('status', 'pending')->count() }}</strong>
                         <p class="tajawal-regular fs-12" style="color: #4B5563;">في الانتظار</p>
                     </div>
                 </div>
@@ -84,7 +88,8 @@
                     <div class="item">
                         <i class="bi bi-check-circle"
                             style="background: linear-gradient(90deg, #22C55E 0%, #059669 100%);"></i>
-                        <strong style="color: #111827;" class="tajawal-bold fs-24">5</strong>
+                        <strong style="color: #111827;"
+                            class="tajawal-bold fs-24">{{ DB::table('orders')->where('status', 'approved')->count() }}</strong>
                         <p class="tajawal-regular fs-12" style="color: #4B5563;">مُوافق عليه</p>
                     </div>
                 </div>
@@ -92,7 +97,8 @@
                     <div class="item">
                         <i class="bi bi-x-circle"
                             style="background: linear-gradient(90deg, #EF4444 0%, #E11D48 100%);"></i>
-                        <strong style="color: #111827;" class="tajawal-bold fs-24">5</strong>
+                        <strong style="color: #111827;"
+                            class="tajawal-bold fs-24">{{ DB::table('orders')->where('status', 'rejected')->count() }}</strong></strong>
                         <p class="tajawal-regular fs-12" style="color: #4B5563;">مرفوض</p>
                     </div>
                 </div>
@@ -116,51 +122,81 @@
             </div>
             <hr style="margin: 30px 0px; color: #80808094;">
             <div class="all__orders">
-                <div class="order__single mb-3">
-                    <div class="d-flex align-items-center mb-4 head__respons">
-                        <h3 class="tajawal-bold fs-20 m-0" style="color: #111827;">أحمد محمد العلي</h3>
-                        <span class="tajawal-medium fs-12 mr-12 status">قيد المراجعة</span>
-                        <span class="tajawal-regular fs-14 mr-12 id">#VR-2024-001</span>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-md-4 item__respons">
-                            <p class="tajawal-regular fs-14" style="color: #6B7280;">بيانات الزائر</p>
-                            <h5 class="tajawal-bold fs-14 m-0" style="color: #111827;">أحمد محمد العلي</h5>
-                            <p class="tajawal-regular fs-14" style="color: #4B5563;">هوية: 1234567890</p>
-                            <p class="tajawal-regular fs-14" style="color: #4B5563;">جوال: 0501234567</p>
-                            <p class="tajawal-regular fs-14" style="color: #4B5563;">شركة التقنية المتقدمة</p>
-                        </div>
-                        <div class="col-md-4 item__respons">
-                            <p class="tajawal-regular fs-14" style="color: #6B7280;"> الموظف المستضيف</p>
-                            <h5 class="tajawal-bold fs-14 m-0" style="color: #111827;"> سارة أحمد خالد</h5>
-                            <p class="tajawal-regular fs-14" style="color: #4B5563;">قسم تقنية المعلومات</p>
-                        </div>
-                        <div class="col-md-4 item__respons">
-                            <p class="tajawal-regular fs-14" style="color: #6B7280;">تفاصيل الزيارة</p>
-                            <h5 class="tajawal-bold fs-14 m-0" style="color: #111827;">اجتماع تقني</h5>
-                            <p class="tajawal-regular fs-14" style="color: #4B5563;">2024-01-16 - 10:00</p>
-                            <p class="tajawal-regular fs-14" style="color: #4B5563;">المدة: ساعتان</p>
-                        </div>
-                    </div>
-                    <div class="note mb-3">
-                        <h6 class="tajawal-medium fs-14" style="color: #6B7280;">ملاحظات إضافية:</h6>
-                        <p class="tajawal-regular  fs-14">اجتماع مهم لمناقشة مشروع النظام الجديد وتطوير البرمجيات</p>
-                    </div>
-                    <p class="tajawal-regular  fs-14 mb-3" style="color: #6B7280;">تاريخ الطلب: 2024-01-15 14:30</p>
+                @foreach ($orders as $order)
+                    <div class="order__single mb-3">
+                        <div class="d-flex align-items-center mb-4 head__respons">
+                            <h3 class="tajawal-bold fs-20 m-0" style="color: #111827;"> {{ $order->full_name }}</h3>
+                            <span class="tajawal-medium fs-12 mr-12 status"> @switch($order->status)
+                                    @case('pending')
+                                        قيد المراجعة
+                                    @break
 
-                    <div class="btns d-flex justify-content-end footer__respons" data-bs-toggle="modal"
-                        data-bs-target="#RejectOrderModal">
-                        <a href="javascript:void(0)" class="btn btn-primary tajawal-medium fs-16 mr-12"><i
-                                class="bi bi-x"></i>
-                            رفض
-                            الطلب</a>
+                                    @case('approved')
+                                        مقبول
+                                    @break
 
-                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#AcceptOrderModal"
-                            class="btn btn-primary tajawal-medium fs-16 mr-12"><i class="bi bi-check"></i> موافقة
-                            وإنشاء QR</a>
+                                    @case('rejected')
+                                        مرفوض
+                                    @break
+                                @endswitch
+                            </span>
+                            <span class="tajawal-regular fs-14 mr-12 id">#{{ $order->order_number }}</span>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-4 item__respons">
+                                <p class="tajawal-regular fs-14" style="color: #6B7280;">بيانات الزائر</p>
+                                <h5 class="tajawal-bold fs-14 m-0" style="color: #111827;">{{ $order->full_name }}
+                                </h5>
+                                <p class="tajawal-regular fs-14" style="color: #4B5563;">هوية:
+                                    {{ $order->identity_number }}</p>
+                                <p class="tajawal-regular fs-14" style="color: #4B5563;">جوال: {{ $order->phone }}
+                                </p>
+                                <p class="tajawal-regular fs-14" style="color: #4B5563;">{{ $order->company }}</p>
+                            </div>
+                            <div class="col-md-4 item__respons">
+                                <p class="tajawal-regular fs-14" style="color: #6B7280;"> الموظف المستضيف</p>
+                                <h5 class="tajawal-bold fs-14 m-0" style="color: #111827;">
+                                    {{ $order->host_employee }}</h5>
+                                <p class="tajawal-regular fs-14" style="color: #4B5563;"> {{ $order->department }}
+                                </p>
+                            </div>
+                            <div class="col-md-4 item__respons">
+                                <p class="tajawal-regular fs-14" style="color: #6B7280;">تفاصيل الزيارة</p>
+                                <h5 class="tajawal-bold fs-14 m-0" style="color: #111827;">
+                                    {{ $order->visit_purpose }}</h5>
+                                <p class="tajawal-regular fs-14" style="color: #4B5563;">{{ $order->visit_date }} -
+                                    {{ $order->visit_time }}</p>
+                                <p class="tajawal-regular fs-14" style="color: #4B5563;">المدة:
+                                    {{ $order->visit_duration }}</p>
+                            </div>
+                        </div>
+                        @if ($order->special_requests)
+                            <div class="note mb-3">
+                                <h6 class="tajawal-medium fs-14" style="color: #6B7280;">ملاحظات إضافية:</h6>
+                                <p class="tajawal-regular  fs-14"> {{ $order->special_requests }}</p>
+                            </div>
+                        @endif
+                        <p class="tajawal-regular  fs-14 mb-3" style="color: #6B7280;">تاريخ الطلب:
+                            {{ $order->created_at->locale('ar')->diffForHumans() }}
+                        </p>
+
+                        <div class="btns d-flex justify-content-end footer__respons" data-bs-toggle="modal"
+                            data-bs-target="#RejectOrderModal">
+
+                            {!! QrCode::size(220)->style('square')->generate($order->order_number) !!}
+
+                            {{-- <a href="javascript:void(0)" class="btn btn-primary tajawal-medium fs-16 mr-12"><i
+                                    class="bi bi-x"></i>
+                                رفض
+                                الطلب</a>
+
+                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#AcceptOrderModal"
+                                class="btn btn-primary tajawal-medium fs-16 mr-12"><i class="bi bi-check"></i> موافقة
+                                وإنشاء QR</a> --}}
+                        </div>
+
                     </div>
-
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

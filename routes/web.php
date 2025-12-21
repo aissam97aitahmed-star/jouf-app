@@ -18,3 +18,8 @@ require __DIR__.'/employee.php';
 require __DIR__.'/visitor.php';
 require __DIR__.'/manager.php';
 require __DIR__.'/officer.php';
+require __DIR__.'/admin.php';
+
+
+// USERNAME :JADCO
+// PASSWORD  : FaAm@$ri@ad2030

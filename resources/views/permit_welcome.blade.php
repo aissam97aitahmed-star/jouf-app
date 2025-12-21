@@ -36,10 +36,10 @@
                     </div>
                 </div>
                 <div class="">
-                    <a href="{{ route('visitor.apply') }}" class="btn btn-primary tajawal-regular fs-16 link" style="color: #00471F;"><i
-                            class="bi bi-plus"></i> طلب تصريح جديد</a>
-                    <a href="{{ route('officer_security.login') }}" class="btn btn-primary tajawal-regular fs-16 link" style="color: #00471F;"><i
-                            class="bi bi-box-arrow-right"></i>تسجيل دخول الموظفين</a>
+                    <a href="{{ route('visitor.apply') }}" class="btn btn-primary tajawal-regular fs-16 link"
+                        style="color: #00471F;"><i class="bi bi-plus"></i> طلب تصريح جديد</a>
+                    <a href="{{ route('officer_security.login') }}" class="btn btn-primary tajawal-regular fs-16 link"
+                        style="color: #00471F;"><i class="bi bi-box-arrow-right"></i>تسجيل دخول الموظفين</a>
                 </div>
             </div>
 
@@ -72,9 +72,12 @@
                         <a href="{{ route('visitor.apply') }}" class="btn btn-primary tajawal-bold fs-18"><i
                                 class="bi bi-play-circle"></i>إصدر
                             تصريح الآن</a>
-                        <a href="" class="btn btn-primary tajawal-regular fs-18"><i
-                                class="bi bi-play-circle"></i> شاهد
-                            الفيديو التوضيحي</a>
+
+                        @if ($homeVideo && $homeVideo->video_path)
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#homeVideoModal"
+                                class="btn btn-primary tajawal-regular fs-18"><i class="bi bi-play-circle"></i> شاهد
+                                الفيديو التوضيحي</a>
+                        @endif
                     </div>
                 </div>
                 <div class="col-md-6 cls">
@@ -86,7 +89,7 @@
                                 <p class="tajawal-medium fs-16">طلبات جديدة</p>
                                 <p class="tajawal-regular fs-14" style="color: #BFDBFE;">اليوم</p>
                             </div>
-                            <strong class="tajawal-bold fs-24" style="color: #4ADE80;">47</strong>
+                            <strong class="tajawal-bold fs-24" style="color: #4ADE80;">{{ \DB::table('orders')->whereDate('created_at', now()->toDateString())->count() }}</strong>
                         </div>
                         <div class="item d-flex align-items-center justify-content-between">
                             <i class="bi bi-check2-all" style="background: #3B82F633; color: #60A5FA;"></i>
@@ -94,7 +97,7 @@
                                 <p class="tajawal-medium fs-16">طلبات مقبولة</p>
                                 <p class="tajawal-regular fs-14" style="color: #BFDBFE;">اليوم</p>
                             </div>
-                            <strong class="tajawal-bold fs-24" style="color: #60A5FA;">45</strong>
+                            <strong class="tajawal-bold fs-24" style="color: #60A5FA;">{{ DB::table('orders')->count() }}</strong>
                         </div>
                         <div class="item d-flex align-items-center justify-content-between">
                             <i class="bi bi-person-fill-exclamation" style="background: #A855F733; color: #C084FC;"></i>
@@ -331,7 +334,8 @@
     <footer class="end">
         <h3 class="tajawal-bold fs-36 text-center text-white mb-5">جاهز لاستقبال زوار جدد ؟</h3>
         <div class="text-center">
-            <a href="{{ route('visitor.apply') }}" class="btn btn-primary tajawal-bold fs-18 apply"><i class="bi bi-person-add"></i> قدم
+            <a href="{{ route('visitor.apply') }}" class="btn btn-primary tajawal-bold fs-18 apply"><i
+                    class="bi bi-person-add"></i> قدم
                 طلب
                 تصريح</a>
             <a href="" class="btn btn-primary tajawal-regular fs-16 contact"><i class="bi bi-telephone"></i>
@@ -342,6 +346,24 @@
     <div>
         <img src="{{ asset('assets/images/footer.jpg') }}" alt="" width="100%">
     </div>
+
+
+    @if ($homeVideo && $homeVideo->video_path)
+        <div class="modal fade" id="homeVideoModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+
+                    <div class="modal-body p-0">
+                        <video width="100%" controls autoplay>
+                            <source src="{{ asset('storage/' . $homeVideo->video_path) }}" type="video/mp4">
+                            متصفحك لا يدعم تشغيل الفيديو
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>

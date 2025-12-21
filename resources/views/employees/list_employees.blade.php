@@ -5,180 +5,134 @@
         <div class="container">
             <div class="d-flex justify-content-between align-items-center py-5">
                 <h4 class="tajawal-bold">قائمة الموظفين المرشدين</h4>
-                <span class="badge rounded-pill text-bg-success tajawal-medium fs-14">6 مرشد متاح</span>
+                <span class="badge rounded-pill text-bg-success tajawal-medium fs-14">
+                    {{ $employees->count() }} مرشد متاح
+                </span>
             </div>
+
             <div class="row pb-5">
-                <div class="col-md-4 mb-4">
-                    <div class="box">
-                        <div class="d-flex align-items-center mb-3">
-                            <span class="key tajawal-bold fs-18">م ز</span>
+                @foreach ($employees as $employee)
+                    <div class="col-md-4 mb-4">
+                        <div class="box">
+                            <div class="d-flex align-items-center mb-3">
+                                <span class="key tajawal-bold fs-18">
+                                    {{ mb_substr($employee->name, 0, 1) }}
+                                </span>
+                                <div>
+                                    <h5 class="tajawal-bold fs-18 m-0">{{ $employee->name }}</h5>
+                                    <p class="tajawal-regular fs-14" style="color:#4B5563;">
+                                        {{ $employee->position }}
+                                    </p>
+                                </div>
+                            </div>
+
                             <div>
-                                <h5 class="tajawal-bold fs-18 m-0">عمرو زيد</h5>
-                                <p class="tajawal-regular fs-14" style="color: #4B5563;">مسوول الدعم الفني</p>
+                                <ul class="info">
+                                    <li class="tajawal-regular fs-14 mb-2">
+                                        <i class="bi bi-bookmark-check"></i>&nbsp;&nbsp;
+                                        {{ $employee->department }}
+                                    </li>
+                                    <li class="tajawal-regular fs-14 mb-2">
+                                        <i class="bi bi-envelope-at"></i>&nbsp;&nbsp;
+                                        {{ $employee->email }}
+                                    </li>
+                                    <li class="tajawal-regular fs-14 mb-2">
+                                        <i class="bi bi-telephone"></i>&nbsp;&nbsp;
+                                        {{ $employee->phone }}
+                                    </li>
+                                    <li class="tajawal-regular fs-14 mb-2">
+                                        <i class="bi bi-geo-alt"></i>&nbsp;&nbsp;
+                                        {{ $employee->office_location }}
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="d-flex gap-2 actions">
+                                <a class="btn btn-primary flex-fill tajawal-regular fs-14 open-employee-modal"
+                                    href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#AppelModal"
+                                    data-name="{{ $employee->name }}" data-position="{{ $employee->position }}"
+                                    data-email="{{ $employee->email }}" data-phone="{{ $employee->phone }}"
+                                    data-office="{{ $employee->office_location }}">
+                                    <i class="bi bi-telephone"></i>&nbsp; اتصال
+                                </a>
+
+                                <a class="btn btn-primary flex-fill tajawal-regular fs-14 open-employee-modal"
+                                    href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#MessageModal"
+                                    data-id="{{ $employee->id }}" data-name="{{ $employee->name }}"
+                                    data-position="{{ $employee->position }}" data-email="{{ $employee->email }}"
+                                    data-phone="{{ $employee->phone }}" data-office="{{ $employee->office_location }}">
+                                    <i class="bi bi-chat"></i>&nbsp; رسالة
+                                </a>
                             </div>
                         </div>
-                        <div>
-                            <ul class="info">
-                                <li class="tajawal-regular fs-14 mb-2"><i class="bi bi-bookmark-check"></i>&nbsp;&nbsp;
-                                    إدارة تقنية المعلومات</li>
-                                <li class="tajawal-regular fs-14 mb-2"><i class="bi bi-envelope-at"></i>&nbsp;&nbsp;
-                                    azaid@aljouf.com.sa</li>
-                                <li class="tajawal-regular fs-14 mb-2"><i class="bi bi-telephone"></i>&nbsp;&nbsp;
-                                    055-691-5391</li>
-                                <li class="tajawal-regular fs-14 mb-2"><i class="bi bi-geo-alt"></i>&nbsp;&nbsp; الادارة
-                                    العامة - بسيطاء</li>
-                            </ul>
-                        </div>
-                        <div class="d-flex gap-2 actions">
-                            <a class="btn btn-primary flex-fill tajawal-regular fs-14" href="javascript:void(0)"
-                                data-bs-toggle="modal" data-bs-target="#AppelModal" role="button">
-                                <i class="bi bi-telephone"></i>&nbsp; اتصال
-                            </a>
-                            <a class="btn btn-primary flex-fill tajawal-regular fs-14" href="javascript:void(0)"
-                                data-bs-toggle="modal" data-bs-target="#MessageModal" role="button">
-                                <i class="bi bi-chat"></i>&nbsp; رسالة
-                            </a>
-                        </div>
                     </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="box">
-                        <div class="d-flex align-items-center mb-3">
-                            <span class="key tajawal-bold fs-18">م ز</span>
-                            <div>
-                                <h5 class="tajawal-bold fs-18 m-0">عمرو زيد</h5>
-                                <p class="tajawal-regular fs-14" style="color: #4B5563;">مسوول الدعم الفني</p>
-                            </div>
-                        </div>
-                        <div>
-                            <ul class="info">
-                                <li class="tajawal-regular fs-14 mb-2"><i class="bi bi-bookmark-check"></i>&nbsp;&nbsp;
-                                    إدارة تقنية المعلومات</li>
-                                <li class="tajawal-regular fs-14 mb-2"><i class="bi bi-envelope-at"></i>&nbsp;&nbsp;
-                                    azaid@aljouf.com.sa</li>
-                                <li class="tajawal-regular fs-14 mb-2"><i class="bi bi-telephone"></i>&nbsp;&nbsp;
-                                    055-691-5391</li>
-                                <li class="tajawal-regular fs-14 mb-2"><i class="bi bi-geo-alt"></i>&nbsp;&nbsp; الادارة
-                                    العامة - بسيطاء</li>
-                            </ul>
-                        </div>
-                        <div class="d-flex gap-2 actions">
-                            <a class="btn btn-primary flex-fill tajawal-regular fs-14" href="javascript:void(0)"
-                                data-bs-toggle="modal" data-bs-target="#AppelModal" role="button">
-                                <i class="bi bi-telephone"></i>&nbsp; اتصال
-                            </a>
-                            <a class="btn btn-primary flex-fill tajawal-regular fs-14" href="javascript:void(0)"
-                                data-bs-toggle="modal" data-bs-target="#MessageModal" role="button">
-                                <i class="bi bi-chat"></i>&nbsp; رسالة
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="box">
-                        <div class="d-flex align-items-center mb-3">
-                            <span class="key tajawal-bold fs-18">م ز</span>
-                            <div>
-                                <h5 class="tajawal-bold fs-18 m-0">عمرو زيد</h5>
-                                <p class="tajawal-regular fs-14" style="color: #4B5563;">مسوول الدعم الفني</p>
-                            </div>
-                        </div>
-                        <div>
-                            <ul class="info">
-                                <li class="tajawal-regular fs-14 mb-2"><i class="bi bi-bookmark-check"></i>&nbsp;&nbsp;
-                                    إدارة تقنية المعلومات</li>
-                                <li class="tajawal-regular fs-14 mb-2"><i class="bi bi-envelope-at"></i>&nbsp;&nbsp;
-                                    azaid@aljouf.com.sa</li>
-                                <li class="tajawal-regular fs-14 mb-2"><i class="bi bi-telephone"></i>&nbsp;&nbsp;
-                                    055-691-5391</li>
-                                <li class="tajawal-regular fs-14 mb-2"><i class="bi bi-geo-alt"></i>&nbsp;&nbsp; الادارة
-                                    العامة - بسيطاء</li>
-                            </ul>
-                        </div>
-                        <div class="d-flex gap-2 actions">
-                            <a class="btn btn-primary flex-fill tajawal-regular fs-14" href="javascript:void(0)"
-                                data-bs-toggle="modal" data-bs-target="#AppelModal" role="button">
-                                <i class="bi bi-telephone"></i>&nbsp; اتصال
-                            </a>
-                            <a class="btn btn-primary flex-fill tajawal-regular fs-14" href="javascript:void(0)"
-                                data-bs-toggle="modal" data-bs-target="#MessageModal" role="button">
-                                <i class="bi bi-chat"></i>&nbsp; رسالة
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
 
-    <!-- Start Appel Modal -->
-    <div class="modal fade employees__call" id="AppelModal" tabindex="-1" aria-labelledby="AppelModalLabel"
-        aria-hidden="true">
+    {{-- ================= Call Modal (نفسه) ================= --}}
+    <div class="modal fade employees__call" id="AppelModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="d-flex flex-column justify-content-center align-items-center w-100">
-                        <span class="tajawal-bold fs-30 mb-3">ع ز</span>
-                        <h5 class="tajawal-bold fs-24" style="color: #FFFFFF;">عمرو زيد</h5>
-                        <p class="tajawal-regular fs-16" style="color: #E0E7FF;">مسؤول الدعم الفني</p>
+                        <span class="tajawal-bold fs-30 mb-3 modal-key">—</span>
+                        <h5 class="tajawal-bold fs-24 modal-name" style="color:#FFFFFF;">—</h5>
+                        <p class="tajawal-regular fs-16 modal-position" style="color:#E0E7FF;">—</p>
                     </div>
                 </div>
+
                 <div class="modal-body">
                     <div class="d-flex item">
                         <i class="fa fa-phone"></i>
                         <div class="d-flex flex-column">
-                            <strong class="tajawal-bold fs-14" style="color: #111827;">رقم الهاتف</strong>
-                            <strong class="tajawal-medium fs-16" style="color: #4F46E5;">055-691-5391</strong>
+                            <strong class="tajawal-bold fs-14">رقم الهاتف</strong>
+                            <strong class="tajawal-medium fs-16 modal-phone"></strong>
                         </div>
                     </div>
+
                     <div class="d-flex item">
                         <i class="fa fa-envelope mail"></i>
                         <div class="d-flex flex-column">
-                            <strong class="tajawal-bold fs-14" style="color: #111827;">البريد الإلكتروني</strong>
-                            <strong class="tajawal-medium fs-16" style="color: #166534;">azaid@aljouf.com.sa</strong>
+                            <strong class="tajawal-bold fs-14">البريد الإلكتروني</strong>
+                            <strong class="tajawal-medium fs-16 modal-email"></strong>
                         </div>
                     </div>
+
                     <div class="d-flex item">
                         <i class="fa fa-map-marker map"></i>
                         <div class="d-flex flex-column">
-                            <strong class="tajawal-bold fs-14" style="color: #111827;">المكتب</strong>
-                            <strong class="tajawal-medium fs-16" style="color: #F97316;">الادارة العامة -
-                                بسيطاء</strong>
+                            <strong class="tajawal-bold fs-14">المكتب</strong>
+                            <strong class="tajawal-medium fs-16 modal-office"></strong>
                         </div>
                     </div>
-                    <a class="btn btn-primary w-100 action"> <i class="fa fa-phone"></i><span
-                            class="tajawal-bold fs-16">مكالمة صوتية</span></a>
-                    <a class="btn btn-primary w-100 action"> <i class="fa fa-video-camera"></i><span
-                            class="tajawal-bold fs-16">مكالمة فيديو</span></a>
-                    <a class="btn btn-primary w-100 action" data-bs-dismiss="modal" href="javascript:void(0)"
-                        aria-label="Close"> <i class="fa fa-times"></i><span class="tajawal-bold fs-16"> إغلاق</span></a>
 
-                    <div class="add mb-4">
-                        <h6 class="tajawal-bold fs-14" style="color: #3730A3;"> <i class="fa fa-info"
-                                aria-hidden="true"></i> معلومات إضافية</h6>
-                        <p class="tajawal-regular fs-14" style="color: #4338CA;">متاح للمساعدة في جميع الاستفسارات
-                            المتعلقة بـالموارد البشرية</p>
-                    </div>
+                    <a class="btn btn-primary w-100 action tajawal-bold fs-16"> <i class="bi bi-telephone-fill"></i> مكالمة صوتية</a>
+                    <a class="btn btn-primary w-100 action tajawal-bold fs-16"> <i class="bi bi-camera-video-fill"></i> مكالمة فيديو</a>
+                    <a class="btn btn-primary w-100 action tajawal-bold fs-16" data-bs-dismiss="modal"> <i class="bi bi-x"></i> إغلاق</a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- End Appel Modal -->
 
-    <!-- Start Message Modal -->
-    <div class="modal fade employees__message" id="MessageModal" tabindex="-1" aria-labelledby="MessageModalLabel"
-        aria-hidden="true">
+    {{-- ================= Message Modal (كامل بدون حذف) ================= --}}
+    <div class="modal fade employees__message" id="MessageModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="d-flex flex-column justify-content-center align-items-center w-100">
-                        <span class="tajawal-bold fs-30 mb-3">ع ز</span>
-                        <h5 class="tajawal-bold fs-24" style="color: #FFFFFF;">عمرو زيد</h5>
-                        <p class="tajawal-regular fs-16" style="color: #E0E7FF;">مسؤول الدعم الفني</p>
+                        <span class="tajawal-bold fs-30 mb-3 modal-key">—</span>
+                        <h5 class="tajawal-bold fs-24 modal-name" style="color:#FFFFFF;">—</h5>
+                        <p class="tajawal-regular fs-16 modal-position" style="color:#E0E7FF;">—</p>
                     </div>
                 </div>
+
+                {{-- كل محتوى الفورم بقي كما هو --}}
                 <div class="modal-body">
                     <form action="" method="">
+                        <input type="hidden" name="employee_id" id="employee_id">
+                        <input type="hidden" name="employee_email" id="employee_email">
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label tajawal-bold fs-14"
                                 style="color: #111827;">موضوع الرسالة</label>
@@ -271,5 +225,46 @@
             </div>
         </div>
     </div>
-    <!-- End Message Modal -->
 @endsection
+
+@push('js')
+    <script>
+        document.querySelectorAll('.open-employee-modal').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.modal-name').forEach(e => e.textContent = this.dataset.name);
+                document.querySelectorAll('.modal-position').forEach(e => e.textContent = this.dataset
+                    .position);
+                document.querySelectorAll('.modal-email').forEach(e => e.textContent = this.dataset.email);
+                document.querySelectorAll('.modal-phone').forEach(e => e.textContent = this.dataset.phone);
+                document.querySelectorAll('.modal-office').forEach(e => e.textContent = this.dataset
+                    .office);
+                document.querySelectorAll('.modal-key').forEach(e => e.textContent = this.dataset.name
+                    .charAt(0));
+            });
+        });
+    </script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('MessageModal');
+
+            modal.addEventListener('show.bs.modal', function(event) {
+                const button = event.relatedTarget;
+
+                const employeeId = button.getAttribute('data-id');
+                const employeeEmail = button.getAttribute('data-email');
+                const employeeName = button.getAttribute('data-name');
+                const employeeJob = button.getAttribute('data-job');
+
+                // hidden inputs
+                document.getElementById('employee_id').value = employeeId;
+                document.getElementById('employee_email').value = employeeEmail;
+
+                // تحديث بيانات العرض في الـ modal
+                modal.querySelector('h5').innerText = employeeName;
+                modal.querySelector('p').innerText = employeeJob;
+            });
+        });
+    </script>
+@endpush
