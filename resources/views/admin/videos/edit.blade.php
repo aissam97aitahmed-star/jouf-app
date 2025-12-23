@@ -20,7 +20,8 @@
             <div class="row">
                 <div class="col-sm-12">
 
-                    <form method="POST" action="{{ route('admin.videos.update', $video) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('admin.videos.update', $video) }}" enctype="multipart/form-data"
+                        class="dropzone" id="video-dropzone">
                         @csrf
                         @method('PUT')
 
@@ -39,7 +40,7 @@
                                     {{-- Title --}}
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label">عنوان الفيديو</label>
+                                            <label class="form-label w-100 text-right">عنوان الفيديو</label>
                                             <input type="text" name="title"
                                                 class="form-control @error('title') is-invalid @enderror"
                                                 value="{{ old('title', $video->title) }}">
@@ -52,7 +53,7 @@
                                     {{-- Category --}}
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label">الفئة</label>
+                                            <label class="form-label w-100 text-right">الفئة</label>
                                             <select name="category" class="form-select">
                                                 <option value="عام" @if ($video->category == 'عام') selected @endif>عام
                                                 </option>
@@ -67,7 +68,7 @@
                                     {{-- Target Group --}}
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label">الفئة المستهدفة</label>
+                                            <label class="form-label w-100 text-right">الفئة المستهدفة</label>
                                             <select name="target_group" class="form-select">
                                                 <option value="عمال" @if ($video->target_group == 'عمال') selected @endif>
                                                     عمال</option>
@@ -80,7 +81,7 @@
                                     {{-- Duration --}}
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label class="form-label">مدة الفيديو (دقائق)</label>
+                                            <label class="form-label w-100 text-right">مدة الفيديو (دقائق)</label>
                                             <input type="number" name="duration" class="form-control"
                                                 value="{{ old('duration', $video->duration) }}">
                                         </div>
@@ -99,7 +100,7 @@
                                     {{-- Description --}}
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="form-label">وصف الفيديو</label>
+                                            <label class="form-label w-100 text-right">وصف الفيديو</label>
                                             <textarea name="description" rows="3" class="form-control">{{ old('description', $video->description) }}</textarea>
                                         </div>
                                     </div>
@@ -107,7 +108,7 @@
                                     {{-- What you will learn --}}
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="form-label">ما ستتعلمه</label>
+                                            <label class="form-label w-100 text-right">ما ستتعلمه</label>
                                             <textarea name="what_you_will_learn" rows="3" class="form-control">{{ old('what_you_will_learn', $video->what_you_will_learn) }}</textarea>
                                         </div>
                                     </div>
@@ -115,7 +116,7 @@
                                     {{-- Key Points --}}
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="form-label">النقاط الرئيسية (كل نقطة في سطر)</label>
+                                            <label class="form-label w-100 text-right">النقاط الرئيسية (كل نقطة في سطر)</label>
                                             <textarea name="key_points" rows="4" class="form-control"
                                                 placeholder="مثال:
 التعرف على أهداف الفيديو
@@ -132,7 +133,7 @@
                                     {{-- Current Video --}}
                                     @if ($video->video_path)
                                         <div class="col-md-12 mb-3">
-                                            <label class="form-label d-block">الفيديو الحالي</label>
+                                            <label class="form-label w-100 text-right d-block">الفيديو الحالي</label>
                                             <video controls style="width: 100%; max-height: 300px;">
                                                 <source src="{{ asset('storage/' . $video->video_path) }}" type="video/mp4">
                                             </video>
@@ -142,7 +143,7 @@
                                     {{-- Replace Video --}}
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label">استبدال ملف الفيديو (اختياري)</label>
+                                            <label class="form-label w-100 text-right">استبدال ملف الفيديو (اختياري)</label>
                                             <input type="file" name="video_path" class="form-control">
                                         </div>
                                     </div>
@@ -183,3 +184,19 @@
         </div>
     </section>
 @endsection
+
+@push('js')
+    <script src="https://cdn.jsdelivr.net/npm/dropzone@5/dist/min/dropzone.min.js"></script>
+
+    <script>
+        Dropzone.options.videoDropzone = {
+            paramName: "video_path",
+            maxFilesize: 2048, // ميغابايت
+            acceptedFiles: ".mp4,.mov,.avi",
+            chunking: true,
+            forceChunking: true,
+            chunkSize: 1024 * 1024, // 1 ميغابايت
+            retryChunks: true,
+        };
+    </script>
+@endpush

@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Employee;
 use App\Enums\Department;
 use Illuminate\Http\Request;
+use App\Exports\EmployeesExport;
+use App\Imports\EmployeesImport;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use Devrabiul\ToastMagic\Facades\ToastMagic;
 
 class EmployeeController extends Controller
@@ -70,5 +73,22 @@ class EmployeeController extends Controller
             'success' => true,
             'message' => 'تم حذف الموظف بنجاح'
         ]);
+    }
+
+    public function export()
+    {
+        return Excel::download(new EmployeesExport, 'employees.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:xlsx,xls',
+        ]);
+
+        Excel::import(new EmployeesImport, $request->file('file'));
+
+        ToastMagic::success('تم استيراد الموظفين بنجاح!');
+        return back();
     }
 }

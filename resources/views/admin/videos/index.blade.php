@@ -54,15 +54,17 @@
                                                     <td>{{ $video->created_at->format('Y-m-d') }}</td>
                                                     <td>
                                                         <div class="d-flex gap-1">
+
                                                             <a href="{{ route('admin.videos.edit', $video) }}"
-                                                                class="btn btn-sm btn-success d-flex align-items-center br-6">
-                                                                <i class="ti ti-edit"></i>
-                                                            </a>
+                                                                class="btn btn-icon btn-light-success"><i
+                                                                    class="ti ti-edit"></i></a>
+
+
                                                             <button type="button"
-                                                                class="btn btn-sm btn-danger d-flex align-items-center br-6 btn-delete"
-                                                                data-id="{{ $video->id }}">
-                                                                <i class="ti ti-trash"></i>
-                                                            </button>
+                                                                class="btn btn-icon btn-light-danger btn-delete"
+                                                                data-id="{{ $video->id }}"><i
+                                                                    class="ti ti-trash"></i></button>
+
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -77,7 +79,8 @@
 
                 {{-- فورم إنشاء فيديو --}}
                 <div class="col-sm-12">
-                    <form method="POST" action="{{ route('admin.videos.store') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('admin.videos.store') }}" enctype="multipart/form-data"
+                        class="dropzone" id="video-dropzone">
                         @csrf
 
                         <div class="card" id="add_video">
@@ -101,7 +104,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label">عنوان الفيديو</label>
+                                            <label class="form-label w-100 text-right">عنوان الفيديو</label>
                                             <input type="text" name="title" class="form-control"
                                                 value="{{ old('title') }}" required>
                                         </div>
@@ -109,7 +112,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label">الفئة</label>
+                                            <label class="form-label w-100 text-right">الفئة</label>
                                             <select name="category" class="form-select">
                                                 <option value="عام">عام</option>
                                                 <option value="عامل">عامل</option>
@@ -121,7 +124,7 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label">الفئة المستهدفة</label>
+                                            <label class="form-label w-100 text-right">الفئة المستهدفة</label>
                                             <select name="target_group" class="form-select">
                                                 <option value="عمال">عمال</option>
                                                 <option value="إداريين">إداريين</option>
@@ -131,7 +134,7 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
-                                            <label class="form-label">المدة (بالدقائق)</label>
+                                            <label class="form-label w-100 text-right">المدة (بالدقائق)</label>
                                             <input type="number" name="duration" class="form-control"
                                                 value="{{ old('duration') }}">
                                         </div>
@@ -147,39 +150,39 @@
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="form-label">وصف الفيديو</label>
+                                            <label class="form-label w-100 text-right">وصف الفيديو</label>
                                             <textarea name="description" rows="3" class="form-control">{{ old('description') }}</textarea>
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="form-label">ما ستتعلمه</label>
+                                            <label class="form-label w-100 text-right">ما ستتعلمه</label>
                                             <textarea name="what_you_will_learn" rows="3" class="form-control">{{ old('what_you_will_learn') }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="form-label">النقاط الرئيسية (كل نقطة في سطر)</label>
+                                            <label class="form-label w-100 text-right">النقاط الرئيسية (كل نقطة في سطر)</label>
                                             <textarea name="key_points" rows="4" class="form-control"
                                                 placeholder="مثال:
 فهم رسالة الشركة
 التعرف على القيم الأساسية
 معرفة الهيكل التنظيمي">{{ old('key_points') }}</textarea>
-                                            <small class="text-muted">سيتم حفظ كل سطر كنقطة مستقلة</small>
+                                            <small class="text-muted w-100 text-right">سيتم حفظ كل سطر كنقطة مستقلة</small>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label">ملف الفيديو</label>
+                                            <label class="form-label w-100 text-right">ملف الفيديو</label>
                                             <input type="file" name="video_path" class="form-control" required>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label">صورة الغلاف</label>
+                                            <label class="form-label w-100 text-right">صورة الغلاف</label>
                                             <input type="file" name="thumbnail" class="form-control">
                                         </div>
                                     </div>
@@ -238,5 +241,18 @@
                 });
             });
         });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/dropzone@5/dist/min/dropzone.min.js"></script>
+
+    <script>
+        Dropzone.options.videoDropzone = {
+            paramName: "video_path",
+            maxFilesize: 2048, // ميغابايت
+            acceptedFiles: ".mp4,.mov,.avi",
+            chunking: true,
+            forceChunking: true,
+            chunkSize: 1024 * 1024, // 1 ميغابايت
+            retryChunks: true,
+        };
     </script>
 @endpush

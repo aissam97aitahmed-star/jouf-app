@@ -30,12 +30,11 @@
     <!-- [Material Icons] https://fonts.google.com/icons -->
     <link rel="stylesheet" href=" {{ asset('admin/assets/fonts/material.css') }}">
     <!-- [Template CSS Files] -->
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href=" {{ asset('admin/assets/css/style.css') }}" id="main-style-link">
     <link rel="stylesheet" href=" {{ asset('admin/assets/css/style-preset.css') }}">
     @stack('css')
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
         * {
@@ -46,9 +45,16 @@
         .icon_mr {
             margin: 0px 10px
         }
-        .mrl {
-                margin-left: 10px;
+        .dz-message {
+            display: none
         }
+        .text-right {
+            text-align: right
+        }
+        .mrl {
+            margin-left: 10px;
+        }
+
         /* كامل شريط التمرير */
         ::-webkit-scrollbar {
             width: 12px;
@@ -192,21 +198,15 @@
                         </a>
                     </li>
                     <li class="pc-item">
-                        <a href="" class="pc-link">
-                            <span class="pc-micon"><i class="ti ti-user-exclamation"></i></span>
-                            <span class="pc-mtext"> إدارة الزوار</span>
-                        </a>
-                    </li>
-                    <li class="pc-item">
-                        <a href="" class="pc-link">
+                        <a href="{{ route('admin.users.index') }}" class="pc-link">
                             <span class="pc-micon"><i class="ti ti-user-check"></i></span>
-                            <span class="pc-mtext"> إدارة مدراء الأمن</span>
+                            <span class="pc-mtext"> إدارة مستخدي المنصة</span>
                         </a>
                     </li>
                     <li class="pc-item">
-                        <a href="" class="pc-link">
-                            <span class="pc-micon"><i class="ti ti-user-plus"></i></span>
-                            <span class="pc-mtext"> إدارة موظفين الأمن</span>
+                        <a href="{{ route('admin.templates.index') }}" class="pc-link">
+                            <span class="pc-micon"><i class="ti ti-files"></i></span>
+                            <span class="pc-mtext">إدارة القوالب سريعة</span>
                         </a>
                     </li>
 

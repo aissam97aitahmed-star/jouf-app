@@ -11,9 +11,14 @@ Route::prefix('officer_security')->name('officer_security.')->group(function () 
         Route::get('/dashboard', [PagesController::class, 'index'])->name('dashboard');
         Route::get('/scanner', [PagesController::class, 'scanner'])->name('scanner');
         Route::get('/visitors', [PagesController::class, 'visitors'])->name('visitors');
+        Route::get('/visitors/entry/{order}', [PagesController::class, 'visitorEntry'])->name('visitor.entry');
+        Route::get('/visitors/exit/{order}', [PagesController::class, 'visitorExit'])->name('visitor.exit');
+        Route::get('/visitors/order/{order}', [PagesController::class, 'getOrder'])->name('order.get');
+
         Route::get('/notification', [PagesController::class, 'notification'])->name('notification');
         Route::get('/reports', [PagesController::class, 'reports'])->name('reports');
         Route::post('/scan-qr', [QrController::class, 'scan'])->name('qr.scan');
+        Route::post('/qr/exit',  [QrController::class, 'exit'])->name('qr.exit');
 
     });
 });

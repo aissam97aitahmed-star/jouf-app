@@ -1,24 +1,29 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VideoController;
 use App\Http\Controllers\Admin\BotFaqController;
 use App\Http\Controllers\Admin\PolicyController;
 use App\Http\Controllers\Admin\AdminMapController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HomeVideoController;
 use App\Http\Controllers\Admin\BotSettingController;
 use App\Http\Controllers\Admin\BotConversationController;
-
-
+use App\Http\Controllers\Admin\MessageTemplateController;
 
 Route::get('/admin/login', function () {
+    if (Auth::check() && Auth::user()->role == "admin") {
+        return redirect()->route('admin.dashboard');
+    }
+    Auth::logout();
     return view('admin.login');
 });
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.index');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::delete('/dashboard/destry/order/{order}', [DashboardController::class, 'deleteOrder'])->name('delete.order');
 
 
     //**######################## START MAP ROUTES **########################\\
@@ -37,6 +42,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     //**######################## END ViIDEOS ROUTES **########################\\
 
     //**######################## START EMPLOYYES ROUTES **########################\\
+    Route::get('/employees/export', [EmployeeController::class, 'export'])->name('employees.export');
+    Route::post('/employees/import', [EmployeeController::class, 'import'])->name('employees.import');
     Route::resource('employees', EmployeeController::class);
     //**######################## END EMPLOYYES ROUTES **########################\\
 
@@ -54,6 +61,14 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     //**######################## START EMPLOYYES ROUTES **########################\\
     Route::get('/home-video', [HomeVideoController::class, 'edit'])->name('home-video.edit');
     Route::post('/home-video', [HomeVideoController::class, 'update'])->name('home-video.update');
+    //**######################## END EMPLOYYES ROUTES **########################\\
+
+    //**######################## START EMPLOYYES ROUTES **########################\\
+    Route::resource('users', UserController::class);
+    //**######################## END EMPLOYYES ROUTES **########################\\
+
+    //**######################## START EMPLOYYES ROUTES **########################\\
+    Route::resource('templates', MessageTemplateController::class);
     //**######################## END EMPLOYYES ROUTES **########################\\
 
 

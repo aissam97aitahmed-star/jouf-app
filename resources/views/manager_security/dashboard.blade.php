@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
         header.security .actions a i {
@@ -111,32 +110,46 @@
             <div class="d-flex justify-content-between align-items-center search__oredr">
                 <form action="">
                     <i class="bi bi-search"></i>
-                    <input type="text" placeholder="البحث بالاسم، الشركة، أو رقم الهوية...">
+                    <input type="text" id="searchInput" placeholder="البحث بالاسم، الشركة، أو رقم الهوية...">
                 </form>
                 <div class="actions resp__act">
-                    <a href="" class="btn btn-primary tajawal-medium fs-14">الكل (5)</a>
-                    <a href="" class="btn btn-primary tajawal-medium fs-14 active">قيد المراجعة (3)</a>
-                    <a href="" class="btn btn-primary tajawal-medium fs-14">موافق عليه (1)</a>
-                    <a href="" class="btn btn-primary tajawal-medium fs-14">مرفوض (1)</a>
+                    <a href="{{ route('security_manager.dashboard') }}"
+                        class="btn btn-primary tajawal-medium fs-14 {{ request()->query('status') == null ? 'active' : '' }}">
+                        الكل ({{ $totalCount }})
+                    </a>
+                    <a href="{{ route('security_manager.dashboard', ['status' => 'pending']) }}"
+                        class="btn btn-primary tajawal-medium fs-14 {{ request()->query('status') == 'pending' ? 'active' : '' }}">
+                        قيد المراجعة ({{ $pendingCount }})
+                    </a>
+                    <a href="{{ route('security_manager.dashboard', ['status' => 'completed']) }}"
+                        class="btn btn-primary tajawal-medium fs-14 {{ request()->query('status') == 'completed' ? 'active' : '' }}">
+                        مكتمل ({{ $completedCount }})
+                    </a>
+                    <a href="{{ route('security_manager.dashboard', ['status' => 'in_progress']) }}"
+                        class="btn btn-primary tajawal-medium fs-14 {{ request()->query('status') == 'in_progress' ? 'active' : '' }}">
+                        جاري ({{ $inProgressCount }})
+                    </a>
                 </div>
+
             </div>
             <hr style="margin: 30px 0px; color: #80808094;">
-            <div class="all__orders">
+            <div class="all__orders" id="ordersContainer">
                 @foreach ($orders as $order)
                     <div class="order__single mb-3">
                         <div class="d-flex align-items-center mb-4 head__respons">
                             <h3 class="tajawal-bold fs-20 m-0" style="color: #111827;"> {{ $order->full_name }}</h3>
-                            <span class="tajawal-medium fs-12 mr-12 status"> @switch($order->status)
+                            <span class="tajawal-medium fs-12 mr-12 status">
+                                @switch($order->status)
                                     @case('pending')
                                         قيد المراجعة
                                     @break
 
-                                    @case('approved')
-                                        مقبول
+                                    @case('in_progress')
+                                        جاري
                                     @break
 
-                                    @case('rejected')
-                                        مرفوض
+                                    @case('completed')
+                                        مكتمل
                                     @break
                                 @endswitch
                             </span>
@@ -332,6 +345,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const ordersContainer = document.getElementById('ordersContainer');
+    const orders = ordersContainer.querySelectorAll('.order__single');
+
+    searchInput.addEventListener('keyup', function() {
+        const filter = this.value.toLowerCase();
+
+        orders.forEach(order => {
+            const name = order.querySelector('h3').textContent.toLowerCase();
+            const company = order.querySelector('.item__respons:nth-child(1) p:nth-child(4)').textContent.toLowerCase();
+            const identity = order.querySelector('.item__respons:nth-child(1) p:nth-child(3)').textContent.toLowerCase();
+
+            if (name.includes(filter) || company.includes(filter) || identity.includes(filter)) {
+                order.style.display = '';
+            } else {
+                order.style.display = 'none';
+            }
+        });
+    });
+</script>
 
 </body>
 

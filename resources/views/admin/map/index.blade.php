@@ -44,19 +44,21 @@
                                                     <td>{{ $location->created_at->format('Y-m-d') }}</td>
                                                     <td>
                                                         <div class="d-flex gap-1">
-                                                            <a href="{{ route('admin.map.show', $location) }}"
-                                                                class="btn btn-sm btn-info d-flex align-items-center br-6">
-                                                                <i class="ti ti-eye"></i>
-                                                            </a>
+
+                                                              <a href="{{ route('admin.map.show', $location) }}"
+                                                                class="btn btn-icon btn-light-primary"><i
+                                                                    class="ti ti-eye"></i></a>
+
+
                                                             <a href="{{ route('admin.map.edit', $location) }}"
-                                                                class="btn btn-sm btn-warning d-flex align-items-center br-6">
-                                                                <i class="ti ti-edit"></i>
-                                                            </a>
+                                                                class="btn btn-icon btn-light-success"><i
+                                                                    class="ti ti-edit"></i></a>
+
                                                             <button type="button"
-                                                                class="btn btn-sm btn-danger d-flex align-items-center br-6 btn-delete"
-                                                                data-id="{{ $location->id }}">
-                                                                <i class="ti ti-trash"></i>
-                                                            </button>
+                                                                class="btn btn-icon btn-light-danger btn-delete"
+                                                                data-id="{{ $location->id }}"><i
+                                                                    class="ti ti-trash"></i></button>
+
                                                         </div>
                                                     </td>
                                                 </tr>

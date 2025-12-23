@@ -11,7 +11,18 @@
                         <div class="card">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5>قائمة الموظفين</h5>
-                                <a href="#add_employee" class="btn btn-outline-primary d-inline-flex">إضافة موظف جديد</a>
+                                <div>
+                                    <a href="#add_employee" class="btn btn-outline-primary d-inline-flex"> <i
+                                            class="ti ti-circle-plus ms-2"></i> إضافة موظف جديد</a>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#importModal"
+                                        class="btn btn-outline-primary d-inline-flex"> <i
+                                            class="ti ti-download ms-2"></i>استيراد إكسيل</a>
+
+                                    {{-- <a href="{{ route('admin.employees.export') }}"
+                                        class="btn btn-outline-primary d-inline-flex">
+                                        <i class="ti ti-download ms-2"></i>تصدير إكسيل
+                                    </a> --}}
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="dt-responsive table-responsive">
@@ -40,15 +51,17 @@
                                                     <td>{{ $employee->office_location ?? '—' }}</td>
                                                     <td>
                                                         <div class="d-flex gap-1">
-                                                            <a href="{{ route('admin.employees.edit', $employee) }}"
-                                                                class="btn btn-sm btn-warning d-flex align-items-center br-6">
-                                                                <i class="ti ti-edit"></i>
-                                                            </a>
+
+                                                             <a href="{{ route('admin.employees.edit', $employee) }}" class="btn btn-icon btn-light-success"><i
+                                                                class="ti ti-edit"></i></a>
+
+
                                                             <button type="button"
-                                                                class="btn btn-sm btn-danger d-flex align-items-center br-6 btn-delete"
-                                                                data-id="{{ $employee->id }}">
-                                                                <i class="ti ti-trash"></i>
-                                                            </button>
+                                                                class="btn btn-icon btn-light-danger btn-delete"
+                                                                data-id="{{ $employee->id }}"><i
+                                                                    class="ti ti-trash"></i></button>
+
+
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -136,6 +149,43 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal الاستيراد -->
+    <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form action="{{ route('admin.employees.import') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="importModalLabel">استيراد موظفين من Excel</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">اختر ملف Excel</label>
+                            <input type="file" name="file" class="form-control" required>
+                            <small class="text-muted">صيغة الملف: XLSX أو XLS</small>
+                        </div>
+                        <div class="mb-3">
+                            <p>مثال على الأعمدة المطلوبة في الملف:</p>
+                            <ul>
+                                <li><strong>name</strong> - الاسم</li>
+                                <li><strong>position</strong> - الوظيفة</li>
+                                <li><strong>department</strong> - الإدارة</li>
+                                <li><strong>email</strong> - البريد الإلكتروني</li>
+                                <li><strong>phone</strong> - الهاتف</li>
+                                <li><strong>office_location</strong> - المكتب (اختياري)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                        <button type="submit" class="btn btn-primary">استيراد</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 @endsection
 
 @push('js')

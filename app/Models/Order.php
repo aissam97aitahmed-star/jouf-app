@@ -35,5 +35,9 @@ class Order extends Model
         'has_company_letter',
         // Status
         'status',
+
+        // Visit Tracking
+        'entry_time', // وقت الدخول
+        'exit_time',  // وقت الخروج
     ];
 }

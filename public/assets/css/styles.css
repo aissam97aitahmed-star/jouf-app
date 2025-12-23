@@ -295,6 +295,12 @@ ul {
     transform: translateY(-5px);
 }
 
+textarea.form-control {
+       font-family: "Tajawal", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
 /* #################### END GLOBAL STYLE  #################### */
 
 /* #################### START INDEX PAGE STYLE  #################### */
@@ -1131,7 +1137,8 @@ header.overveiw .experience__icons i {
     padding: 13px;
     border-width: 1px;
     background-color: #F6FFFA;
-    border: 1px solid #00471F80
+    border: 1px solid #00471F80;
+    cursor: pointer;
 }
 
 .employees__message .modal-body form .priority div span {
@@ -1142,6 +1149,7 @@ header.overveiw .experience__icons i {
     padding-left: 12px;
     background: #DCFCE7;
     color: #166534;
+    cursor: pointer;
 }
 
 .employees__message .modal-body form .priority div span i {
@@ -3264,6 +3272,7 @@ section.scanner__security .notes__requirement i {
 .modal__security .visit__data ul li {
     display: flex;
     justify-content: space-between;
+    width: max-content;
 }
 
 .modal__security span.visit___status {

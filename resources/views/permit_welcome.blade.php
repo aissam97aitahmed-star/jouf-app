@@ -89,7 +89,7 @@
                                 <p class="tajawal-medium fs-16">طلبات جديدة</p>
                                 <p class="tajawal-regular fs-14" style="color: #BFDBFE;">اليوم</p>
                             </div>
-                            <strong class="tajawal-bold fs-24" style="color: #4ADE80;">{{ \DB::table('orders')->whereDate('created_at', now()->toDateString())->count() }}</strong>
+                            <strong class="tajawal-bold fs-24" style="color: #4ADE80;">{{ $totalCountToday }}</strong>
                         </div>
                         <div class="item d-flex align-items-center justify-content-between">
                             <i class="bi bi-check2-all" style="background: #3B82F633; color: #60A5FA;"></i>
@@ -97,7 +97,7 @@
                                 <p class="tajawal-medium fs-16">طلبات مقبولة</p>
                                 <p class="tajawal-regular fs-14" style="color: #BFDBFE;">اليوم</p>
                             </div>
-                            <strong class="tajawal-bold fs-24" style="color: #60A5FA;">{{ DB::table('orders')->count() }}</strong>
+                            <strong class="tajawal-bold fs-24" style="color: #60A5FA;">{{ $completedCount }}</strong>
                         </div>
                         <div class="item d-flex align-items-center justify-content-between">
                             <i class="bi bi-person-fill-exclamation" style="background: #A855F733; color: #C084FC;"></i>
@@ -105,7 +105,7 @@
                                 <p class="tajawal-medium fs-16">زوار حاليون</p>
                                 <p class="tajawal-regular fs-14" style="color: #BFDBFE;">داخل المبنى</p>
                             </div>
-                            <strong class="tajawal-bold fs-24" style="color: #C084FC;">23</strong>
+                            <strong class="tajawal-bold fs-24" style="color: #C084FC;">{{ $inProgressCount ?? 0 }}</strong>
                         </div>
                     </div>
                 </div>

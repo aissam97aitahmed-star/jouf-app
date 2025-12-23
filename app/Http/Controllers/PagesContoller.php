@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\HomeVideo;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -24,6 +25,10 @@ class PagesContoller extends Controller
     public function permitProgram()
     {
         $homeVideo = HomeVideo::first();
-        return view('permit_welcome', compact('homeVideo'));
+        $totalCountToday = Order::whereDate('visit_date', today())->count();
+        $inProgressCount = Order::whereDate('visit_date', today())->whereNotNull('entry_time')->whereNull('exit_time')->count();
+        $completedCount = Order::whereDate('visit_date', today())->whereNotNull('entry_time')->whereNotNull('exit_time')->count();
+
+        return view('permit_welcome', compact('homeVideo', 'totalCountToday', 'inProgressCount', 'completedCount'));
     }
 }

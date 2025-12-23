@@ -11,7 +11,7 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     */ 
+     */
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
@@ -45,8 +45,11 @@ return new class extends Migration
             $table->boolean('has_company_letter')->default(false); // أحمل خطاب من الشركة (اختياري)
 
             // Status
-            $table->enum('status', ['pending', 'approved', 'rejected'])
+            $table->enum('status', ['pending', 'in_progress', 'completed'])
                 ->default('pending');
+
+            $table->time('entry_time')->nullable(); // وقت الدخول
+            $table->time('exit_time')->nullable(); // وقت الخروج
 
             $table->timestamps();
         });

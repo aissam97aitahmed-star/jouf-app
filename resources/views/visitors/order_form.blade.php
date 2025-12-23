@@ -207,7 +207,7 @@
                                         <option value="{{ $duration->value }}">
                                             {{ $duration->value }}
                                         </option>
-                                    @endforeach 
+                                    @endforeach
                                 </select>
                                 <i class="bi bi-caret-down-fill custom-select-icon"></i>
                             </div>
