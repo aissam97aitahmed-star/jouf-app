@@ -14,9 +14,6 @@
                 <div class="col-md-6 col-xs-12 mb-3">
                     <h5 class="tajawal-bold mb-3">خريطة المواقع</h5>
                     <div id="locationsMap" style="height: 400px; border-radius: 12px;"></div>
-
-                    {{-- <img src="{{ asset('assets/images/map.jpg') }}" alt="" width="100%"
-                        style="border-radius: 12px;"> --}}
                 </div>
                 <div class="col-md-6 col-xs-12">
                     @forelse ($locations as $location)
@@ -24,7 +21,7 @@
                             <div class="d-flex align-items-center mb-3">
                                 <i class="bi bi-geo-alt location__icon"></i>
                                 <div>
-                                    <h6 class="tajawal-bold fs-18 m-0">{{ $location->name }}</h6>
+                                    <a href="https://www.google.com/maps?q={{ $location->lat }},{{ $location->lng }}" target="_blank" class="text-dark"><h6 class="tajawal-bold fs-18 m-0">{{ $location->name }}</h6></a>
                                     <p class="tajawal-regular fs-14" style="color: #4B5563;">{{ $location->category }}</p>
                                 </div>
                             </div>

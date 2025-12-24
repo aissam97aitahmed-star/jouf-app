@@ -78,8 +78,8 @@
                     <div class="col-md-4 col-xs-12 mb-5">
                         <div class="box">
                             <i class="bi bi-clock text-white"></i>
-                            <h5 class="text-white tajawal-bold mb-2 mt-4">دعم متواصل</h5>
-                            <p class="text-white tajawal-regular">فريق دعم متاح على مدار الساعة</p>
+                            <h5 class="text-white tajawal-bold mb-2 mt-4">سرعة في الخدمة</h5>
+                            <p class="text-white tajawal-regular">معالجة فورية للطلبات والتصاريح</p>
                         </div>
                     </div>
                     <div class="col-md-4 col-xs-12 mb-5">

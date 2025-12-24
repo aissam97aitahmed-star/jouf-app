@@ -2,7 +2,10 @@
 
 @push('css')
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
+
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 @endpush
 
 @section('content')
@@ -45,7 +48,7 @@
                                                     <td>
                                                         <div class="d-flex gap-1">
 
-                                                              <a href="{{ route('admin.map.show', $location) }}"
+                                                            <a href="{{ route('admin.map.show', $location) }}"
                                                                 class="btn btn-icon btn-light-primary"><i
                                                                     class="ti ti-eye"></i></a>
 
@@ -165,27 +168,55 @@
 @endsection
 
 @push('js')
-    <script>
-        // Leaflet Map
-        const map = L.map('map').setView([31.63, -8.00], 6);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap'
-        }).addTo(map);
-        let marker;
-        map.on('click', function(e) {
-            const {
-                lat,
-                lng
-            } = e.latlng;
-            document.getElementById('lat').value = lat;
-            document.getElementById('lng').value = lng;
-            if (marker) {
-                marker.setLatLng(e.latlng);
-            } else {
-                marker = L.marker(e.latlng).addTo(map);
-            }
-        });
-    </script>
+  <script>
+    // إنشاء الخريطة
+    const map = L.map('map').setView([31.63, -8.00], 6);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    let marker;
+
+    // البحث عن موقع
+    const geocoder = L.Control.geocoder({
+        defaultMarkGeocode: false,
+        placeholder: 'ابحث عن موقع...'
+    })
+    .on('markgeocode', function(e) {
+        const latlng = e.geocode.center;
+
+        // تحريك الخريطة
+        map.setView(latlng, 15);
+
+        // وضع Marker
+        if (marker) {
+            marker.setLatLng(latlng);
+        } else {
+            marker = L.marker(latlng).addTo(map);
+        }
+
+        // حفظ الإحداثيات
+        document.getElementById('lat').value = latlng.lat;
+        document.getElementById('lng').value = latlng.lng;
+    })
+    .addTo(map);
+
+    // اختيار الموقع بالنقر
+    map.on('click', function(e) {
+        const { lat, lng } = e.latlng;
+
+        document.getElementById('lat').value = lat;
+        document.getElementById('lng').value = lng;
+
+        if (marker) {
+            marker.setLatLng(e.latlng);
+        } else {
+            marker = L.marker(e.latlng).addTo(map);
+        }
+    });
+</script>
+
 
 
 

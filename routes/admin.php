@@ -64,6 +64,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     //**######################## END EMPLOYYES ROUTES **########################\\
 
     //**######################## START EMPLOYYES ROUTES **########################\\
+    Route::post('/users/import', [UserController::class, 'import'])->name('users.import');
     Route::resource('users', UserController::class);
     //**######################## END EMPLOYYES ROUTES **########################\\
 

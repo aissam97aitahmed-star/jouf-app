@@ -1,6 +1,6 @@
 @extends('admin.layout')
 
-@section('content')
+@section('content')  
     <section class="pc-container">
         <div class="pc-content">
             <div class="row">

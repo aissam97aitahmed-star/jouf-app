@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
+use App\Imports\UsersImport;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 use Devrabiul\ToastMagic\Facades\ToastMagic;
 
 class UserController extends Controller
@@ -17,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::where('role', '!=', 'admin')
-            ->latest()
+            ->orderBy('id', 'asc')
             ->paginate(10);
         return view('admin.users.index', compact('users'));
     }
@@ -114,4 +116,20 @@ class UserController extends Controller
             'message' => 'تم حذف المستخدم بنجاح'
         ]);
     }
+
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:xlsx,xls',
+        ]);
+
+        Excel::import(new UsersImport, $request->file('file'));
+
+        ToastMagic::success('تم استيراد الموظفين بنجاح!');
+        return back();
+    }
 }
+
+
+

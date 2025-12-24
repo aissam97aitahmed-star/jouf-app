@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Carbon\Carbon;
 use App\Models\Order;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Paginator::useBootstrapFive();
         // مشاركه البيانات مع كل view تستخدم الـ layout
         View::composer('officer_security.layout', function ($view) {
             $today = Carbon::today();

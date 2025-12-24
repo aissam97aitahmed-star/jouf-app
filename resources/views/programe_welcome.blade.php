@@ -120,13 +120,9 @@
                 <div class="col-md-6 p-0">
                     <div class="bg-box h-100 d-flex align-items-center justify-content-center">
                         <div class="content">
-                            <h1 class="tajawal-bold fs-36 mb-4">منصة إصدار تصاريح الزوار</h1>
-                            <p class="tajawal-regular fs-20" style="color: #FFFFFFE5;">منصة متكاملة لإصدار التصاريح
-                                الخاصة
-                                بالزوار القادمين للشكة</p>
-                            <p class="tajawal-regular fs-20 mb-4" style="color: #FFFFFFE5;">من خلال طلب تصريح من قبل
-                                موظف او
-                                إدارة في الشركة</p>
+                            <h1 class="tajawal-bold fs-36 mb-4"> المنصة الترحيبية بالموظفين</h1>
+                            <p class="tajawal-regular fs-20" style="color: #FFFFFFE5;">منصة متكاملة لإدارة ترحيب الموظفين الجدد</p>
+                            <p class="tajawal-regular fs-20 mb-4" style="color: #FFFFFFE5;">وتتبع مراحل الإعداد والتدريب</p>
                             <div class="d-flex justify-content-evenly">
                                 <div class="item d-flex flex-column w-auto align-items-center">
                                     <i class="bi bi-bar-chart"></i>

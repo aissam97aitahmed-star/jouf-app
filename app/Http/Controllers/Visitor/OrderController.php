@@ -8,11 +8,22 @@ use App\Enums\VisitPurpose;
 use App\Enums\VisitDuration;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Services\NotificationService;
+use App\Events\NewVisitorOrderCreated;
 use Devrabiul\ToastMagic\Facades\ToastMagic;
 use Monarobase\CountryList\CountryListFacade as Countries;
 
 class OrderController extends Controller
 {
+
+    protected $notificationService;
+
+    public function __construct(NotificationService $notificationService)
+    {
+        $this->notificationService = $notificationService;
+    }
+
+
     public function index()
     {
         // ToastMagic::success('تم إرسال الطلب بنجاح!');
@@ -68,6 +79,12 @@ class OrderController extends Controller
 
         // حفظ الطلب مع تخزين الكائن
         $order = Order::create($validated);
+        broadcast(new NewVisitorOrderCreated($order));
+        $this->notificationService->store(
+            'طلب جديد',
+            'تم إنشاء طلب زيارة من ' . $request->full_name,
+            'security_manager'
+        );
         ToastMagic::success('تم إرسال الطلب بنجاح!');
         // إعادة عرض الـ view مع إرسال order_id
         return redirect()->route('visitor.order.success')
