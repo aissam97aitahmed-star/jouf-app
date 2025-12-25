@@ -2240,6 +2240,7 @@ footer.end a.contact {
     color: #aaa;
     margin-left: 10px;
     font-size: 14px;
+    cursor: pointer;
 }
 
 .visitor__login form .visitor-input {

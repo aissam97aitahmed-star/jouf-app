@@ -86,7 +86,7 @@
                         <p class="tajawal-regular fs-14">إدارة الزوار والتصاريح الأمنية</p>
                     </div>
                 </div>
-
+ 
                 <div>
                     <img src="{{ asset('assets/images/main-logo.png') }}" alt="" width="161px" height="116px">
                 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Officer;
 
 use App\Models\Order;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
@@ -15,7 +16,11 @@ class PagesController extends Controller
         $activeOrders = Order::whereNotNull('entry_time')
             ->whereNull('exit_time')
             ->get();
-        return view('officer_security.dashboard', compact('activeOrders'));
+        $notifications = Notification::where('role', 'security_officer')
+            ->orderBy('id', 'DESC')
+            ->take(2)   // أو ->limit(2)
+            ->get();
+        return view('officer_security.dashboard', compact('activeOrders', 'notifications'));
     }
     public function scanner()
     {
@@ -85,7 +90,32 @@ class PagesController extends Controller
 
     public function notification()
     {
-        return view('officer_security.notification');
+        $notifications = Notification::where('role', 'security_officer')->orderBy('id', 'DESC')->get();
+        return view('officer_security.notification', compact('notifications'));
+    }
+
+
+    // تحديد إشعار كمقروء
+    public function markAsRead($id)
+    {
+        $notification = Notification::findOrFail($id);
+        $notification->update(['is_read' => true]);
+        return response()->json(['success' => true]);
+    }
+
+    // تحديد كل الإشعارات كمقروء
+    public function markAllAsRead()
+    {
+        Notification::where('is_read', false)->update(['is_read' => true]);
+        return response()->json(['success' => true]);
+    }
+
+    // حذف إشعار
+    public function destroy($id)
+    {
+        $notification = Notification::findOrFail($id);
+        $notification->delete();
+        return response()->json(['success' => true]);
     }
 
     public function reports()

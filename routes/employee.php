@@ -6,8 +6,8 @@ use App\Http\Controllers\Employee\MapController;
 use App\Http\Controllers\Employee\VideoController;
 use App\Http\Controllers\Employee\PrivacyController;
 use App\Http\Controllers\Employee\DashboardController;
+use App\Http\Controllers\Employee\NotificationController;
 use App\Http\Controllers\Employee\EmployeesListController;
-
 
 Route::view('/mail', 'emails.employee-message');
 Route::middleware(['auth', 'role:employee'])->prefix('employee')->name('employee.')->group(function () {
@@ -21,4 +21,8 @@ Route::middleware(['auth', 'role:employee'])->prefix('employee')->name('employee
     Route::get('/chat_bot', [BotController::class, 'index'])->name('bot');
     Route::post('/bot/ask', [BotController::class, 'ask'])->name('bot.ask');
     Route::get('/conversations/export', [BotController::class, 'export'])->name('bot.export');
+    Route::get('/notification', [NotificationController::class, 'index'])->name('notification');
+    Route::post('/notifications/read/{id}', [NotificationController::class, 'markAsRead'])->name('notifications.read');
+    Route::post('/notifications/read-all', [NotificationController::class, 'markAllAsRead'])->name('notifications.read.all');
+    Route::delete('/notifications/delete/{id}', [NotificationController::class, 'destroy'])->name('notifications.delete');
 });

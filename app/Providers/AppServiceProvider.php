@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Carbon\Carbon;
 use App\Models\Order;
+use App\Models\Notification;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -34,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
             $approved = $todayOrders->count();
             $inProgress = $todayOrders->whereNotNull('entry_time')->whereNull('exit_time')->count();
             $completed = $todayOrders->whereNotNull('entry_time')->whereNotNull('exit_time')->count();
-            $alerts = 2; // أو حسب التنبيهات الفعلية
+            $alerts = Notification::where('role', 'security_officer')->count(); // أو حسب التنبيهات الفعلية
 
             $view->with(compact('totalToday', 'pending', 'approved', 'inProgress', 'completed', 'alerts'));
         });

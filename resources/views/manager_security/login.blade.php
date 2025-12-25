@@ -22,7 +22,7 @@
         <div class="container-fluid ">
             <div class="row">
                 <div class="col-md-6 p-0">
-                    <img src="assets/images/login_logo.png" alt="" width="100%">
+                    <img src="{{ asset('assets/images/login_logo.png') }}" alt="" width="100%">
                     <div class="d-flex justify-content-center pb-5">
 
                         <form method="POST" action="{{ route('login') }}">
@@ -59,7 +59,7 @@
                                     الوظيفي</label><br>
                                 <div class="input-container">
                                     <span class="input-icon"><i class="bi bi-person"></i></span>
-                                    <input type="text" placeholder="ادخل الرقم الوظيفي" name="username" value="Aljouf009"
+                                    <input type="text" placeholder="ادخل الرقم الوظيفي" name="username"
                                         required autofocus autocomplete="username" class="visitor-input tajawal-medium fs-14">
                                 </div>
                             </div>
@@ -68,9 +68,9 @@
                                     المرور
                                 </label><br>
                                 <div class="input-container">
-                                    <input type="text" placeholder="********" name="password" required
-                                        class="visitor-input tajawal-medium fs-14" value="Aljouf1897900">
-                                    <span class="input-icon"><i class="bi bi-eye"></i></span>
+                                    <input type="password" placeholder="********" name="password" required
+                                        class="visitor-input tajawal-medium fs-14" id="passwordInput">
+                                    <span class="input-icon"><i class="bi bi-eye" id="togglePassword"></i></span>
                                 </div>
                             </div>
                             <div class="mb-3 d-flex align-items-center justify-content-between">
@@ -96,7 +96,7 @@
                         </form>
                     </div>
                     <div>
-                        <img src="assets/images/footer.jpg" width="100%" alt="" height="44px">
+                        <img src="{{ asset('assets/images/footer.jpg') }}" width="100%" alt="" height="44px">
                     </div>
                 </div>
                 <div class="col-md-6 p-0">
@@ -133,6 +133,20 @@
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const passwordInput = document.querySelector('#passwordInput');
+
+        togglePassword.addEventListener('click', function() {
+            // تبديل نوع الحقل بين password و text
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // تبديل أيقونة العين
+            this.classList.toggle('bi-eye'); // العين المفتوحة
+            this.classList.toggle('bi-eye-slash'); // العين المغلقة
+        });
+    </script>
 </body>
 
 </html>

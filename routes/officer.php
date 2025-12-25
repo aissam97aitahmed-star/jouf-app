@@ -16,9 +16,12 @@ Route::prefix('officer_security')->name('officer_security.')->group(function () 
         Route::get('/visitors/order/{order}', [PagesController::class, 'getOrder'])->name('order.get');
 
         Route::get('/notification', [PagesController::class, 'notification'])->name('notification');
+        Route::post('/notifications/read/{id}', [PagesController::class, 'markAsRead'])->name('notifications.read');
+        Route::post('/notifications/read-all', [PagesController::class, 'markAllAsRead'])->name('notifications.read.all');
+        Route::delete('/notifications/delete/{id}', [PagesController::class, 'destroy'])->name('notifications.delete');
+
         Route::get('/reports', [PagesController::class, 'reports'])->name('reports');
         Route::post('/scan-qr', [QrController::class, 'scan'])->name('qr.scan');
         Route::post('/qr/exit',  [QrController::class, 'exit'])->name('qr.exit');
-
     });
 });

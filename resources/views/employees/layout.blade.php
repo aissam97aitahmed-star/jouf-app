@@ -20,6 +20,9 @@
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     {!! ToastMagic::styles() !!}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 
     @stack('css')
     <style>
@@ -32,8 +35,29 @@
             height: 90vh;
             overflow: auto;
         }
+
+        .notyf__message {
+            font-family: "Tajawal", sans-serif !important;
+            font-weight: 500 !important;
+            font-style: normal !important;
+            font-size: 15px !important;
+            direction: rtl !important;
+            text-align: right !important;
+        }
+
+        .notyf__icon {
+            margin-right: 0px !important;
+            margin-left: 13px !important
+        }
     </style>
 </head>
+@php
+    use App\Models\Notification;
+    $notificationCount = Notification::where([
+        'role' => 'employee',
+        'is_read' => false,
+    ])->count();
+@endphp
 
 <body>
     <header class="overveiw text-white">
@@ -70,11 +94,12 @@
                     </div>
                 </div>
                 <div class="experience__icons z-2 d-flex">
-                    <div class="d-inline" style="position: relative;">
-                        <span class="notification-badge">5</span>
+                    <a href="{{ route('employee.notification') }}" class="d-inline text-white"
+                        style="position: relative;">
+                        <span class="notification-badge" id="notificationCount">{{ $notificationCount ?? 0 }}</span>
                         <i class="bi bi-bell notification-icon"></i>
-                    </div>
-                    <i class="bi bi-gear"></i>
+                    </a>
+                    {{-- <i class="bi bi-gear"></i> --}}
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
@@ -125,6 +150,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 
     <script>
         const toTop = document.getElementById("toTop");
@@ -148,6 +174,37 @@
     {!! ToastMagic::scripts() !!}
 
     @stack('js')
+
+
+
+    <script>
+        const notyf = new Notyf({
+            duration: 100000,
+            position: {
+                x: 'left',
+                y: 'top'
+            },
+            types: [{
+                type: 'error',
+                className: 'notyf-error-ar'
+            }]
+        });
+
+        window.addEventListener('DOMContentLoaded', function() {
+
+            let notificationCount = "{{ $notificationCount ?? 0 }}";
+            window.Echo.channel('employee-notifications').listen('.new-notification', (e) => {
+                notificationCount++;
+                document.getElementById('notificationCount').innerText = notificationCount;
+                notyf.success(e.message);
+                // alert('test');
+
+
+
+            });
+        })
+    </script>
+
 </body>
 
 </html>

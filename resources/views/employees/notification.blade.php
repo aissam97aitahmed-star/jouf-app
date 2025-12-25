@@ -1,7 +1,8 @@
-@extends('officer_security.layout')
+@extends('employees.layout')
 
 @section('content')
-   <section class="alerts__security">
+
+    <section class="alerts__security">
         <div class="container">
             <div class="div">
                 <div class="d-flex justify-content-between align-items-center notification__head">
@@ -32,9 +33,9 @@
                                         تحديد كمقروء
                                     </a>
                                 @endif
-                                <a href="#" class="btn btn-primary tajawal-regular fs-16 details delete-btn"> <i
+                                {{-- <a href="#" class="btn btn-primary tajawal-regular fs-16 details delete-btn"> <i
                                         class="bi bi-trash"></i>
-                                    حذف</a>
+                                    حذف</a> --}}
 
                             </div>
                         </div>
@@ -58,7 +59,7 @@
                     let alertDiv = this.closest('.alert__single');
                     let id = alertDiv.dataset.id;
 
-                    fetch(`/officer_security/notifications/read/${id}`, {
+                    fetch(`/employee/notifications/read/${id}`, {
                             method: 'POST',
                             headers: {
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
@@ -75,51 +76,51 @@
             });
 
             // حذف إشعار
-            const deleteButtons = document.querySelectorAll('.delete-btn');
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const alertDiv = this.closest('.alert__single');
-                    const id = alertDiv.dataset.id;
+            // const deleteButtons = document.querySelectorAll('.delete-btn');
+            // deleteButtons.forEach(button => {
+            //     button.addEventListener('click', function(e) {
+            //         e.preventDefault();
+            //         const alertDiv = this.closest('.alert__single');
+            //         const id = alertDiv.dataset.id;
 
-                    Swal.fire({
-                        title: 'هل أنت متأكد؟',
-                        text: "لن تتمكن من التراجع عن الحذف!",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#d33',
-                        cancelButtonColor: '#3085d6',
-                        confirmButtonText: 'نعم، احذف!',
-                        cancelButtonText: 'إلغاء'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            fetch(`/officer_security/notifications/delete/${id}`, {
-                                    method: 'DELETE',
-                                    headers: {
-                                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                        'Accept': 'application/json'
-                                    }
-                                }).then(res => res.json())
-                                .then(data => {
-                                    if (data.success) {
-                                        Swal.fire({
-                                                title: 'تم الحذف!',
-                                                text: 'تم حذف التنبيه بنجاح.',
-                                                icon: 'success',
-                                                confirmButtonText: 'حسناً' // ✅ هذا سيغير نص الزر
-                                            })
-                                            .then(() => {
-                                                alertDiv
-                                                    .remove(); // ✅ إزالة العنصر من الصفحة
-                                            });
-                                    }
-                                }).catch(err => {
-                                    Swal.fire('حدث خطأ', 'لم يتم حذف التنبيه', 'error');
-                                });
-                        }
-                    });
-                });
-            });
+            //         Swal.fire({
+            //             title: 'هل أنت متأكد؟',
+            //             text: "لن تتمكن من التراجع عن الحذف!",
+            //             icon: 'warning',
+            //             showCancelButton: true,
+            //             confirmButtonColor: '#d33',
+            //             cancelButtonColor: '#3085d6',
+            //             confirmButtonText: 'نعم، احذف!',
+            //             cancelButtonText: 'إلغاء'
+            //         }).then((result) => {
+            //             if (result.isConfirmed) {
+            //                 fetch(`/employee/notifications/delete/${id}`, {
+            //                         method: 'DELETE',
+            //                         headers: {
+            //                             'X-CSRF-TOKEN': '{{ csrf_token() }}',
+            //                             'Accept': 'application/json'
+            //                         }
+            //                     }).then(res => res.json())
+            //                     .then(data => {
+            //                         if (data.success) {
+            //                             Swal.fire({
+            //                                     title: 'تم الحذف!',
+            //                                     text: 'تم حذف التنبيه بنجاح.',
+            //                                     icon: 'success',
+            //                                     confirmButtonText: 'حسناً' // ✅ هذا سيغير نص الزر
+            //                                 })
+            //                                 .then(() => {
+            //                                     alertDiv
+            //                                         .remove(); // ✅ إزالة العنصر من الصفحة
+            //                                 });
+            //                         }
+            //                     }).catch(err => {
+            //                         Swal.fire('حدث خطأ', 'لم يتم حذف التنبيه', 'error');
+            //                     });
+            //             }
+            //         });
+            //     });
+            // });
 
             // تحديد كل الإشعارات كمقروء
             // تحديد كل الإشعارات كمقروء
@@ -128,7 +129,7 @@
                 readAllBtn.addEventListener('click', function(e) {
                     e.preventDefault();
 
-                    fetch(`/officer_security/notifications/read-all`, {
+                    fetch(`/employee/notifications/read-all`, {
                             method: 'POST',
                             headers: {
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}',

@@ -5,11 +5,21 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Facility;
 use App\Models\Location;
 use Illuminate\Http\Request;
+use App\Events\NotifyEmployee;
 use App\Http\Controllers\Controller;
+use App\Services\NotificationService;
 use Devrabiul\ToastMagic\Facades\ToastMagic;
 
 class AdminMapController extends Controller
 {
+
+    protected $notificationService;
+
+    public function __construct(NotificationService $notificationService)
+    {
+        $this->notificationService = $notificationService;
+    }
+
     public function index()
     {
         $facilities = Facility::all();
@@ -60,8 +70,18 @@ class AdminMapController extends Controller
         if ($request->filled('facilities')) {
             $location->facilities()->sync($request->facilities);
         }
+        try {
+            broadcast(new NotifyEmployee('تنبيه : تم إضافة موقع جديد'));
+            $this->notificationService->store(
+                'موقع جديد',
+                'تم إضافة موقع جديد من طرف الإدارة',
+                'employee'
+            );
+        } catch (\Throwable $th) {
+            return $th;
+        }
         ToastMagic::success('تم إنشاء الموقع بنجاح');
-        return redirect() ->back();
+        return redirect()->back();
     }
 
     public function update(Request $request, Location $location)

@@ -24,6 +24,8 @@ Route::get('/admin/login', function () {
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::delete('/dashboard/destry/order/{order}', [DashboardController::class, 'deleteOrder'])->name('delete.order');
+    Route::get('/password/update', [DashboardController::class, 'updatePasswordForm'])->name('password.update');
+    Route::post('/password/reset', [DashboardController::class, 'updatePassword'])->name('password.reset');
 
 
     //**######################## START MAP ROUTES **########################\\

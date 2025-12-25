@@ -35,6 +35,7 @@
             font-weight: 500;
             font-style: normal;
         }
+
         .notyf__message,
         .notyf-error-ar .notyf__message {
             font-family: "Tajawal", sans-serif !important;
@@ -51,8 +52,17 @@
         }
     </style>
     {!! ToastMagic::styles() !!}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
+
+@php
+    use App\Models\Notification;
+    $notificationCount = Notification::where([
+        'role' => 'security_officer',
+        'is_read' => false,
+    ])->count();
+@endphp
 
 <body>
 
@@ -72,11 +82,13 @@
                 </div>
 
                 <div class="d-flex align-items-center actions">
-                    <a href="" class="btn btn-primary position-relative">
+                    <a href="{{ route('officer_security.notification') }}" class="btn btn-primary position-relative">
                         <i class="bi bi-bell"></i>
-                        <span class="notification-badge">5</span>
+                        <span class="notification-badge" id="notificationCount">{{ $notificationCount ?? 0 }}</span>
                     </a>
-                    <a href="" class="btn btn-primary"><i class="bi bi-gear"></i></a>
+                    <a href="{{ route('officer_security.dashboard') }}" class="btn btn-primary position-relative">
+                        <i class="bi bi-house"></i>
+                    </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
@@ -188,6 +200,37 @@
     {!! ToastMagic::scripts() !!}
 
     @stack('js')
+
+
+    <script>
+        const notyf = new Notyf({
+            duration: 100000,
+            position: {
+                x: 'left',
+                y: 'top'
+            },
+            types: [{
+                type: 'error',
+                className: 'notyf-error-ar'
+            }]
+        });
+
+        window.addEventListener('DOMContentLoaded', function() {
+
+            let notificationCount = "{{ $notificationCount ?? 0 }}";
+            window.Echo.channel('order').listen('NewVisitorOrderCreated', (e) => {
+                // alert(e);
+                notificationCount++;
+                document.getElementById('notificationCount').innerText = notificationCount;
+                // alert('test');
+                notyf.success('تنبيه جديد');
+
+
+
+            });
+        })
+    </script>
+
 
 </body>
 

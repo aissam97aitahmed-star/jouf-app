@@ -209,6 +209,12 @@
                             <span class="pc-mtext">إدارة القوالب سريعة</span>
                         </a>
                     </li>
+                      <li class="pc-item">
+                        <a href="{{ route('admin.password.update') }}" class="pc-link">
+                            <span class="pc-micon"><i class="ti ti-lock"></i></span>
+                            <span class="pc-mtext">تغيير كلمة المرور</span>
+                        </a>
+                    </li>
 
 
                 </ul>

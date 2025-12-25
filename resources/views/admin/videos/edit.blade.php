@@ -116,7 +116,8 @@
                                     {{-- Key Points --}}
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label class="form-label w-100 text-right">النقاط الرئيسية (كل نقطة في سطر)</label>
+                                            <label class="form-label w-100 text-right">النقاط الرئيسية (كل نقطة في
+                                                سطر)</label>
                                             <textarea name="key_points" rows="4" class="form-control"
                                                 placeholder="مثال:
 التعرف على أهداف الفيديو
@@ -195,7 +196,9 @@
             acceptedFiles: ".mp4,.mov,.avi",
             chunking: true,
             forceChunking: true,
-            chunkSize: 1024 * 1024, // 1 ميغابايت
+            chunkSize: 5 * 1024 * 1024 // 5MB
+            parallelUploads: 3
+            timeout: 0, // 1 ميغابايت
             retryChunks: true,
         };
     </script>

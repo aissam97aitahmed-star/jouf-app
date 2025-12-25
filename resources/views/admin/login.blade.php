@@ -54,7 +54,7 @@
                                     اسم المستخدم</label><br>
                                 <div class="input-container">
                                     <span class="input-icon"><i class="bi bi-person"></i></span>
-                                    <input type="text" placeholder="Amr" name="username" value="AljoufAdmin043"
+                                    <input type="text" placeholder="Amr" name="username" 
                                         required autofocus autocomplete="username"
                                         class="visitor-input tajawal-medium fs-14">
                                 </div>
@@ -64,9 +64,10 @@
                                     المرور
                                 </label><br>
                                 <div class="input-container">
-                                    <input type="password" placeholder="********" name="password" required value="AljoufAdmin32443"
-                                        autocomplete="current-password" class="visitor-input tajawal-medium fs-14">
-                                    <span class="input-icon"><i class="bi bi-eye"></i></span>
+                                    <input type="password" placeholder="********" name="password" required
+                                         autocomplete="current-password"
+                                        class="visitor-input tajawal-medium fs-14" id="passwordInput">
+                                    <span class="input-icon"><i class="bi bi-eye" id="togglePassword"></i></span>
                                 </div>
                             </div>
                             <div class="mb-3 d-flex align-items-center justify-content-between">
@@ -126,6 +127,21 @@
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const passwordInput = document.querySelector('#passwordInput');
+
+        togglePassword.addEventListener('click', function() {
+            // تبديل نوع الحقل بين password و text
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // تبديل أيقونة العين
+            this.classList.toggle('bi-eye'); // العين المفتوحة
+            this.classList.toggle('bi-eye-slash'); // العين المغلقة
+        });
+    </script>
 </body>
 
 </html>

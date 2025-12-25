@@ -54,7 +54,7 @@ class UserController extends Controller
         ]);
 
         ToastMagic::success('تم إضافة المستخدم بنجاح');
-        return redirect()->route('admin.uesrs.index');
+        return redirect()->route('admin.users.index');
     }
 
 

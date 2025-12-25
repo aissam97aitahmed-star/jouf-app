@@ -7,7 +7,9 @@ use App\Enums\Department;
 use App\Enums\VisitPurpose;
 use App\Enums\VisitDuration;
 use Illuminate\Http\Request;
+use App\Mail\OrderCreatedMail;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use App\Services\NotificationService;
 use App\Events\NewVisitorOrderCreated;
 use Devrabiul\ToastMagic\Facades\ToastMagic;
@@ -85,6 +87,13 @@ class OrderController extends Controller
             'تم إنشاء طلب زيارة من ' . $request->full_name,
             'security_manager'
         );
+        $this->notificationService->store(
+            'طلب جديد',
+            'تم إنشاء طلب زيارة من ' . $request->full_name,
+            'security_officer'
+        );
+        // إرسال البريد الإلكتروني
+        Mail::to($order->email)->send(new OrderCreatedMail($order));
         ToastMagic::success('تم إرسال الطلب بنجاح!');
         // إعادة عرض الـ view مع إرسال order_id
         return redirect()->route('visitor.order.success')

@@ -50,20 +50,15 @@
                     </div>
                     <div class="mb-5">
                         <h3 class="tajawal-bold fs-18 mb-3" style="color: #111827;">التنبيهات العاجلة</h3>
-                        <div class="alert">
-                            <i class="bi bi-clock"></i>
-                            <div>
-                                <p class="tajawal-medium fs-14 m-0" style="color: #111827;">تصريح منتهي الصلاحية</p>
-                                <p class="tajawal-regular fs-12 m-0" style="color: #4B5563;">14:30</p>
+                        @foreach ($notifications as $notification)
+                            <div class="alert">
+                                <i class="bi bi-clock"></i>
+                                <div>
+                                    <p class="tajawal-medium fs-14 m-0" style="color: #111827;">{{ $notification->description }}</p>
+                                    <p class="tajawal-regular fs-12 m-0" style="color: #4B5563;">{{ $notification->created_at->locale('ar')->diffForHumans() }}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="alert">
-                            <i class="bi bi-clock"></i>
-                            <div>
-                                <p class="tajawal-medium fs-14 m-0" style="color: #111827;">تصريح منتهي الصلاحية</p>
-                                <p class="tajawal-regular fs-12 m-0" style="color: #4B5563;">14:30</p>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                     <div class="mb-5">
                         <h3 class="tajawal-bold fs-18 mb-3" style="color: #111827;">روابط سريعة</h3>
