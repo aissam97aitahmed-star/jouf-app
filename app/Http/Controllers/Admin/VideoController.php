@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Video;
 use Illuminate\Http\Request;
+use App\Jobs\MoveVideoToStorage;
 use App\Jobs\ProcessVideoUpload;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -27,7 +28,7 @@ class VideoController extends Controller
 
     public function store(Request $request)
     {
-        // 1️⃣ تحقق من البيانات النصية فقط (بدون ملفات)
+        // 1️⃣ Validate (بدون video file)
         $request->validate([
             'title'      => 'required|string|max:255',
             'category'   => 'nullable|string|max:255',
@@ -35,22 +36,24 @@ class VideoController extends Controller
             'thumbnail'  => 'nullable|image|max:2048',
         ]);
 
-        // 2️⃣ أنشئ data يدويًا (نظيف)
+        // 2️⃣ Prepare clean data
         $data = [
             'title'    => $request->title,
             'category' => $request->category,
+            'duration' => $request->duration,
+            'is_required' => $request->boolean('is_required'),
+            'description' => $request->description,
+            'what_you_will_learn' => $request->what_you_will_learn,
         ];
 
-        // 3️⃣ key_points
+        // 3️⃣ Key points
         if ($request->filled('key_points')) {
-            $data['key_points'] = array_values(
-                array_filter(
-                    preg_split("/\r\n|\n|\r/", $request->key_points)
-                )
-            );
+            $data['key_points'] = array_values(array_filter(
+                preg_split("/\r\n|\n|\r/", $request->key_points)
+            ));
         }
 
-        // 4️⃣ thumbnail → خزّن الآن ومرر path فقط
+        // 4️⃣ Thumbnail (store now – light file)
         if ($request->hasFile('thumbnail')) {
             $data['thumbnail'] = $request->file('thumbnail')
                 ->store('thumbnails', 'public');
@@ -75,21 +78,18 @@ class VideoController extends Controller
 
         // 6️⃣ الملف اكتمل
         $file = $save->getFile();
+
+        // ✅ خزّنه فورًا داخل Laravel storage
         $tempPath = $file->store('temp');
+        // مثال: temp/abc123.mp4
 
-        // dump($data);
+        MoveVideoToStorage::dispatch(
+            $tempPath,                        // Laravel-managed path
+            $file->getClientOriginalName(),
+            $data
+        );
 
-
-        // ✅ هنا لا يوجد UploadedFile إطلاقًا
-        ProcessVideoUpload::dispatch($tempPath, $data);
-
-        // return response()->json([
-        //     'success' => true,
-        //     'message' => 'Video is being processed in background'
-        // ]);
-
-        ToastMagic::success('تم الفيديو بنجاح');
-
+        ToastMagic::success('جاري معالجة الفيديو في الخلفية');
         return redirect()->route('admin.videos.index');
     }
 
@@ -116,36 +116,51 @@ class VideoController extends Controller
 
 public function update(Request $request, Video $video)
 {
-    // 1️⃣ تحقق من البيانات النصية فقط
+    /**
+     * 1️⃣ Validate (بدون ملفات)
+     */
     $data = $request->validate([
-        'title' => 'required|string|max:255',
-        'category' => 'nullable|string|max:255',
-        'target_group' => 'nullable|string|max:255',
-        'is_required' => 'boolean',
-        'description' => 'nullable|string',
-        'what_you_will_learn' => 'nullable|string',
-        'duration' => 'nullable|integer',
-        'video_path' => 'nullable', // فيديو جديد chunked
-        'thumbnail' => 'nullable|image',
-        'key_points' => 'nullable|string',
+        'title'             => 'required|string|max:255',
+        'category'          => 'nullable|string|max:255',
+        'target_group'      => 'nullable|string|max:255',
+        'is_required'       => 'boolean',
+        'description'       => 'nullable|string',
+        'what_you_will_learn'=> 'nullable|string',
+        'duration'          => 'nullable|integer',
+        'video_path'        => 'nullable', // chunked
+        'thumbnail'         => 'nullable|image|max:2048',
+        'key_points'        => 'nullable|string',
     ]);
 
-    // 2️⃣ تحويل key_points من نص إلى array
-    if (!empty($data['key_points'])) {
-        $data['key_points'] = array_values(array_filter(preg_split("/\r\n|\n|\r/", $data['key_points'])));
+    /**
+     * 2️⃣ key_points → array
+     */
+    if ($request->filled('key_points')) {
+        $data['key_points'] = array_values(
+            array_filter(
+                preg_split("/\r\n|\n|\r/", $request->key_points)
+            )
+        );
     }
 
-    // 3️⃣ معالجة الصورة أولًا (حتى نحصل على path نصي)
+    /**
+     * 3️⃣ thumbnail (يُخزّن الآن)
+     */
     if ($request->hasFile('thumbnail')) {
         if ($video->thumbnail) {
             Storage::disk('public')->delete($video->thumbnail);
         }
-        $thumbnailPath = $request->file('thumbnail')->store('thumbnails', 'public');
-        $data['thumbnail'] = $thumbnailPath; // فقط path نصي
+
+        $data['thumbnail'] = $request
+            ->file('thumbnail')
+            ->store('thumbnails', 'public');
     }
 
-    // 4️⃣ إذا تم رفع فيديو جديد chunked
+    /**
+     * 4️⃣ Chunked Video Upload (اختياري)
+     */
     if ($request->has('video_path')) {
+
         $receiver = new FileReceiver(
             'video_path',
             $request,
@@ -153,7 +168,7 @@ public function update(Request $request, Video $video)
         );
 
         if (!$receiver->isUploaded()) {
-            return response()->json(['error' => 'فشل تحميل الملف'], 400);
+            return response()->json(['error' => 'فشل تحميل الفيديو'], 400);
         }
 
         $save = $receiver->receive();
@@ -162,22 +177,29 @@ public function update(Request $request, Video $video)
             return response()->json(['status' => 'chunk uploaded']);
         }
 
+        // ✅ الملف اكتمل
         $file = $save->getFile();
-        $tempPath = $file->store('temp'); // ⚡ هذا path نصي فقط
 
-        // إرسال الـ Job بدون UploadedFile
-        ProcessVideoUpload::dispatch($tempPath, [
-            'old_video_path' => $video->video_path,
-            'title' => $data['title'],
-            'category' => $data['category'] ?? null,
-            'key_points' => $data['key_points'] ?? null,
-            'thumbnail' => $data['thumbnail'] ?? null, // path نصي فقط
-        ]);
+        // 🔐 خزّنه فورًا داخل Laravel storage
+        $tempPath = $file->store('temp');
 
-        unset($data['video_path']); // حتى لا يحذف القديم
+        // 🚀 Job
+        MoveVideoToStorage::dispatch(
+            $tempPath,
+            $file->getClientOriginalName(),
+            [
+                'video_id'        => $video->id,
+                'old_video_path'  => $video->video_path,
+            ]
+        );
+
+        // ❗ لا نلمس video_path هنا
+        unset($data['video_path']);
     }
 
-    // 5️⃣ تحديث البيانات النصية فقط
+    /**
+     * 5️⃣ تحديث البيانات النصية فقط
+     */
     $video->update($data);
 
     ToastMagic::success('تم تحديث الفيديو بنجاح');

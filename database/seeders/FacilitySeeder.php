@@ -26,5 +26,8 @@ class FacilitySeeder extends Seeder
                 'name' => $facility,
             ]);
         }
+
+        $this->command->info('Facilities Data Created!');
+
     }
 }

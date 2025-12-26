@@ -25,5 +25,7 @@ class BotSettingSeeder extends Seeder
                 'save_conversations' => true,
             ]
         );
+        $this->command->info('Bot Setting Data Created!');
+
     }
 }

@@ -39,5 +39,8 @@ class MessageTemplateSeeder extends Seeder
         foreach ($templates as $template) {
             MessageTemplate::create($template);
         }
+
+        $this->command->info('Messages Templates Data Created!');
+
     }
 }

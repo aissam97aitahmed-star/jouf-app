@@ -26,5 +26,8 @@ class PolicyCategorySeeder extends Seeder
                 'name' => $category,
             ]);
         }
+
+        $this->command->info('Policy Categories Data Created!');
+
     }
 }

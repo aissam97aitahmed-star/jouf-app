@@ -58,5 +58,6 @@ class BotFaqSeeder extends Seeder
                 $faq
             );
         }
+        $this->command->info('Bot Faqs Created!');
     }
 }

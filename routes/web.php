@@ -6,7 +6,6 @@ use App\Http\Controllers\PagesContoller;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
-    //  dd(Auth::user()->name);
     return view('welcome');
 })->name('index');
 

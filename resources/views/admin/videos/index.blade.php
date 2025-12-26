@@ -248,14 +248,13 @@
     <script>
         Dropzone.options.videoDropzone = {
             paramName: "video_path",
-            maxFilesize: 2048, // ميغابايت
             acceptedFiles: ".mp4,.mov,.avi",
             chunking: true,
             forceChunking: true,
-            chunkSize: 5 * 1024 * 1024 // 5MB
-            parallelUploads: 3
-            timeout: 0, // 1 ميغابايت
+            chunkSize: 10 * 1024 * 1024, // 10MB
+            parallelUploads: 1, // 🔥 مهم
             retryChunks: true,
+            timeout: 0
         };
     </script>
 @endpush
