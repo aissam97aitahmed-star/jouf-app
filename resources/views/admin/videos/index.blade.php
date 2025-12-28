@@ -110,18 +110,24 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-6"> 
                                         <div class="form-group">
-                                            <label class="form-label w-100 text-right">الفئة</label>
-                                            <select name="category" class="form-select">
+                                            <label class="form-label w-100 text-right">الفئة المستهدفة</label>
+                                            <select name="category" class="form-select" required>
                                                 <option value="عام">عام</option>
-                                                <option value="عامل">عامل</option>
-                                                <option value="إداري">إداري</option>
+                                                <option value="عن الشركة">عن الشركة</option>
+                                                <option value="الشوون الادارية">الشوون الادارية</option>
+                                                <option value="الشؤون الادارية القانونية">الشؤون الادارية القانونية </option>
+                                                <option value="تقنية المعلومات والبرامج">تقنية المعلومات والبرامج </option>
+                                                <option value="الجودة">الجودة</option>
+                                                <option value="الامن والسلامة">الامن والسلامة</option>
+                                                <option value="المجمع الصناعي">المجمع الصناعي </option>
+                                                <option value="الإدارة المالية">الإدارة المالية</option>
                                             </select>
 
                                         </div>
                                     </div>
-
+{{--
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label w-100 text-right">الفئة المستهدفة</label>
@@ -130,7 +136,7 @@
                                                 <option value="إداريين">إداريين</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="col-md-3">
                                         <div class="form-group">

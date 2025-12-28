@@ -61,7 +61,7 @@
                                         <div class="bot__msg__content">
                                             <h6><i class="fa fa-info" aria-hidden="true"></i> <span
                                                     class="tajawal-medium fs-12">{{ $settings->bot_name }}
-                                                    </span></h6>
+                                                </span></h6>
                                             <p class="tajawal-regular fs-14">{{ $conv->answer }}</p>
                                             <span class="tajawal-regular fs-12"
                                                 style="color: #6B7280;">{{ $conv->created_at->locale('ar')->diffForHumans() }}</span>
@@ -116,13 +116,12 @@
                         <h4 class="tajawal-bold fs-18 mb-3">الأسئلة الأكثر تكراراً</h4>
                         <ul class="p-0">
                             @foreach ($faqs as $faq)
-                            @php
-                                $count = \App\Models\BotConversation::where('question', $faq->question)->count();
-                            @endphp
-                                @if($count >= 1)
+                                @php
+                                    $count = \App\Models\BotConversation::where('question', $faq->question)->count();
+                                @endphp
+                                @if ($count >= 1)
                                     <li class="tajawal-medium fs-14"><span>{{ $faq->question }}</span> <strong
                                             class="tajawal-regular fs-12 ">{{ $count }}</strong></li>
-
                                 @endif
                             @endforeach
                         </ul>
@@ -134,8 +133,9 @@
                                 data-bs-target="#exampleModal"><i class="fa fa-cog" aria-hidden="true"></i> &nbsp;
                                 <span>إعدادات
                                     البوت</span></button>
-                            <a href="{{ route('employee.bot.export') }}" class="btn btn-primary w-100 tajawal-regular fs-16" type="submit"><i
-                                    class="fa fa-download" aria-hidden="true"></i> &nbsp; <span>تصدير
+                            <a href="{{ route('employee.bot.export') }}"
+                                class="btn btn-primary w-100 tajawal-regular fs-16" type="submit"><i class="fa fa-download"
+                                    aria-hidden="true"></i> &nbsp; <span>تصدير
                                     المحادثات</span></a>
                             <button class="btn btn-primary w-100 tajawal-regular fs-16" type="submit"><i
                                     class="fa fa-bar-chart" aria-hidden="true"></i> &nbsp; <span>إحصائيات مفصلة
@@ -424,6 +424,17 @@
 
 @push('js')
     <script>
+        function scrollToQuestionInput() {
+            const input = document.getElementById('question');
+            if (input) {
+                input.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+                input.focus();
+            }
+        }
+
         const questionInput = document.getElementById('question');
         const sendButton = document.querySelector('#bot-form .sent');
 
@@ -448,7 +459,7 @@
 
         // عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', scrollChatToBottom);
-
+        scrollToQuestionInput();
 
         const chatBody = document.querySelector('.chat_body_content'); // مكان عرض المحادثات
 
@@ -577,6 +588,8 @@
         document.querySelectorAll('.question-item').forEach(item => {
             item.addEventListener('click', function() {
                 document.getElementById('question').value = this.dataset.question;
+                 scrollToQuestionInput();
+                 sendButton.classList.add('active'); 
             });
         });
     </script>

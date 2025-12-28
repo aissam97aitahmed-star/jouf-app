@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\Mail;
 
 class AdminSeeder extends Seeder
 {
@@ -24,3 +24,6 @@ class AdminSeeder extends Seeder
          $this->command->info('New Admin Created!');
     }
 }
+
+
+

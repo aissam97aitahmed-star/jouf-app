@@ -3,7 +3,8 @@
 <!-- [Head] start -->
 
 <head>
-    <title>Controle Panel</title>
+     <title> Aljouf Portal </title>
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <!-- [Meta] -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">

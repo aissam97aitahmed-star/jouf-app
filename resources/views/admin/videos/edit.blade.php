@@ -51,22 +51,36 @@
                                     </div>
 
                                     {{-- Category --}}
+                                    @php
+                                        // مصفوفة الفئات الثابتة
+                                        $categories = [
+                                            'عام',
+                                            'عن الشركة',
+                                            'الشؤون الادارية',
+                                            'الشؤون الادارية القانونية',
+                                            'تقنية المعلومات والبرامج',
+                                            'الجودة',
+                                            'الامن والسلامة',
+                                            'المجمع الصناعي',
+                                            'الإدارة المالية',
+                                        ];
+                                    @endphp
+
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label w-100 text-right">الفئة</label>
+                                            <label class="form-label w-100 text-right">الفئة المستهدفة</label>
                                             <select name="category" class="form-select">
-                                                <option value="عام" @if ($video->category == 'عام') selected @endif>عام
-                                                </option>
-                                                <option value="عامل" @if ($video->category == 'عامل') selected @endif>
-                                                    عامل</option>
-                                                <option value="إداري" @if ($video->category == 'إداري') selected @endif>
-                                                    إداري</option>
+                                               @foreach($categories as $category)
+                <option value="{{ $category }}" @if($video->category == $category) selected @endif>
+                    {{ $category }}
+                </option>
+            @endforeach
                                             </select>
                                         </div>
                                     </div>
 
                                     {{-- Target Group --}}
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label w-100 text-right">الفئة المستهدفة</label>
                                             <select name="target_group" class="form-select">
@@ -76,7 +90,7 @@
                                                     إداريين</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     {{-- Duration --}}
                                     <div class="col-md-3">

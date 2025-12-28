@@ -19,7 +19,7 @@ class UsersImport implements ToModel, WithHeadingRow
     return new User([
         'username' => trim($row['username']),
         'name' => trim($row['name']),
-        'email' => trim($row['email']),
+        'email' => !empty($row['email']) ? trim($row['email']) : null,
         'password' => Hash::make(trim($row['password'])),
         'role' => 'employee',
     ]);

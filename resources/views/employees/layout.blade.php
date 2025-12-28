@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>App demo</title>
+    <title> Aljouf Portal </title>
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,10 +54,18 @@
 </head>
 @php
     use App\Models\Notification;
+    use Carbon\Carbon;
     $notificationCount = Notification::where([
         'role' => 'employee',
         'is_read' => false,
     ])->count();
+    $user = Auth::user();
+    $trialDays = 60;
+    $createdAt = Carbon::parse($user->created_at);
+    $today = Carbon::today();
+    // حساب الفرق بالأيام كعدد صحيح
+    $daysPassed = (int) $createdAt->diffInDays($today);
+    $daysRemaining = max($trialDays - $daysPassed, 0); // لا يقل عن صفر
 @endphp
 
 <body>
@@ -67,7 +76,7 @@
                     <div class="circle__bg z-1"></div>
                     <strong class="key tajawal-bold z-2">ع ز</strong>
                     <div class="z-2">
-                        <h6 class="empname fs-18 tajawal-bold m-0 ">مرحباً، {{ Auth::user()->name ?? '****' }} 106000
+                        <h6 class="empname fs-18 tajawal-bold m-0 ">مرحباً، {{ Auth::user()->name ?? '****' }}
                         </h6>
                         <p class="emptype fs-14 tajawal-regular ">موظف جديد</p>
                     </div>
@@ -89,7 +98,7 @@
                         <div class="">
                             <span class="fs-12 tajawal-bold"> <i class="bi bi-clock"></i> فترة التجربة </span>
                         </div>
-                        <strong class="experience__time fs-30">60</strong>
+                        <strong class="experience__time fs-30">{{ $daysRemaining }}</strong>
                         <span class="tajawal-regular fs-12">يوم متبقي</span>
                     </div>
                 </div>

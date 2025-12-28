@@ -9,7 +9,7 @@ class Video extends Model
     protected $fillable = [
         'title',
         'category',
-        'target_group',
+        // 'target_group',
         'is_required',
         'description',
         'what_you_will_learn',

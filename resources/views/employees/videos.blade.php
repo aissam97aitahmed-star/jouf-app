@@ -6,7 +6,7 @@
             <div class="d-flex justify-content-between align-items-center py-5 v__header">
                 <h4 class="tajawal-bold">الفيديوهات التعليمية</h4>
                 <div class="d-flex align-items-center gap-3 actions">
-                    <button class="btn btn-primary tajawal-medium active" type="submit">
+                    {{-- <button class="btn btn-primary tajawal-medium active" type="submit">
                         <i class="bi bi-list-check"></i> &nbsp; الكل
                     </button>
                     <button class="btn btn-primary tajawal-medium " type="submit">
@@ -14,7 +14,22 @@
                     </button>
                     <button class="btn btn-primary tajawal-medium " type="submit">
                         <i class="bi bi-person-lines-fill"></i> &nbsp; عمال
-                    </button>
+                    </button> --}}
+                    <div class="">
+                        <select class="form-select form-select-lg" aria-label="Large select example" id="categories">
+                            <option value="value1" class="tajawal-regular fs-14">جميع الفيديوهات</option>
+                            <option value="عام">عام</option>
+                            <option value="عن الشركة">عن الشركة</option>
+                            <option value="الشوون الادارية">الشوون الادارية</option>
+                            <option value="الشؤون الادارية القانونية ">الشؤون الادارية القانونية </option>
+                            <option value="تقنية المعلومات والبرامج ">تقنية المعلومات والبرامج </option>
+                            <option value="الجودة">الجودة</option>
+                            <option value="الامن والسلامة">الامن والسلامة</option>
+                            <option value="المجمع الصناعي ">المجمع الصناعي </option>
+                            <option value="الإدارة المالية">الإدارة المالية</option>
+                        </select>
+                    </div>
+
                     <button class="btn btn-primary tajawal-regular fs-14 count" type="submit">
                         {{ $videos->count() }} فيديو
                     </button>
@@ -53,7 +68,7 @@
                                     <p class="card-text tajawal-regular fs-14 mb-2" style="color: #8590A6;">
                                         {{ $video->description }}</p>
                                     <div class="actions d-flex justify-content-between align-items-center">
-                                        <span class="tajawal-regular fs-12 pdg">{{ $video->target_group }}</span>
+                                        <span class="tajawal-regular fs-12 pdg">{{ $video->category }}</span>
                                         <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                             <i class="bi bi-play-circle"></i>
                                             <span class="tajawal-regular fs-16">مشاهدة</span>
@@ -305,32 +320,27 @@
     </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const filterButtons = document.querySelectorAll('.actions button:not(.count)');
-            const videoCards = document.querySelectorAll('.vedios__content .col-md-4');
+     // تصفية الفيديوهات حسب الفئة مع التعامل مع الفراغات
+document.getElementById('categories').addEventListener('change', function() {
+    var selectedCategory = this.value.trim(); // إزالة الفراغات الزائدة
+    var videos = document.querySelectorAll('.vedios__content .row .col-md-4');
 
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
+    videos.forEach(function(video) {
+        var videoCategory = video.querySelector('.actions span').textContent.trim();
 
-                    // إزالة الكلاس active من كل الأزرار
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    // إضافة الكلاس active للزر الحالي
-                    button.classList.add('active');
+        if (selectedCategory === 'value1' || selectedCategory === 'جميع الفيديوهات') {
+            video.style.display = 'block';
+        } else if (videoCategory === selectedCategory) {
+            video.style.display = 'block';
+        } else {
+            video.style.display = 'none';
+        }
+    });
 
-                    const filter = button.textContent.trim(); // الكل / إداريين / عمال
+    // تحديث عداد الفيديوهات
+    var visibleCount = Array.from(videos).filter(v => v.style.display !== 'none').length;
+    document.querySelector('.count').textContent = visibleCount + ' فيديو';
+});
 
-                    videoCards.forEach(card => {
-                        const targetGroup = card.querySelector('.pdg').textContent
-                    .trim(); // نص الفئة
-                        if (filter === 'الكل' || targetGroup === filter) {
-                            card.style.display = 'block';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
-                });
-            });
-        });
     </script>
 @endpush

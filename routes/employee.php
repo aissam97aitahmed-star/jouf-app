@@ -18,6 +18,14 @@ Route::middleware(['auth', 'role:employee'])->prefix('employee')->name('employee
     Route::get('/employees_list', [EmployeesListController::class, 'index'])->name('employeeslist');
     Route::post('/employees_list/send-mail', [EmployeesListController::class, 'sendMessage'])->name('send.message');
     Route::get('/privacy', [PrivacyController::class, 'index'])->name('privacy');
+    Route::get('/policies/{policy}/download', [PrivacyController::class, 'download'])
+        ->name('policies.download');
+    Route::get(
+        '/employee/policies/{policy}/view',
+        [PrivacyController::class, 'view']
+    )
+        ->name('policies.view');
+
     Route::get('/chat_bot', [BotController::class, 'index'])->name('bot');
     Route::post('/bot/ask', [BotController::class, 'ask'])->name('bot.ask');
     Route::get('/conversations/export', [BotController::class, 'export'])->name('bot.export');

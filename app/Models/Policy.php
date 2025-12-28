@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\PolicyCategory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,5 +28,11 @@ class Policy extends Model
     public function category()
     {
         return $this->belongsTo(PolicyCategory::class, 'policy_category_id');
+    }
+
+    public function viewers()
+    {
+        return $this->belongsToMany(User::class, 'policy_views')
+            ->withTimestamps();
     }
 }

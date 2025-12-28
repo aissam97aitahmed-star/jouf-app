@@ -11,7 +11,7 @@
                         <div class="card">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5>قائمة المستخدمين</h5>
-                                 <div>
+                                <div>
                                     <a href="#add_user" class="btn btn-outline-primary d-inline-flex"> <i
                                             class="ti ti-circle-plus ms-2"></i> إضافة مستخدم جديد</a>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#importModal"
@@ -43,6 +43,8 @@
                                                             مدير الأمن
                                                         @elseif ($user->role == 'security_officer')
                                                             موظف الأمن
+                                                        @elseif ($user->role == 'admin')
+                                                            <span style="text-decoration: underline">مدير المنصة</span>
                                                         @else
                                                             موظف جديد
                                                         @endif
@@ -107,6 +109,7 @@
                                         <label class="form-label">نوع المستخدم </label>
                                         <select name="role" class="form-select">
                                             <option value="" selected>— اختر الدور —</option>
+                                            <option value="admin">مدير المنصة</option>
                                             <option value="security_manager">مدير الأمن</option>
                                             <option value="security_officer">موظف الأمن</option>
                                             <option value="employee">موظف جديد</option>
@@ -152,7 +155,7 @@
         </div>
     </section>
 
-      <!-- Modal الاستيراد -->
+    <!-- Modal الاستيراد -->
     <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form action="{{ route('admin.users.import') }}" method="POST" enctype="multipart/form-data">

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');                 // عنوان الفيديو
             $table->string('category')->nullable(); // الفئة (إداري، تقني...)
-            $table->string('target_group')->nullable(); // الفئة المستهدفة
+            // $table->string('target_group')->nullable(); // الفئة المستهدفة
             $table->boolean('is_required')->default(false); // إجباري؟
 
             $table->text('description')->nullable(); // وصف الفيديو
