@@ -1,10 +1,14 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesContoller;
 use App\Http\Controllers\ProfileController;
 
+Route::get('/test', function () {
+    return User::count();
+});
 Route::get('/', function () {
     return view('welcome');
 })->name('index');

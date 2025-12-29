@@ -8,7 +8,7 @@
 
     <p>QR Code الخاص بالطلب:</p>
     <div>
-        {!! QrCode::size(150)->style('square')->generate($order->order_number) !!}
+        <img src="{{ asset('qrcodes/order_' . $order->id . '.png') }}" alt="QR Code">
     </div>
 
     <p>شكراً لاستخدامك خدمتنا.</p>

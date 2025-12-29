@@ -9,9 +9,11 @@ use App\Enums\VisitDuration;
 use Illuminate\Http\Request;
 use App\Mail\OrderCreatedMail;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 use App\Services\NotificationService;
 use App\Events\NewVisitorOrderCreated;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Devrabiul\ToastMagic\Facades\ToastMagic;
 use Monarobase\CountryList\CountryListFacade as Countries;
 
@@ -93,6 +95,17 @@ class OrderController extends Controller
             'security_officer'
         );
         // إرسال البريد الإلكتروني
+        $qrPath = 'qrcodes/order_' . $order->id . '.png';
+        $fullPath = public_path($qrPath);
+
+        // إنشاء المجلد إذا لم يكن موجودًا
+        if (!File::exists(public_path('qrcodes'))) {
+            File::makeDirectory(public_path('qrcodes'), 0755, true);
+        }
+
+        // توليد وحفظ QR Code
+        QrCode::format('png')->size(150)->generate($order->order_number, $fullPath);
+
         Mail::to($order->email)->send(new OrderCreatedMail($order));
         ToastMagic::success('تم إرسال الطلب بنجاح!');
         // إعادة عرض الـ view مع إرسال order_id

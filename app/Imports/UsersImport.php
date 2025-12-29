@@ -10,19 +10,22 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 class UsersImport implements ToModel, WithHeadingRow
 {
     public function model(array $row)
-{
-    // تجاهل الصفوف الفارغة
-    if (empty($row['username']) || empty($row['name'])) {
-        return null;
+    {
+        // تجاهل الصفوف الفارغة
+        if (empty($row['username']) || empty($row['name'])) {
+            return null;
+        }
+
+        return User::updateOrCreate(
+            [
+                'username' => trim($row['username']),
+            ],
+            [
+                'name'     => trim($row['name']),
+                'email'    => !empty($row['email']) ? trim($row['email']) : null,
+                'password' => Hash::make(trim($row['password'] ?? $row['username'])),
+                'role'     => 'employee',
+            ]
+        );
     }
-
-    return new User([
-        'username' => trim($row['username']),
-        'name' => trim($row['name']),
-        'email' => !empty($row['email']) ? trim($row['email']) : null,
-        'password' => Hash::make(trim($row['password'])),
-        'role' => 'employee',
-    ]);
-}
-
 }

@@ -10,6 +10,7 @@ use App\Models\PolicyCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Devrabiul\ToastMagic\Facades\ToastMagic;
 
 class PrivacyController extends Controller
 {
@@ -39,10 +40,15 @@ class PrivacyController extends Controller
 
     public function download(Policy $policy)
     {
-        $policy->increment('downloads');
+        try {
+            $policy->increment('downloads');
 
-        return Storage::disk('public')
-            ->download($policy->pdf_path, $policy->title . '.pdf');
+            return Storage::disk('public')
+                ->download($policy->pdf_path, $policy->title . '.pdf');
+        } catch (\Throwable $th) {
+            ToastMagic::info('الملف غير متاح الان ');
+            return back();
+        }
     }
 
     public function view(Policy $policy)
