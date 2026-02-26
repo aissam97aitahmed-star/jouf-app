@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Visitor;
 
 use App\Models\Order;
-use App\Enums\Department;
+use App\Models\Department;
 use App\Enums\VisitPurpose;
 use App\Enums\VisitDuration;
 use Illuminate\Http\Request;
 use App\Mail\OrderCreatedMail;
+use App\Mail\OrderApprovedMail;
+use App\Mail\OrderRejectedMail;
+use App\Mail\OrderForApprovalMail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
@@ -33,7 +36,7 @@ class OrderController extends Controller
         // ToastMagic::success('تم إرسال الطلب بنجاح!');
         $nationalities = Countries::getList('ar');
         $visitPurposes = VisitPurpose::cases();
-        $departments   = Department::cases();
+        $departments   = Department::all();
         $visitDurations   = VisitDuration::cases();
         return view('visitors.order_form', compact('nationalities', 'visitPurposes', 'departments', 'visitDurations'));
     }
@@ -81,8 +84,18 @@ class OrderController extends Controller
 
         $validated['order_number'] = $orderNumber;
 
+
         // حفظ الطلب مع تخزين الكائن
         $order = Order::create($validated);
+
+        try {
+            $department = Department::find($request->department);
+            Mail::to($department->email)
+                ->send(new OrderForApprovalMail($order));
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
         broadcast(new NewVisitorOrderCreated($order));
         $this->notificationService->store(
             'طلب جديد',
@@ -134,5 +147,27 @@ class OrderController extends Controller
         ]);
 
         return back()->with('success', 'تم تحديث حالة الطلب');
+    }
+
+    public function approve(Order $order)
+    {
+        $order->status = 'approved';
+        $order->save();
+
+        // هنا ترسل ايميل للزائر مع QR
+        Mail::to($order->email)->send(new OrderApprovedMail($order));
+
+        return view('orders.result', ['message' => 'تم قبول الطلب بنجاح']);
+    }
+
+    public function reject(Order $order)
+    {
+        $order->status = 'rejected';
+        $order->save();
+
+        // ممكن ترسل ايميل رفض
+        Mail::to($order->email)->send(new OrderRejectedMail($order));
+
+        return view('orders.result', ['message' => 'تم رفض الطلب']);
     }
 }

@@ -20,21 +20,17 @@
     <header class="home__visitor">
         <div class="container-fluid">
             <div class="d-flex align-items-center justify-content-between vs__cols">
-                <div class="circle__bg z-1"></div>
-                <div class="z-2">
                     <div class="d-flex align-items-center">
+                        <a href="{{ route('index') }}"><i class="bi bi-arrow-right-circle"></i></a>
                         <i class="bi bi-person-add"></i>
                         <div>
                             <h4 class="tajawal-bold fs-20 m-0">نظام إدارة الزوار</h4>
                             <p class="tajawal-regular fs-16">منصة آمنة وسريعة لطلبات الزيارة</p>
                         </div>
                     </div>
-                </div>
                 <div class="">
-                    <div class="circle__bg z-1"></div>
-                    <div class="text-center z-2 p-sticky">
                         <img src="{{ asset('assets/images/main-logo.png') }}" alt="" width="161px">
-                    </div>
+
                 </div>
                 <div class="">
                     <a href="{{ route('visitor.apply') }}" class="btn btn-primary tajawal-regular fs-16 link"
@@ -51,7 +47,7 @@
         <div class="container content">
             <div class="row">
                 <div class="col-md-6 cls">
-                    <h1 class="tajawal-bold fs-48 m-0">نظام الزوار الذكي</h1>
+                    <h1 class="tajawal-bold fs-48 m-0 text-white">نظام الزوار الذكي</h1>
                     <h2 class="tajawal-bold fs-48 mb-4">مرحباً بك في</h2>
                     <p class="tajawal-regular fs-20 mb-4" style="color: #DBEAFE;">نظام متطور وآمن لإصدار تصاريح زيارات
                         الشركة. قدم طلبك الآن واحصل على الموافقة خلال دقائق معدودة.</p>

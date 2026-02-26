@@ -8,9 +8,11 @@ use App\Http\Controllers\Admin\BotFaqController;
 use App\Http\Controllers\Admin\PolicyController;
 use App\Http\Controllers\Admin\AdminMapController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\BotOptionController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HomeVideoController;
 use App\Http\Controllers\Admin\BotSettingController;
+use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\BotConversationController;
 use App\Http\Controllers\Admin\MessageTemplateController;
 
@@ -73,6 +75,15 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     //**######################## START EMPLOYYES ROUTES **########################\\
     Route::resource('templates', MessageTemplateController::class);
     //**######################## END EMPLOYYES ROUTES **########################\\
+
+    //**######################## START EMPLOYYES ROUTES **########################\\
+    Route::resource('bot_options', BotOptionController::class);
+    //**######################## END EMPLOYYES ROUTES **########################\\
+
+    //**######################## END Department ROUTES **########################\\
+    Route::resource('departments', DepartmentController::class);
+    //**######################## END Department ROUTES **########################\\
+
 
 
 });

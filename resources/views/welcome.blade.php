@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 
@@ -16,22 +15,42 @@
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
 
+    <style>
+        .overieed {
+            /* background: linear-gradient(180deg, rgba(0, 71, 31, 0.2) 0%, rgba(0, 125, 55, 0.5) 46.15%, rgba(0, 71, 31, 0.8) 100%); */
+            /* background: linear-gradient(180deg,
+            rgba(0, 71, 31, 0.05) 0%,
+            rgba(0, 125, 55, 0.12) 46.15%,
+            rgba(0, 71, 31, 0.25) 100%); */
+            background: linear-gradient(180deg,
+                    rgba(0, 71, 31, 0.08) 0%,
+                    rgba(0, 125, 55, 0.2) 46.15%,
+                    rgba(0, 71, 31, 0.35) 100%);
+        }
+
+        .home .features i {
+            background: #58896d8a;
+        }
+    </style>
+
 </head>
 
 <body>
     <div class="home">
         <div class="overieed">
             <header>
-                <img src="{{ asset('assets/images/splash_header.png') }}" class="splash__logo" alt="" width="100%">
+                <img src="{{ asset('assets/images/splash_header.png') }}" class="splash__logo" alt=""
+                    width="100%">
             </header>
             <div class="container text-center">
-                <h1 class="my-5 home__title tajawal-bold text-white">مرحباً بكم في <br> <span>شركة الجوف للتنمية
+                <h1 class="my-5 home__title tajawal-bold text-white">مرحباً بكم في <br> <span class="text-white">شركة
+                        الجوف للتنمية
                         الزراعية</span>
                 </h1>
-                <p class="mb-5 tajawal-regular home__desc text-white">منصة شاملة ومتطورة لإدارة المنظمين حديثا للشركة
+                {{-- <p class="mb-5 tajawal-regular home__desc text-white">منصة شاملة ومتطورة لإدارة المنظمين حديثا للشركة
                     والزوار مع
                     أحدث
-                    تقنيات الأمان والمراقبة</p>
+                    تقنيات الأمان والمراقبة</p> --}}
                 <div class="mb-5">
                     <div class="row first__r">
                         <div class="col-sm-6 col-xs-12 d-flex justify-content-end">
@@ -43,8 +62,9 @@
                                         الموظفين والتدريب
                                         والتأهيل مع متابعة شاملة للأداء
                                     </p>
-                                    <a href="{{ route('welcome.program') }}" class="btn btn-primary w-100 f-btn tajawal-bold fs-18">
-                                       <i class="bi bi-arrow-right-circle"></i>
+                                    <a href="{{ route('welcome.program') }}"
+                                        class="btn btn-primary w-100 f-btn tajawal-bold fs-18">
+                                        <i class="bi bi-arrow-right-circle"></i>
                                         <span>دخول البرنامج الترحيبي</span>
                                     </a>
                                 </div>
@@ -59,7 +79,8 @@
                                         وإصدار تصاريح
                                         الدخول مع تتبع آمن ومتطور</p>
                                     </p>
-                                    <a href="{{ route('permit.program') }}" class="btn btn-primary w-100 s-btn tajawal-bold fs-18 text-main">
+                                    <a href="{{ route('permit.program') }}"
+                                        class="btn btn-primary w-100 s-btn tajawal-bold fs-18 text-main">
                                         <i class="bi bi-ticket-detailed"></i>
                                         <span>دخول برنامج التصاريح</span>
                                     </a>

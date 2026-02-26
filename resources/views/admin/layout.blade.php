@@ -35,6 +35,8 @@
 
     <link rel="stylesheet" href=" {{ asset('admin/assets/css/style.css') }}" id="main-style-link">
     <link rel="stylesheet" href=" {{ asset('admin/assets/css/style-preset.css') }}">
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     @stack('css')
 
     <style>
@@ -166,6 +168,12 @@
                         <a href="{{ route('admin.map.index') }}" class="pc-link">
                             <span class="pc-micon"><i class="ti ti-map"></i></span>
                             <span class="pc-mtext"> مواقع الخريطة التفاعلية</span>
+                        </a>
+                    </li>
+                     <li class="pc-item">
+                        <a href="{{ route('admin.departments.index') }}" class="pc-link">
+                            <span class="pc-micon"><i class="ti ti-menu"></i></span>
+                            <span class="pc-mtext"> إدارة الإدارات</span>
                         </a>
                     </li>
                     <li class="pc-item">

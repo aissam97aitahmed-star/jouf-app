@@ -9,7 +9,7 @@ use App\Http\Controllers\Employee\DashboardController;
 use App\Http\Controllers\Employee\NotificationController;
 use App\Http\Controllers\Employee\EmployeesListController;
 
-Route::view('/mail', 'emails.employee-message');
+// Route::view('/mail', 'emails.employee-message');
 Route::middleware(['auth', 'role:employee'])->prefix('employee')->name('employee.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/map', [MapController::class, 'index'])->name('map');

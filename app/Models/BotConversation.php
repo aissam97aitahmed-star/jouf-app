@@ -12,6 +12,7 @@ class BotConversation extends Model
         'question',
         'answer',
         'resolved',
+        'step'
     ];
 
     public function user()

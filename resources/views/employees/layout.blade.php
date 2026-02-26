@@ -73,7 +73,6 @@
         <div class="all__cols d-flex justify-content-between p-0 w-100 m-auto align-items-center">
             <div class="cl__1">
                 <div class="d-flex align-items-center">
-                    <div class="circle__bg z-1"></div>
                     <strong class="key tajawal-bold z-2">ع ز</strong>
                     <div class="z-2">
                         <h6 class="empname fs-18 tajawal-bold m-0 ">مرحباً، {{ Auth::user()->name ?? '****' }}
@@ -82,8 +81,7 @@
                     </div>
                 </div>
             </div>
-            <div class="cl__2">
-                <div class="circle__bg z-1"></div>
+            <div class="cl__2"> 
 
                 <div class="text-center z-2 p-sticky">
                     <img src="{{ asset('assets/images/logo.png') }}" alt="" width="161px" height="116px">

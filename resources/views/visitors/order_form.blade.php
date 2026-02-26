@@ -214,22 +214,27 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6"><label class="form-label">الموظف المضيف *</label><input type="text"
-                                class="form-control" placeholder="احمد جمال" name="host_employee" required></div>
-
                         <div class="col-md-6"><label class="form-label"> القسم</label>
                             <div class="custom-select-wrapper">
-                                <select id="purposeSelect" class="form-select" name="department">
+                                <select id="departmentSelect" class="form-select" name="department">
                                     <option value="" disabled selected>اختر القسم</option>
                                     @foreach ($departments as $department)
-                                        <option value="{{ $department->value }}">
-                                            {{ $department->value }}
+                                        <option value="{{ $department->id }}"
+                                            data-employee="{{ $department->responsible_employee }}">
+                                            {{ $department->name }}
                                         </option>
                                     @endforeach
                                 </select>
                                 <i class="bi bi-caret-down-fill custom-select-icon"></i>
                             </div>
                         </div>
+
+                        <div class="col-md-6"><label class="form-label">الموظف المضيف *</label><input type="text"
+                                class="form-control"  placeholder="سيظهر تلقائياً"
+                                name="host_employee" required>
+                        </div>
+
+
                     </div>
                     <hr style="color: #6c757dab; margin: 25px 0px;">
                     <div class="d-flex justify-content-between">
@@ -379,8 +384,6 @@
                 'visit_purpose',
                 'visit_date',
                 'visit_time',
-                'host_employee',
-                'department'
             ];
 
             // Load saved data on page load
@@ -399,16 +402,36 @@
                 }
             });
 
-            function populateReview() {
-                const reviewElements = form.querySelectorAll('.value__name');
-                reviewElements.forEach(el => {
-                    const key = el.dataset.key;
-                    if (fieldsToSave.includes(key)) {
-                        const value = localStorage.getItem(key);
-                        el.textContent = value || '';
-                    }
-                });
+          function populateReview() {
+
+    // القيم المخزنة في localStorage
+    const reviewElements = form.querySelectorAll('.value__name');
+
+    reviewElements.forEach(el => {
+        const key = el.dataset.key;
+
+        // الحقول العادية من localStorage
+        if (fieldsToSave.includes(key)) {
+            el.textContent = localStorage.getItem(key) || '';
+        }
+
+        // الموظف المضيف من الحقل مباشرة
+        if (key === 'host_employee') {
+            const input = form.querySelector('[name="host_employee"]');
+            el.textContent = input ? input.value : '';
+        }
+
+        // القسم نعرض اسمه وليس ID
+        if (key === 'department') {
+            const select = form.querySelector('[name="department"]');
+            if (select && select.selectedIndex >= 0) {
+                el.textContent = select.options[select.selectedIndex].text;
+            } else {
+                el.textContent = '';
             }
+        }
+    });
+}
 
             function updateSteps(newStep) {
                 steps.forEach(step => {

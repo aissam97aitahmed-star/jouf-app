@@ -81,7 +81,11 @@
                                                     {{ $order->identity_number }} <br> {{ $order->phone }} <br>
                                                     {{ $order->email }}
                                                 </td>
-                                                <td> {!! QrCode::size(90)->style('square')->generate($order->order_number) !!}</td>
+                                                <td>
+                                                    @if ($order->status == 'approved')
+                                                        {!! QrCode::size(90)->style('square')->generate($order->order_number) !!}
+                                                    @endif
+                                                </td>
                                                 <td> {{ $order->created_at->locale('ar')->diffForHumans() }}</td>
 
                                                 <td>{{ $order->visit_purpose }}</td>
@@ -92,6 +96,16 @@
                                                         <button type="button" style="width: max-content;"
                                                             class="btn btn-sm btn-outline-warning d-inline-flex"><i
                                                                 class="ti ti-info-circle ms-1"></i>في الانتظار</button>
+                                                    @endif
+                                                    @if ($order->status == 'approved')
+                                                        <button type="button" style="width: max-content;"
+                                                            class="btn btn-sm btn-outline-success d-inline-flex"><i
+                                                                class="ti ti-info-circle ms-1"></i>تمت الموافقة </button>
+                                                    @endif
+                                                    @if ($order->status == 'rejected')
+                                                        <button type="button" style="width: max-content;"
+                                                            class="btn btn-sm btn-outline-danger d-inline-flex"><i
+                                                                class="ti ti-info-circle ms-1"></i>تم الرفض </button>
                                                     @endif
                                                     @if ($order->status == 'in_progress')
                                                         <button type="button" style="width: max-content;"
@@ -107,7 +121,8 @@
 
                                                 </td>
                                                 <td>
-                                                    <button data-id="{{ $order->id }}" type="button" class="btn btn-icon btn-light-danger btn-delete"><i
+                                                    <button data-id="{{ $order->id }}" type="button"
+                                                        class="btn btn-icon btn-light-danger btn-delete"><i
                                                             class="ti ti-trash"></i></button>
                                                 </td>
                                             </tr>

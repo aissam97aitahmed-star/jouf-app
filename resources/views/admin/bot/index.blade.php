@@ -1,6 +1,6 @@
 @extends('admin.layout')
 
-@section('content') 
+@section('content')
     <section class="pc-container">
         <div class="pc-content">
             <div class="row">
@@ -16,8 +16,12 @@
                         <div class="card" id="bot_settings_form">
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <h5>إعدادات البوت</h5>
-                                <a href="#qeustions" class="btn btn-outline-info d-inline-flex"><i
-                                        class="ti ti-info-circle mrl"></i>الأسئلة الأكثر تكراراً</a>
+                                <div>
+                                    <a href="#qeustions" class="btn btn-outline-info d-inline-flex"><i
+                                            class="ti ti-info-circle mrl"></i>الأسئلة الأكثر تكراراً</a>
+                                    <a href="{{ route('admin.bot_options.index') }}" class="btn btn-outline-info d-inline-flex"><i
+                                            class="ti ti-check mrl"></i>الأسئلة الإختيارية</a>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -162,7 +166,7 @@
                                     {{ $faqs->links() }}
                                 </div>
                             </div>
-                        </div>
+                        </div>  
                     </div>
                 </div>
 
@@ -310,25 +314,25 @@
     </script>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // ملء بيانات الـ modal عند الضغط على زر التعديل
-        const editButtons = document.querySelectorAll('.btn-edit');
-        editButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const id = this.dataset.id;
-                const question = this.dataset.question;
-                const answer = this.dataset.answer;
-                const is_active = this.dataset.is_active;
+        document.addEventListener('DOMContentLoaded', function() {
+            // ملء بيانات الـ modal عند الضغط على زر التعديل
+            const editButtons = document.querySelectorAll('.btn-edit');
+            editButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.dataset.id;
+                    const question = this.dataset.question;
+                    const answer = this.dataset.answer;
+                    const is_active = this.dataset.is_active;
 
-                document.getElementById('edit-question-id').value = id;
-                document.getElementById('edit-question-text').value = question;
-                document.getElementById('edit-question-answer').value = answer;
-                document.getElementById('edit-question-active').value = is_active;
+                    document.getElementById('edit-question-id').value = id;
+                    document.getElementById('edit-question-text').value = question;
+                    document.getElementById('edit-question-answer').value = answer;
+                    document.getElementById('edit-question-active').value = is_active;
 
-                // تعيين action النموذج ديناميكياً
-                document.getElementById('editQuestionForm').action = `/admin/bot/faqs/${id}`;
+                    // تعيين action النموذج ديناميكياً
+                    document.getElementById('editQuestionForm').action = `/admin/bot/faqs/${id}`;
+                });
             });
         });
-    });
-</script>
+    </script>
 @endpush

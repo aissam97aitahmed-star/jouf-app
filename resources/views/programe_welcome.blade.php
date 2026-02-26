@@ -37,6 +37,11 @@
                                 </div>
                             @endif
                             @csrf
+                              <div class="mb-4">
+                                <button class="btn btn-primary tajawal-medium fs-16 w-100 submit">
+                                    <a href="{{ route('index') }}" class="text-white" >العودة للرئيسية</a>
+                                    </button>
+                            </div>
                             <h2 class="tajawal-bold fs-30 text-center" style="color: #1E293B;">مرحبا بانظمامك لنا
                             </h2>
                             <p class="tajawal-regular fs-16 text-center mb-4" style="color: #4B5563;">تسجيل الدخول
@@ -48,6 +53,7 @@
                                 <div class="type">
                                     <a href="" style="    width: fit-content !important;"
                                         class="btn btn-primary tajawal-medium fs-14 w-100 active">موظف جديد</a>
+
                                 </div>
                             </div>
                             <div class="mb-3">

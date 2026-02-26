@@ -29,12 +29,15 @@
                             &nbsp; تصفية</h5>
                         <form action="">
                             <div>
-                                <label for="" class="tajawal-medium fs-14 mb-2">حسب التاريخ</label>
+                                <label for="" class="tajawal-medium fs-14 mb-2">حسب الإدارة</label>
                                 <div class="select-wrapper position-relative">
-                                    <select class="form-select form-select-lg mb-3" aria-label="Large select example">
-                                        <option value="value1" class="tajawal-regular fs-14">جميع الفترات</option>
-                                        <option class="tajawal-regular fs-14">جميع الفترات</option>
-                                        <option class="tajawal-regular fs-14">جميع الفترات</option>
+                                    <select id="categoryFilter" class="form-select form-select-lg mb-3"
+                                        aria-label="Large select example">
+                                        <option value="all" class="tajawal-regular fs-14">جميع الإدارات</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->name }}" class="tajawal-regular fs-14">
+                                                {{ $category->name }}</option>
+                                        @endforeach
                                     </select>
                                     <i class="bi bi-caret-down-fill select-icon"></i>
                                 </div>
@@ -42,10 +45,12 @@
                             <div>
                                 <label for="" class="tajawal-medium fs-14 mb-2">حسب التاريخ</label>
                                 <div class="select-wrapper position-relative">
-                                    <select class="form-select form-select-lg mb-3" aria-label="Large select example">
-                                        <option value="value1" class="tajawal-regular fs-14">جميع الفترات</option>
-                                        <option class="tajawal-regular fs-14">جميع الفترات</option>
-                                        <option class="tajawal-regular fs-14">جميع الفترات</option>
+                                    <select id="dateFilter" class="form-select form-select-lg mb-3"
+                                        aria-label="Large select example">
+                                        <option value="all">كل التواريخ</option>
+                                        <option value="today">اليوم</option>
+                                        <option value="7">آخر 7 أيام</option>
+                                        <option value="30">آخر 30 يوم</option>
                                     </select>
                                     <i class="bi bi-caret-down-fill select-icon"></i>
                                 </div>
@@ -56,7 +61,8 @@
                 </div>
                 <div class="col-md-8">
                     @foreach ($policies as $policy)
-                        <div class="box mb-5">
+                        <div class="box mb-5 policy-item" data-category="{{ $policy->category->name }}"
+                            data-date="{{ $policy->updated_at->format('Y-m-d') }}">
                             <div class="d-flex mb-3 policy__single">
                                 <span class="key tajawal-bold fs-18"><i class="bi bi-shield-check d-flex fs-20"></i></span>
                                 <div style="flex: 1;">
@@ -90,8 +96,8 @@
                                     <a href="" class="btn btn-primary tajawal-regular fs-14" type="submit"><i
                                             class="bi bi-share"></i>&nbsp; مشاركة </a>
                                 </div>
-                                <a href="" class="btn btn-primary tajawal-regular fs-14 last" type="submit"><i
-                                        class="bi bi-pencil"></i>&nbsp; تعديل </a>
+                                {{-- <a href="" class="btn btn-primary tajawal-regular fs-14 last" type="submit"><i
+                                        class="bi bi-pencil"></i>&nbsp; تعديل </a> --}}
                             </div>
 
                             @php
@@ -120,3 +126,53 @@
         </div>
     </section>
 @endsection
+
+@push('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            const categoryFilter = document.getElementById('categoryFilter');
+            const dateFilter = document.getElementById('dateFilter');
+            const policies = document.querySelectorAll('.policy-item');
+
+            function filterPolicies() {
+                const selectedCategory = categoryFilter.value;
+                const selectedDate = dateFilter.value;
+
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                policies.forEach(policy => {
+                    const policyCategory = policy.dataset.category;
+                    const policyDate = new Date(policy.dataset.date);
+
+                    let categoryMatch =
+                        selectedCategory === 'all' ||
+                        policyCategory === selectedCategory;
+
+                    let dateMatch = true;
+
+                    if (selectedDate !== 'all') {
+                        const diffTime = today - policyDate;
+                        const diffDays = diffTime / (1000 * 60 * 60 * 24);
+
+                        if (selectedDate === 'today') {
+                            dateMatch = diffDays === 0;
+                        } else {
+                            dateMatch = diffDays <= parseInt(selectedDate);
+                        }
+                    }
+
+                    if (categoryMatch && dateMatch) {
+                        policy.style.display = 'block';
+                    } else {
+                        policy.style.display = 'none';
+                    }
+                });
+            }
+
+            categoryFilter.addEventListener('change', filterPolicies);
+            dateFilter.addEventListener('change', filterPolicies);
+        });
+    </script>
+@endpush

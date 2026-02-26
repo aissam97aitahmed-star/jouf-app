@@ -62,7 +62,7 @@
                                             <h6><i class="fa fa-info" aria-hidden="true"></i> <span
                                                     class="tajawal-medium fs-12">{{ $settings->bot_name }}
                                                 </span></h6>
-                                            <p class="tajawal-regular fs-14">{{ $conv->answer }}</p>
+                                            <p class="tajawal-regular fs-14">{!! nl2br(e($conv->answer)) !!}</p>
                                             <span class="tajawal-regular fs-12"
                                                 style="color: #6B7280;">{{ $conv->created_at->locale('ar')->diffForHumans() }}</span>
                                         </div>
@@ -528,10 +528,10 @@
             scrollToBottom();
         }
 
-        // دالة لإضافة رسالة البوت تدريجيًا
-        function addBotMessage(message, time) {
-            const wrapper = document.createElement('div');
-            wrapper.innerHTML = `
+     // دالة لإضافة رسالة البوت تدريجيًا
+function addBotMessage(message, time) {
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = `
         <div class="chat_body mb-4 bot__message">
             <div class="bot__msg__content">
                 <h6><i class="fa fa-info" aria-hidden="true"></i>
@@ -542,27 +542,36 @@
             </div>
         </div>
     `;
-            chatBody.appendChild(wrapper);
+    chatBody.appendChild(wrapper);
+    scrollToBottom();
+
+    const p = wrapper.querySelector('.bot_typing');
+    typeWriter(p, message, 50); // 50ms لكل حرف
+}
+
+// دالة الكتابة تدريجيًا مع دعم الأسطر الجديدة
+function typeWriter(element, text, speed) {
+    const lines = text.split('\n'); // تقسيم النص حسب الأسطر
+    let lineIndex = 0;
+
+    function typingLine(line, i = 0) {
+        if (i < line.length) {
+            element.innerHTML += line.charAt(i);
+            i++;
             scrollToBottom();
-
-            const p = wrapper.querySelector('.bot_typing');
-            typeWriter(p, message, 50); // 50ms لكل حرف
-        }
-
-        // دالة الكتابة تدريجيًا
-        function typeWriter(element, text, speed) {
-            let i = 0;
-
-            function typing() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    scrollToBottom();
-                    setTimeout(typing, speed);
-                }
+            setTimeout(() => typingLine(line, i), speed);
+        } else {
+            lineIndex++;
+            if (lineIndex < lines.length) {
+                element.innerHTML += '<br>'; // إضافة سطر جديد
+                setTimeout(() => typingLine(lines[lineIndex]), speed);
             }
-            typing();
         }
+    }
+
+    typingLine(lines[lineIndex]);
+}
+
 
         // دالة لتنسيق الوقت
         function formatTime(date) {
@@ -588,8 +597,8 @@
         document.querySelectorAll('.question-item').forEach(item => {
             item.addEventListener('click', function() {
                 document.getElementById('question').value = this.dataset.question;
-                 scrollToQuestionInput();
-                 sendButton.classList.add('active'); 
+                scrollToQuestionInput();
+                sendButton.classList.add('active');
             });
         });
     </script>

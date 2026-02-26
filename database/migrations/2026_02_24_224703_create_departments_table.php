@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('bot_conversations', function (Blueprint $table) {
-            $table->integer('step')->default(0); // 0 = default, 1 = اختيار القائمة
-
+        Schema::create('departments', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('responsible_employee')->nullable();
+            $table->string('email')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -22,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('bot_conversations', function (Blueprint $table) {
-            $table->dropColumn('step');
-        });
+        Schema::dropIfExists('departments');
     }
 };

@@ -30,7 +30,7 @@
                                 @foreach ($location->facilities as $facility)
                                     <span
                                         class="badge rounded-pill text-bg-success disp tajawal-regular fs-12">{{ $facility->name }}
-                                        الملابس</span>
+                                    </span>
                                 @endforeach
 
                             </div>

@@ -27,7 +27,7 @@
                                 <strong class="tajawal-bold">المرشدين</strong>
                             </div>
                         </div>
-                        <a href="" class="learn tajawal-bold"><i class="bi bi-play-circle"></i> &nbsp;&nbsp; ابدأ
+                        <a href="{{ route('employee.videos') }}" class="learn tajawal-bold"><i class="bi bi-play-circle"></i> &nbsp;&nbsp; ابدأ
                             رحلة
                             التعلم</a>
                     </div>
