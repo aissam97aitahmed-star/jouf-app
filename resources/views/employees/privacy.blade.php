@@ -63,11 +63,10 @@
                     @foreach ($policies as $policy)
                         <div class="box mb-5 policy-item" data-category="{{ $policy->category->name }}"
                             data-date="{{ $policy->updated_at->format('Y-m-d') }}">
-                            <div class="d-flex mb-3 policy__single">
+                            <div class="d-flex policy__single">
                                 <span class="key tajawal-bold fs-18"><i class="bi bi-shield-check d-flex fs-20"></i></span>
                                 <div style="flex: 1;">
-                                    <h4 class="tajawal-bold fs-20 mb-2"> {{ $policy->title }} <span
-                                            class="tajawal-medium fs-12"> {{ $policy->priority }} </span></h4>
+                                    <h4 class="tajawal-bold fs-20 mb-2"> {{ $policy->title }} </h4>
                                     <p class="tajawal-regular fs-14 mb-2">{{ $policy->description }}</p>
                                     <ul class="d-flex details mb-2 p-0 cats">
                                         <li class="tajawal-regular fs-14"><i class="bi bi-folder"></i>&nbsp;
@@ -77,24 +76,27 @@
                                             تحديث:
                                             {{ \Carbon\Carbon::parse($policy->updated_at)->locale('ar')->diffForHumans() }}
                                         </li>
-                                        <li class="tajawal-regular fs-14"><i class="bi bi-download"></i>&nbsp;
+                                        {{-- <li class="tajawal-regular fs-14"><i class="bi bi-download"></i>&nbsp;
                                             {{ $policy->downloads }} تنزيل
-                                        </li>
+                                        </li> --}}
                                     </ul>
                                 </div>
-                                <span class="badge rounded-pill text-bg-success tajawal-medium fs-12 disp"
-                                    style="height: fit-content;">نشطة</span>
+                                <a href="{{ route('employee.policies.view', $policy) }}" target="_blank" class="badge rounded-pill text-bg-success tajawal-medium fs-12 disp"
+                                    style="height: fit-content; display: flex;     align-items: center; padding: 8px 20px;" >
+                                    <i
+                                            class="bi bi-eye" style="margin-left: 7px"> </i>
+                                    عرض</a>
                             </div>
-                            <div class="actions d-flex mb-3">
+                            <div class="actions d-flex">
                                 <div style="flex: 1;">
-                                    <a href="{{ route('employee.policies.view', $policy) }}" target="_blank"
+                                    {{-- <a href="{{ route('employee.policies.view', $policy) }}" target="_blank"
                                         class="btn btn-primary tajawal-regular fs-14" type="submit"><i
-                                            class="bi bi-eye"></i>&nbsp; <span>عرض</span> </a>
-                                    <a href="{{ route('employee.policies.download', $policy) }}"
+                                            class="bi bi-eye"></i>&nbsp; <span>عرض</span> </a> --}}
+                                    {{-- <a href="{{ route('employee.policies.download', $policy) }}"
                                         class="btn btn-primary tajawal-regular fs-14" type="submit"><i
                                             class="bi bi-download"></i>&nbsp; تنزيل PDF </a>
                                     <a href="" class="btn btn-primary tajawal-regular fs-14" type="submit"><i
-                                            class="bi bi-share"></i>&nbsp; مشاركة </a>
+                                            class="bi bi-share"></i>&nbsp; مشاركة </a> --}}
                                 </div>
                                 {{-- <a href="" class="btn btn-primary tajawal-regular fs-14 last" type="submit"><i
                                         class="bi bi-pencil"></i>&nbsp; تعديل </a> --}}

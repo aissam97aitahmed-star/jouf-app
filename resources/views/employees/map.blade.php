@@ -8,7 +8,7 @@
         <div class="container">
             <div class="d-flex justify-content-between align-items-center py-5">
                 <h4 class="tajawal-bold">الخريطة التفاعلية للمواقع</h4>
-                <span class="badge rounded-pill text-bg-success tajawal-medium fs-14">5 موقع متاح</span>
+                <span class="badge rounded-pill text-bg-success tajawal-medium fs-14">{{ $locations->count() }} موقع متاح</span>
             </div>
             <div class="row pb-5 mb-5">
                 <div class="col-md-6 col-xs-12 mb-3">

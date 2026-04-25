@@ -29,7 +29,7 @@
 }
 
 
-.tajawal-medium {
+.tajawal-medium, .menu-links a {
     font-family: "Tajawal", sans-serif;
     font-weight: 500;
     font-style: normal;
@@ -654,7 +654,7 @@ header.overveiw .experience__icons i {
     text-align: center;
     display: block;
     background: #8CB453;
-    width: 334px;
+    /* width: 334px; */
     height: 49px;
     border-radius: 12px;
     padding: 12px;
@@ -1812,6 +1812,7 @@ input[type="range"]::-moz-range-thumb {
 
 .home__visitor i.bi-person-add,
 .home__visitor i.bi-arrow-right-circle,
+.home__visitor i.bi-list,
 header.security i.bi-shield-check {
     background: linear-gradient(180deg, #FFFFFF 0%, #B8D5C3 100%);
     width: 48px;

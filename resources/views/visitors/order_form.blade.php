@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="d-flex align-items-center">
-                    <a href="{{ route('index') }}" class="btn btn-primary tajawal-regular fs-16">
+                    <a href="{{ route('permit.program') }}" class="btn btn-primary tajawal-regular fs-16">
                         <i class="bi bi-arrow-right"></i> العودة
                     </a>
                 </div>
@@ -230,7 +230,7 @@
                         </div>
 
                         <div class="col-md-6"><label class="form-label">الموظف المضيف *</label><input type="text"
-                                class="form-control"  placeholder="سيظهر تلقائياً"
+                                class="form-control"  placeholder="يرجى كتابه اسم الموظف المظيف"
                                 name="host_employee" required>
                         </div>
 

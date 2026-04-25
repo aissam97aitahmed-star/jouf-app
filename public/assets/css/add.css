@@ -1,0 +1,1097 @@
+/* Swiper specific spacing */
+.productSwiper {
+    padding: 80px 15px 60px !important;
+    /* Extra top padding for the overlapping circles */
+}
+
+.swiper-slide {
+    height: auto;
+    /* Ensures cards in the same row have equal height */
+    display: flex;
+}
+
+.brand-product-card {
+    background: #5a823e;
+    /* Example dark green background */
+    border: 4px solid #5a823e;
+    border-radius: 35px;
+    padding: 90px 25px 40px;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.brand-image-wrapper {
+    position: absolute;
+    top: -70px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 140px;
+    border: 4px solid #5a823e;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #fff;
+    z-index: 10;
+}
+
+.brand-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Modern Swiper Bullets & Arrows */
+.swiper-pagination-bullet-active {
+    background: #5a823e !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #5a823e !important;
+    transform: scale(0.7);
+    background: white;
+    padding: 40px;
+    border-radius: 50%;
+}
+
+
+.feature-card {
+    border: none;
+    border-radius: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #ffffff;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.icon-box {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.bg-vision,
+.bg-strategy {
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    color: white;
+    font-size: 30px;
+    background: linear-gradient(90deg, #22C55E 0%, #059669 100%) !important
+}
+
+.section-title {
+    font-weight: 700;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 60px;
+    height: 4px;
+    background-color: #2e7d32;
+}
+
+/* القائمة الجانبية */
+#menuToggle {
+    padding: 0;
+    background: no-repeat;
+    border: none;
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 320px;
+    height: 100vh;
+    background: #fff;
+    box-shadow: -3px 0 15px rgba(0, 0, 0, .1);
+    transition: .3s ease;
+    z-index: 9999;
+    padding: 30px 20px;
+}
+
+/* عند الفتح */
+.side-menu.active {
+    right: 0;
+    background: linear-gradient(90deg, #166534 0%, #13803C 48.56%, #16A34A 100%)
+}
+
+/* زر الإغلاق */
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+/* الروابط */
+.menu-links {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-links li {
+    margin: 15px 0;
+}
+
+.menu-links a {
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: inline-block;
+    /* مهم */
+    transition: 0.3s;
+    /* يعطي حركة سلسة */
+}
+
+.menu-links a:hover {
+    transform: scale(1.1);
+}
+
+/* الخلفية الداكنة */
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .4);
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s;
+    z-index: 9998;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Sets up a clean background similar to the image's background */
+.product-section {
+    background-color: #f7f6f2;
+    /* Light textured background */
+    padding: 60px 0;
+}
+
+/* Core Product Card Container */
+.brand-product-card {
+    background: linear-gradient(180deg, #00471F 0%, #00AD4C 100%);
+    color: white;
+    border: 4px solid var(--primary-brand-color);
+    /* The specific green border from image */
+    border-radius: 35px;
+    /* Large rounded corners from image */
+    padding: 100px 30px 10px;
+    /* Top padding leaves space for the image to overlap */
+    position: relative;
+    text-align: center;
+    height: 100%;
+    margin-top: 60px;
+    /* Space above for the overlapping circle */
+}
+
+/* The overlapping circular image container */
+.brand-image-wrapper {
+    position: absolute;
+    top: -75px;
+    /* Pushes image up so it overlaps the border */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 150px;
+    border: 4px solid var(--primary-brand-color);
+    /* Matches the outer border color */
+    border-radius: 50%;
+    /* Perfect circle */
+    overflow: hidden;
+    /* Ensures image stays a circle */
+    background: white;
+    border: 3px solid white;
+    /* Behind the image for better contrast */
+}
+
+.brand-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Text styling directly from image data */
+.brand-product-title {
+    color: var(--title-color);
+    /* Specific color from image */
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.brand-english-title {
+    color: #5d5e61;
+    /* Specific gray from image */
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+.brand-product-desc {
+    color: #212529;
+    /* Text body color from image */
+    line-height: 2.0;
+    text-align: justify
+        /* Increased line-height from image */
+        /* font-size: 1.05rem; */
+}
+
+.brand-english-desc {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-top: 15px;
+}
+
+:root {
+    --jadco-green: #5a823e;
+    --jadco-dark: #1a2b15;
+}
+
+.facilities-modern {
+    background-color: #ffffff;
+    padding: 100px 0;
+}
+
+/* Modern Title with Side Line */
+.header-box {
+    border-right: 5px solid var(--jadco-green);
+    padding-right: 20px;
+    margin-bottom: 60px;
+}
+
+.facility-row {
+    margin-bottom: 0;
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+}
+
+.facility-image-col {
+    padding: 0;
+    /* min-height: 400px; */
+    position: relative;
+}
+
+.facility-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    border-top-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+
+.facility-text-col {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #fff;
+    transition: background-color 0.4s ease;
+}
+
+.facility-row:hover .facility-text-col {
+    background-color: #fcfdfb;
+}
+
+.facility-number {
+    font-family: serif;
+    font-size: 3rem;
+    color: #198754;
+    font-weight: 900;
+    margin-bottom: -20px;
+}
+
+.facility-name {
+    color: var(--jadco-dark);
+    font-weight: 800;
+    font-size: 1.75rem;
+    margin-bottom: 20px;
+}
+
+.facility-desc {
+    color: #555;
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+/* Reverse layout for alternating look */
+@media (min-width: 992px) {
+    .facility-row:nth-child(even) {
+        flex-direction: row-reverse;
+    }
+}
+
+@media (max-width: 768px) {
+    .facility-text-col {
+        padding: 40px 20px;
+    }
+
+    .facility-image-col {
+        min-height: 250px;
+    }
+}
+
+:root {
+    --jadco-green: #5a823e;
+    --jadco-gold: #bfa36a;
+    --soft-bg: #f8f9fa;
+}
+
+.about-modern {
+    padding: 100px 0;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+/* Layered Image Effect */
+.about-visual-container {
+    position: relative;
+    padding: 20px;
+}
+
+.about-visual-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80%;
+    height: 80%;
+    background-color: var(--soft-bg);
+    border-radius: 40px;
+    z-index: 1;
+}
+
+.main-about-img {
+    position: relative;
+    z-index: 2;
+    border-radius: 40px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+    transition: transform 0.4s ease;
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+}
+
+.main-about-img:hover {
+    transform: scale(1.02);
+}
+
+/* Experience Badge */
+.exp-badge {
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    background: var(--jadco-green);
+    color: #fff;
+    padding: 25px;
+    border-radius: 30px;
+    z-index: 3;
+    box-shadow: 0 15px 30px rgba(90, 130, 62, 0.3);
+}
+
+.exp-year {
+    display: block;
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1;
+}
+
+/* Text Styling */
+.section-subtitle {
+    color: var(--jadco-gold);
+    font-weight: 700;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.about-title {
+    font-weight: 800;
+    color: #111827;
+    font-size: 2.8rem;
+    margin-bottom: 30px;
+}
+
+.lead-text {
+    font-size: 1.25rem;
+    color: #111827;
+    border-right: 4px solid var(--jadco-green);
+    padding-right: 20px;
+    margin-bottom: 30px;
+}
+
+.body-text {
+    color: #4B5563;
+    line-height: 2;
+    font-size: 1.1rem;
+    text-align: justify;
+}
+
+.highlight-box {
+    background: var(--soft-bg);
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.highlight-icon {
+    width: 50px;
+    height: 50px;
+    background: #fff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--jadco-green);
+    font-size: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+:root {
+    --jadco-green: #2d5a27;
+    --jadco-gold: #c5a059;
+    --dark-void: #111827;
+}
+
+.vs-modern-section {
+    padding: 0;
+    overflow: hidden;
+    background: var(--dark-void);
+    color: #fff;
+}
+
+.vs-box {
+    position: relative;
+    min-height: 500px;
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+}
+
+/* Vision Side - Nature/Green Theme */
+.vision-box {
+    background: linear-gradient(135deg, rgba(45, 90, 39, 0.95) 0%, rgba(17, 24, 39, 0.9) 100%);
+}
+
+/* Strategy Side - Industrial/Gold Theme */
+.strategy-box {
+    background: linear-gradient(180deg, #00471F 0%, #00AD4C 100%);
+    border-right: 1px solid rgba(197, 160, 89, 0.2);
+}
+
+/* Background Large Text Decoration */
+.bg-text-decor {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12rem;
+    font-weight: 900;
+    opacity: 0.03;
+    z-index: -1;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.vs-icon-circle {
+    width: 70px;
+    height: 70px;
+    border: 2px solid;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+}
+
+.vision-box .vs-icon-circle {
+    border-color: #5cb85c;
+    color: #5cb85c;
+}
+
+.strategy-box .vs-icon-circle {
+    border-color: var(--jadco-gold);
+    color: var(--jadco-gold);
+}
+
+.vs-title {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 25px;
+}
+
+.vs-description {
+    font-size: 1.25rem;
+    line-height: 1.9;
+    max-width: 500px;
+    color: #d1d5db;
+    text-align: justify;
+}
+
+/* Hover Interactions */
+
+
+/* Vision 2030 Badge */
+.v2030-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 25px;
+    background: #e65512;
+    border: 1px solid rgba(197, 160, 89, 0.5);
+    border-radius: 100px;
+    color: white;
+    margin-top: 30px;
+    font-weight: 700;
+}
+
+:root {
+    --jadco-green: #2d5a27;
+    --jadco-gold: #c5a059;
+    --text-dark: #1f2937;
+}
+
+.industrial-section {
+    padding: 100px 0;
+    background-color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Asymmetric background decoration */
+.industrial-section::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: -5%;
+    width: 40%;
+    height: 60%;
+    background: #f4f7f1;
+    border-radius: 100px;
+    z-index: 0;
+    transform: rotate(-5deg);
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+.main-section-title {
+    color: var(--text-dark);
+    font-weight: 800;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 25px;
+}
+
+/* Modern Card UI */
+.brand-product-card {
+    background: #fff;
+    border-radius: 40px;
+    padding: 100px 30px 45px;
+    position: relative;
+    text-align: center;
+    height: 100%;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    margin-top: 60px;
+}
+
+.brand-product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(45, 90, 39, 0.12);
+    border-color: var(--jadco-green);
+}
+
+/* The Image Ring */
+.brand-image-wrapper {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 140px;
+    padding: 8px;
+    /* Space for the ring effect */
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+.brand-image-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px dashed #00ad4c;
+    border-radius: 50%;
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.brand-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Typography Styling */
+.brand-product-title {
+    color: var(--jadco-green);
+    font-size: 1.75rem;
+    margin-bottom: 5px;
+}
+
+.brand-english-title {
+    color: var(--jadco-gold) !important;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+.brand-product-desc {
+    color: #4b5563 !important;
+    line-height: 1.9;
+    font-size: 1rem;
+    text-align: justify;
+    text-align-last: center;
+}
+
+:root {
+    --jadco-green: #2d5a27;
+    --jadco-gold: #c5a059;
+    --soft-gold: #fcf8eb;
+}
+
+.cert-section {
+    padding: 100px 0;
+    background-color: #fcfcfc;
+}
+
+.cert-header {
+    margin-bottom: 60px;
+}
+
+.cert-card {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 30px;
+    padding: 40px;
+    height: 100%;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.cert-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    border-color: var(--jadco-gold);
+}
+
+/* Guinness Special Style */
+.cert-card.featured {
+    background: linear-gradient(135deg, var(--jadco-green) 0%, #1a3617 100%);
+    color: #fff;
+}
+
+.cert-icon-box {
+    /* width: 70px;
+    height: 70px; */
+    background: var(--soft-gold);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    font-size: 2rem;
+    color: var(--jadco-gold);
+}
+
+.featured .cert-icon-box {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.cert-title {
+    font-weight: 800;
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: center
+}
+
+.cert-desc {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #6c757d;
+}
+
+.featured .cert-desc {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Badge Label */
+.trust-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.5;
+}
+
+:root {
+    --jadco-green: #2d5a27;
+    --jadco-gold: #c5a059;
+    --bg-light: #f8f9fa;
+}
+
+.work-hours-section {
+    padding: 80px 0;
+    background-color: #fff;
+}
+
+.schedule-card {
+    border: none;
+    border-radius: 30px;
+    background: var(--bg-light);
+    padding: 40px;
+    height: 100%;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.schedule-card:hover {
+    background: #fff;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+    transform: translateY(-5px);
+}
+
+.schedule-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 6px;
+    height: 100%;
+    background: var(--jadco-green);
+}
+
+.operational-card::before {
+    background: var(--jadco-gold);
+}
+
+.dept-icon {
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--jadco-green);
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.operational-card .dept-icon {
+    color: var(--jadco-gold);
+}
+
+.work-day {
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 10px;
+    font-size: 1.25rem;
+}
+
+.time-badge {
+    display: inline-flex;
+    align-items: center;
+    background: #fff;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 700;
+    color: var(--jadco-green);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.operational-card .time-badge {
+    color: var(--jadco-gold);
+}
+
+.sub-depts {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed #ddd;
+    font-size: 0.95rem;
+    color: #6b7280;
+}
+
+.manager-note {
+    background: #fff4e5;
+    border: 1px solid #ffe5cc;
+    border-radius: 15px;
+    padding: 15px 25px;
+    color: #854d0e;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+}
+
+.btn-back-to-top {
+    position: fixed;
+    bottom: 40px;
+    left: 40px;
+    /* Left side for RTL layouts */
+    display: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #2d5a27;
+    /* JADCO Green */
+    color: white;
+    border: none;
+    z-index: 9999;
+    transition: all 0.3s ease;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-back-to-top i {
+    font-size: 1.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.btn-back-to-top:hover {
+    background-color: #c5a059;
+    /* JADCO Gold */
+    color: white;
+    transform: translateY(-5px);
+}
+
+/* Progress Circle Logic */
+.progress-circle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.progress-circle path {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.2);
+    stroke-width: 4;
+}
+
+/* Responsive adjustment for mobile */
+@media (max-width: 768px) {
+    .btn-back-to-top {
+        bottom: 20px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* 1. Ensure the slide container takes full height of the wrapper */
+.productSwiper .swiper-slide {
+    height: auto;
+    /* Allows flex stretching */
+    display: flex;
+}
+
+/* 2. Make your card fill the slide height */
+.productSwiper .brand-product-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    /* This is the key */
+}
+
+/* 3. Optional: Make the card body grow to push footer/content down */
+.productSwiper .card-body {
+    flex-grow: 1;
+}
+
+.modern-ticket {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+}
+
+.modern-ticket:hover {
+    transform: scale(1.03) rotate(1deg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Services Employye Style  */
+.service-card {
+    background: #ffffff;
+    border-radius: 16px;
+    transition: transform 0.3s ease;
+      border: 1px solid #169a4740 !important;
+    border-radius: 10px;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+.service-card .card-body {
+    /* border: 1px solid #169a4740;
+    border-radius: 10px; */
+}
+.icon-circle {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.bg-soft-primary {
+    background-color: #e7f1ff;
+}
+
+.bg-soft-success {
+    background-color: #e1f7ec;
+}
+
+.bg-soft-warning {
+    background-color: #fff8e6;
+}
+
+.btn-icon-sm {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: #f8f9fa;
+    color: #6c757d;
+    transition: 0.2s;
+}
+
+.btn-icon-sm:hover {
+    background: #0d6efd;
+    color: white;
+}
+
+.fs-13 {
+    font-size: 13px;
+}
+
+.fs-14 {
+    font-size: 14px;
+}
+
+.border-primary-start {
+    border-left: 4px solid #0d6efd !important;
+}
+.program-card {
+        background: #fff;
+        border-radius: 15px;
+        overflow: hidden;
+        border: 1px solid #eee;
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+
+    .program-img-wrapper {
+        position: relative;
+        height: 140px;
+        background: #fdfdfd;
+        overflow: hidden;
+    }
+
+    .program-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; /* Keeps logo proportions safe */
+        padding: 20px;
+        transition: transform 0.5s ease;
+    }
+
+    .program-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #1698468c; /* Matches your olive gold theme */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .program-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 25px rgba(92, 216, 113, 0.08);
+    }
+
+    .program-card:hover .program-overlay {
+        opacity: 1;
+    }
+
+    .program-card:hover .program-img {
+        transform: scale(1.1);
+    }
+
+    /* Responsive Text sizing */
+    .fs-13 { font-size: 13px; }

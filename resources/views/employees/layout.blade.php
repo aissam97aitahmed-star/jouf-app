@@ -15,6 +15,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/add.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -81,7 +82,7 @@
                     </div>
                 </div>
             </div>
-            <div class="cl__2"> 
+            <div class="cl__2">
 
                 <div class="text-center z-2 p-sticky">
                     <img src="{{ asset('assets/images/logo.png') }}" alt="" width="161px" height="116px">
@@ -153,6 +154,95 @@
         <img src="{{ asset('assets/images/to__top.png') }}" width="35px" height="35px" alt="">
     </div>
 
+
+    @if (!Auth::user()->terms_accepted_at)
+        <div class="modal fade" id="termsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content border-0 shadow-lg" style="border-radius: 20px;">
+                    <div class="modal-header bg-light border-0 pt-4 px-4" style="color: #00471f">
+                        <i class="bi bi-shield-lock-fill fs-4 ms-3"></i>
+                        <h5 class="modal-title tajawal-bold ">إشعار سرية المعلومات والبيانات</h5>
+                    </div>
+                    <div class="modal-body p-4">
+                        <div class="alert alert-warning border-0 tajawal-regular mb-4"
+                            style="background-color: #fff8e6; color: #856404;">
+                            عزيزي الموظف، مرحباً بك في النظام الترحيبي لشركة الجوف.
+                        </div>
+
+                        <div class="content-scroll pe-2"
+                            style="max-height: 300px; overflow-y: auto; text-align: justify;">
+                            <p class="tajawal-regular fs-14">نود تنبيهك إلى أن جميع المعلومات والبيانات المتاحة عبر هذا
+                                البرنامج – بما في ذلك سياسات الشركة، بيانات الموظفين، أرقام التواصل، المواقع، الأنظمة
+                                التشغيلية، وأي محتوى إداري أو تقني – تُعد معلومات داخلية سرية ومملوكة للشركة.</p>
+
+                            <strong class="tajawal-bold d-block mb-2">يُمنع منعاً باتاً:</strong>
+                            <ul class="tajawal-regular fs-14 text-danger">
+                                <li>نسخ أو تصوير أو مشاركة أي جزء من هذه البيانات خارج نطاق العمل.</li>
+                                <li>إرسال المعلومات عبر وسائل شخصية أو غير معتمدة.</li>
+                                <li>استخدامها لأغراض غير متعلقة بمهامك الوظيفية.</li>
+                            </ul>
+
+                            <p class="tajawal-regular fs-14 border-top pt-3">إن أي إفشاء أو إساءة استخدام لهذه
+                                المعلومات قد يعرّض صاحبه للمساءلة النظامية وفقاً لنظام حماية البيانات الشخصية في المملكة
+                                العربية السعودية، ونظام مكافحة الجرائم المعلوماتية.</p>
+                        </div>
+
+                        <div class="mt-4 p-3 bg-light rounded-3 border">
+                            <div class="form-check d-flex align-items-center">
+                                <input class="form-check-input ms-3" type="checkbox" id="acceptCheck"
+                                    style="width: 25px; height: 25px; cursor: pointer;">
+                                <label class="form-check-label tajawal-bold fs-14 ms-2" for="acceptCheck"
+                                    style="cursor: pointer;">
+                                    أقرّ باطلاعي على هذا الإشعار والتزامي الكامل بسياسة سرية المعلومات.
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0 pb-4 px-4">
+                        <button type="button" id="btnAccept"
+                            class="btn btn-primary w-100 py-2 tajawal-bold disabled" onclick="submitAcceptance()">
+                            موافق واستمرار
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Auto show modal on load
+            document.addEventListener('DOMContentLoaded', function() {
+                var myModal = new bootstrap.Modal(document.getElementById('termsModal'));
+                myModal.show();
+
+                // Enable button only if checkbox is checked
+                const checkbox = document.getElementById('acceptCheck');
+                const btn = document.getElementById('btnAccept');
+
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        btn.classList.remove('disabled');
+                    } else {
+                        btn.classList.add('disabled');
+                    }
+                });
+            });
+
+            function submitAcceptance() {
+                fetch("{{ route('employee.accept-terms') }}", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                        "Content-Type": "application/json"
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        bootstrap.Modal.getInstance(document.getElementById('termsModal')).hide();
+                    }
+                });
+            }
+        </script>
+    @endif
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>

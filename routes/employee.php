@@ -12,6 +12,7 @@ use App\Http\Controllers\Employee\EmployeesListController;
 // Route::view('/mail', 'emails.employee-message');
 Route::middleware(['auth', 'role:employee'])->prefix('employee')->name('employee.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('/accept-terms', [DashboardController::class, 'acceptTerms'])->name('accept-terms');
     Route::get('/map', [MapController::class, 'index'])->name('map');
     Route::get('/videos', [VideoController::class, 'index'])->name('videos');
     Route::post('/videos/{id}/increment-views', [VideoController::class, 'incrementViews'])->name('videos');
