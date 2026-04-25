@@ -16,7 +16,7 @@
             <div class="admin-dashboard">
                 <section class="dashboard-hero">
                     <div class="hero-content">
-                        <span class="hero-badge">aljouf-portal 2026</span>
+                        <span class="hero-badge">شركة الجوف للتنمية الزراعية</span>
                         <h2 class="text-white">مساحة إدارية أوضح لاتخاذ القرار ومتابعة العمل اليومي</h2>
                         <p>
                             تم ترتيب أهم المؤشرات والطلبات في واجهة أبسط وأكثر راحة بصريًا حتى يصل المدير إلى المعلومات
