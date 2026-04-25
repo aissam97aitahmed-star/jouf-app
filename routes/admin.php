@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\BotSettingController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\BotConversationController;
 use App\Http\Controllers\Admin\MessageTemplateController;
+use App\Http\Controllers\Admin\EmployeeServiceContactController;
 
 Route::get('/admin/login', function () {
     if (Auth::check() && Auth::user()->role == "admin") {
@@ -23,12 +24,12 @@ Route::get('/admin/login', function () {
     Auth::logout();
     return view('admin.login');
 });
+
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::delete('/dashboard/destry/order/{order}', [DashboardController::class, 'deleteOrder'])->name('delete.order');
     Route::get('/password/update', [DashboardController::class, 'updatePasswordForm'])->name('password.update');
     Route::post('/password/reset', [DashboardController::class, 'updatePassword'])->name('password.reset');
-
 
     //**######################## START MAP ROUTES **########################\\
     Route::prefix('map')->name('map.')->group(function () {
@@ -84,11 +85,12 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('departments', DepartmentController::class);
     //**######################## END Department ROUTES **########################\\
 
-
-
+    //**######################## START SERVICE CONTACTS ROUTES **########################\\
+    Route::resource('service-contacts', EmployeeServiceContactController::class)
+        ->except(['create', 'show', 'edit']);
+    //**######################## END SERVICE CONTACTS ROUTES **########################\\
 });
 
 Route::get('/control_panel', function () {
-    //  dd(Auth::user()->name);
     return view('admin.index');
 })->name('admin.index');

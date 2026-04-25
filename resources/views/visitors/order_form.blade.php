@@ -253,10 +253,10 @@
                         <h2 class="tajawal-bold fs-24">معلومات إضافية</h2>
                     </div>
                     <div class="row g-4">
-                        <div class="col-md-6"><label class="form-label">رقم لوحة السيارة</label><input type="text"
-                                name="car_plate" class="form-control" placeholder="أ ب ج 1234"></div>
-                        <div class="col-md-6"><label class="form-label">المرافقون</label><input type="text"
-                                name="companions" class="form-control" placeholder="أسماء المرافقين (إن وجد)"></div>
+                        <div class="col-md-6"><label class="form-label">رقم لوحة السيارة *</label><input type="text"
+                                name="car_plate" required class="form-control" placeholder="أ ب ج 1234"></div>
+                        <div class="col-md-6"><label class="form-label">المرافقون *</label><input type="text"
+                                name="companions" required class="form-control" placeholder="أسماء المرافقين (إن وجد)"></div>
                         <div class="col-md-12">
                             <label class="form-label">طلبات خاصة</label>
                             <textarea class="form-control" rows="3" cols="4" style="height: 112px;" name="special_requests"
