@@ -26,6 +26,8 @@ Route::middleware(['auth', 'role:employee'])->prefix('employee')->name('employee
         [PrivacyController::class, 'view']
     )
         ->name('policies.view');
+    Route::post('/policies/{policy}/acknowledge-view', [PrivacyController::class, 'acknowledgeView'])
+        ->name('policies.acknowledge-view');
 
     Route::get('/chat_bot', [BotController::class, 'index'])->name('bot');
     Route::post('/bot/ask', [BotController::class, 'ask'])->name('bot.ask');

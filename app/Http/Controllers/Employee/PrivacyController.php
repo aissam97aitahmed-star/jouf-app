@@ -16,13 +16,22 @@ class PrivacyController extends Controller
 {
     public function index(Request $request)
     {
+        $currentUserId = Auth::id();
         $employeesCount = User::where('role', 'employee')->count();
         // $policies = Policy::withCount('viewers')->get();
         // return $policies;
         $categories = PolicyCategory::withCount('policies')->get();
         $priorities = PolicyPriority::cases();
 
-        $policies = Policy::withCount('viewers')->with('category')
+        $policies = Policy::withCount([
+            'viewers as viewers_count' => function ($query) {
+                $query->where('role', 'employee');
+            },
+        ])->withExists([
+            'viewers as viewed_by_user' => function ($query) use ($currentUserId) {
+                $query->where('users.id', $currentUserId);
+            },
+        ])->with('category')
             ->when($request->category_id, function ($query) use ($request) {
                 $query->where('policy_category_id', $request->category_id);
             })
@@ -53,14 +62,22 @@ class PrivacyController extends Controller
 
     public function view(Policy $policy)
     {
-        $user = Auth::user();
-
-        if ($user->role == 'employee') {
-            $policy->viewers()->syncWithoutDetaching([$user->id]);
-        }
-
         return redirect()->to(
             asset('storage/' . $policy->pdf_path)
         );
+    }
+
+    public function acknowledgeView(Policy $policy)
+    {
+        $user = Auth::user();
+
+        if ($user && $user->role === 'employee') {
+            $policy->viewers()->syncWithoutDetaching([$user->id]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'تم تسجيل الاطلاع على السياسة بنجاح.',
+        ]);
     }
 }
