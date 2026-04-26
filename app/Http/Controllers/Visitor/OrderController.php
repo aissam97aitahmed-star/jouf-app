@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Visitor;
 
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Department;
 use App\Enums\VisitPurpose;
@@ -139,7 +140,7 @@ class OrderController extends Controller
     public function updateStatus(Request $request, Order $order)
     {
         $request->validate([
-            'status' => 'required|in:pending,approved,rejected'
+            'status' => 'required|in:pending,host_approved,approved,rejected'
         ]);
 
         $order->update([
@@ -151,13 +152,56 @@ class OrderController extends Controller
 
     public function approve(Order $order)
     {
-        $order->status = 'approved';
+        $stage = request('stage', 'department');
+
+        if (in_array($order->status, ['approved', 'in_progress', 'completed'], true)) {
+            return view('orders.result', [
+                'message' => 'تم اعتماد الطلب مسبقاً',
+                'order' => $order,
+            ]);
+        }
+
+        if ($stage === 'security_manager') {
+            $order->status = 'approved';
+            $order->save();
+
+            Mail::to($order->email)->send(new OrderApprovedMail($order));
+
+            return view('orders.result', [
+                'message' => 'تم قبول الطلب بنجاح',
+                'order' => $order,
+            ]);
+        }
+
+        if ($order->status === 'host_approved') {
+            return view('orders.result', [
+                'message' => 'تمت موافقة المستضيف مسبقاً والطلب بانتظار اعتماد مدير الأمن',
+                'order' => $order,
+            ]);
+        }
+
+        $order->status = 'host_approved';
         $order->save();
 
-        // هنا ترسل ايميل للزائر مع QR
-        Mail::to($order->email)->send(new OrderApprovedMail($order));
+        $securityManagerEmails = User::query()
+            ->where('role', 'security_manager')
+            ->whereNotNull('email')
+            ->pluck('email')
+            ->filter()
+            ->unique()
+            ->values()
+            ->all();
 
-        return view('orders.result', ['message' => 'تم قبول الطلب بنجاح']);
+        if (!empty($securityManagerEmails)) {
+            foreach ($securityManagerEmails as $securityManagerEmail) {
+                Mail::to($securityManagerEmail)->send(new OrderForApprovalMail($order, 'security_manager'));
+            }
+        }
+
+        return view('orders.result', [
+            'message' => 'تم قبول الطلب مبدئياً وإرساله إلى مدير الأمن للاعتماد النهائي',
+            'order' => $order,
+        ]);
     }
 
     public function reject(Order $order)

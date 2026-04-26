@@ -1,10 +1,15 @@
 @extends('emails.layout')
 
 @section('content')
+@php
+    $isSecurityManagerStage = ($approvalStage ?? 'department') === 'security_manager';
+@endphp
 
 <p>مرحباً،</p>
 
-<p>يوجد طلب زيارة جديد بانتظار موافقتك.</p>
+<p>
+    {{ $isSecurityManagerStage ? 'يوجد طلب زيارة تمت مراجعته من الجهة المختصة وبانتظار موافقة مدير الأمن.' : 'يوجد طلب زيارة جديد بانتظار موافقتك.' }}
+</p>
 
 <hr>
 
@@ -42,10 +47,10 @@
 
 <div style="margin-top:20px; text-align:center;">
 
-    <a href="{{ route('visitor.orders.approve', $order->id) }}"
+    <a href="{{ route('visitor.orders.approve', ['order' => $order->id, 'stage' => $isSecurityManagerStage ? 'security_manager' : 'department']) }}"
        style="background:#16a34a;color:white;padding:12px 20px;
               text-decoration:none;border-radius:6px;margin-right:10px;display:inline-block;">
-        ✅ قبول الطلب
+        {{ $isSecurityManagerStage ? '✅ اعتماد الطلب النهائي' : '✅ قبول الطلب' }}
     </a>
 
     <a href="{{ route('visitor.orders.reject', $order->id) }}"
@@ -56,6 +61,8 @@
 
 </div>
 
-<p style="margin-top:25px;">شكراً لتعاونكم.</p>
+<p style="margin-top:25px;">
+    {{ $isSecurityManagerStage ? 'بعد الاعتماد النهائي سيتم إرسال إشعار القبول ورمز الدخول للزائر مباشرة.' : 'شكراً لتعاونكم.' }}
+</p>
 
 @endsection

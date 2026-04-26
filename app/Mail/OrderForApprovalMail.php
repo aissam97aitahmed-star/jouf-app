@@ -14,12 +14,14 @@ class OrderForApprovalMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $order;
+    public $approvalStage;
     /**
      * Create a new message instance.
      */
-    public function __construct(Order $order)
+    public function __construct(Order $order, string $approvalStage = 'department')
     {
         $this->order = $order;
+        $this->approvalStage = $approvalStage;
     }
 
     /**
@@ -27,8 +29,12 @@ class OrderForApprovalMail extends Mailable
      */
     public function envelope(): Envelope
     {
+        $subject = $this->approvalStage === 'security_manager'
+            ? 'طلب زيارة بانتظار موافقة مدير الأمن'
+            : 'طلب زيارة جديد بانتظار الموافقة';
+
         return new Envelope(
-            subject: 'طلب زيارة جديد بانتظار الموافقة',
+            subject: $subject,
         );
     }
 

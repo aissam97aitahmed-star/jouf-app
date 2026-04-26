@@ -6,7 +6,8 @@
 @section('content')
     @php
         $pendingCount = $orders->where('status', 'pending')->count();
-        $approvedCount = $orders->where('status', 'approved')->count();
+        $hostApprovedCount = $orders->where('status', 'host_approved')->count();
+        $approvedCount = $orders->filter(fn($order) => in_array($order->status, ['approved', 'in_progress', 'completed']))->count();
         $inProgressCount = $orders->where('status', 'in_progress')->count();
         $completedCount = $orders->where('status', 'completed')->count();
     @endphp
@@ -26,15 +27,15 @@
                         <div class="hero-highlights">
                             <div class="hero-pill">
                                 <i class="ti ti-hourglass"></i>
-                                <span>{{ $pendingCount }} طلب بانتظار الإجراء</span>
+                                <span>{{ $pendingCount }} طلب بانتظار موافقة المستضيف</span>
                             </div>
                             <div class="hero-pill">
-                                <i class="ti ti-progress-check"></i>
-                                <span>{{ $inProgressCount }} طلب قيد المعالجة</span>
+                                <i class="ti ti-user-check"></i>
+                                <span>{{ $hostApprovedCount }} طلب وافق عليه المستضيف</span>
                             </div>
                             <div class="hero-pill">
                                 <i class="ti ti-circle-check"></i>
-                                <span>{{ $completedCount }} طلب مكتمل</span>
+                                <span>{{ $approvedCount }} طلب اعتمده مدير الأمن</span>
                             </div>
                         </div>
                     </div>
@@ -59,15 +60,15 @@
                         <div class="hero-mini-stats">
                             <div>
                                 <strong>{{ $approvedCount }}</strong>
-                                <span>تمت الموافقة</span>
+                                <span>اعتماد نهائي</span>
                             </div>
                             <div>
-                                <strong>{{ $videos_count }}</strong>
-                                <span>محتوى مرئي</span>
+                                <strong>{{ $hostApprovedCount }}</strong>
+                                <span>موافقة المستضيف</span>
                             </div>
                             <div>
-                                <strong>{{ $policies_count }}</strong>
-                                <span>سياسات نشطة</span>
+                                <strong>{{ $pendingCount }}</strong>
+                                <span>بانتظار الرد</span>
                             </div>
                         </div>
                     </div>
@@ -82,7 +83,7 @@
                             <div class="metric-meta">
                                 <span>مجموع الطلبات</span>
                                 <h3>{{ $orders_count }}</h3>
-                                <p>{{ $approvedCount }} طلب تمت الموافقة عليه</p>
+                                <p>{{ $approvedCount }} طلب وصل إلى الاعتماد النهائي</p>
                             </div>
                         </article>
                     </div>
@@ -132,14 +133,32 @@
                         <div>
                             <span class="section-kicker">Order Center</span>
                             <h5>إدارة الطلبات</h5>
-                            <p>مراجعة الطلبات، تتبع حالتها، وحذف السجلات غير المطلوبة من نفس الشاشة.</p>
+                            <p>مراجعة الطلبات وتتبع مراحل الموافقة من انتظار المستضيف حتى اعتماد مدير الأمن.</p>
                         </div>
 
                         <div class="section-chips">
                             <span class="section-chip">قيد الانتظار: {{ $pendingCount }}</span>
-                            <span class="section-chip">قيد المعالجة: {{ $inProgressCount }}</span>
-                            <span class="section-chip">مكتمل: {{ $completedCount }}</span>
+                            <span class="section-chip">موافقة المستضيف: {{ $hostApprovedCount }}</span>
+                            <span class="section-chip">اعتماد مدير الأمن: {{ $approvedCount }}</span>
                         </div>
+                    </div>
+
+                    <div class="approval-overview-grid">
+                        <article class="approval-stage-card pending">
+                            <span class="approval-stage-label">المرحلة 1</span>
+                            <strong>{{ $pendingCount }}</strong>
+                            <p>طلبات جديدة لم يوافق عليها المستضيف بعد</p>
+                        </article>
+                        <article class="approval-stage-card host">
+                            <span class="approval-stage-label">المرحلة 2</span>
+                            <strong>{{ $hostApprovedCount }}</strong>
+                            <p>تمت موافقة المستضيف عليها وهي بانتظار اعتماد مدير الأمن</p>
+                        </article>
+                        <article class="approval-stage-card security">
+                            <span class="approval-stage-label">المرحلة 3</span>
+                            <strong>{{ $approvedCount }}</strong>
+                            <p>تم اعتمادها نهائياً من مدير الأمن</p>
+                        </article>
                     </div>
 
                     <div class="card orders-table-card tbl-card">
@@ -150,6 +169,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>الزائر</th>
+                                            <th>التقدم</th>
                                             <th>الرمز</th>
                                             <th>تاريخ الإنشاء</th>
                                             <th>نوع الزيارة</th>
@@ -161,6 +181,13 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($orders as $key => $order)
+                                            @php
+                                                $approvalStep = match ($order->status) {
+                                                    'host_approved' => 2,
+                                                    'approved', 'in_progress', 'completed' => 3,
+                                                    default => 1,
+                                                };
+                                            @endphp
                                             <tr>
                                                 <td>
                                                     <span class="row-index">{{ $key + 1 }}</span>
@@ -180,8 +207,29 @@
                                                         </div>
                                                     </div>
                                                 </td>
+                                                    <td>
+                                                    <div class="approval-progress {{ $order->status === 'rejected' ? 'is-rejected' : '' }}">
+                                                        <div class="approval-progress-track">
+                                                            <span class="approval-step {{ $approvalStep >= 1 ? 'is-done' : '' }}">
+                                                                <span class="approval-dot"></span>
+                                                                <small>انتظار</small>
+                                                            </span>
+                                                            <span class="approval-step {{ $approvalStep >= 2 ? 'is-done' : '' }}">
+                                                                <span class="approval-dot"></span>
+                                                                <small>موافقة المستضيف</small>
+                                                            </span>
+                                                            <span class="approval-step {{ $approvalStep >= 3 ? 'is-done' : '' }}">
+                                                                <span class="approval-dot"></span>
+                                                                <small>اعتماد الأمن</small>
+                                                            </span>
+                                                        </div>
+                                                        @if ($order->status === 'rejected')
+                                                            <span class="approval-progress-note">تم إيقاف الطلب بسبب الرفض</span>
+                                                        @endif
+                                                    </div>
+                                                </td>
                                                 <td>
-                                                    @if ($order->status === 'approved')
+                                                    @if (in_array($order->status, ['approved', 'in_progress', 'completed']))
                                                         <div class="qr-box">
                                                             {!! QrCode::size(84)->style('square')->generate($order->order_number) !!}
                                                         </div>
@@ -209,10 +257,15 @@
                                                             <i class="ti ti-hourglass-low"></i>
                                                             في الانتظار
                                                         </span>
+                                                    @elseif ($order->status === 'host_approved')
+                                                        <span class="status-pill primary-soft">
+                                                            <i class="ti ti-user-check"></i>
+                                                            وافق المستضيف
+                                                        </span>
                                                     @elseif ($order->status === 'approved')
                                                         <span class="status-pill success">
                                                             <i class="ti ti-circle-check"></i>
-                                                            تمت الموافقة
+                                                            اعتماد مدير الأمن
                                                         </span>
                                                     @elseif ($order->status === 'rejected')
                                                         <span class="status-pill danger">
@@ -231,6 +284,7 @@
                                                         </span>
                                                     @endif
                                                 </td>
+
                                                 <td>
                                                     <button data-id="{{ $order->id }}" type="button"
                                                         class="btn btn-delete-action btn-delete">
@@ -473,6 +527,58 @@
             gap: 16px;
         }
 
+        .approval-overview-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .approval-stage-card {
+            padding: 18px 20px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.82);
+            border: 1px solid rgba(13, 68, 40, 0.08);
+            box-shadow: 0 18px 36px rgba(12, 54, 33, 0.06);
+        }
+
+        .approval-stage-card strong {
+            display: block;
+            margin: 10px 0 6px;
+            font-size: 34px;
+            line-height: 1;
+            color: #123524;
+        }
+
+        .approval-stage-card p {
+            margin: 0;
+            color: #6d7f73;
+            line-height: 1.7;
+        }
+
+        .approval-stage-label {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .approval-stage-card.pending .approval-stage-label {
+            background: rgba(255, 194, 31, 0.18);
+            color: #946200;
+        }
+
+        .approval-stage-card.host .approval-stage-label {
+            background: rgba(23, 92, 211, 0.12);
+            color: #175cd3;
+        }
+
+        .approval-stage-card.security .approval-stage-label {
+            background: rgba(11, 107, 58, 0.14);
+            color: #0b6b3a;
+        }
+
         .section-heading {
             display: flex;
             align-items: flex-end;
@@ -627,6 +733,11 @@
             background: rgba(11, 107, 58, 0.14);
         }
 
+        .status-pill.primary-soft {
+            color: #175cd3;
+            background: rgba(23, 92, 211, 0.12);
+        }
+
         .status-pill.success-soft {
             color: #166246;
             background: rgba(22, 98, 70, 0.12);
@@ -640,6 +751,77 @@
         .status-pill.info {
             color: #175cd3;
             background: rgba(23, 92, 211, 0.12);
+        }
+
+        .approval-progress {
+            min-width: 230px;
+        }
+
+        .approval-progress-track {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 8px;
+            position: relative;
+        }
+
+        .approval-progress-track::before {
+            content: "";
+            position: absolute;
+            top: 7px;
+            right: 14px;
+            left: 14px;
+            height: 2px;
+            background: linear-gradient(90deg, #d8e2da 0%, #e7efe8 100%);
+            z-index: 0;
+        }
+
+        .approval-step {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            justify-items: center;
+            gap: 8px;
+            color: #8a9a90;
+            text-align: center;
+            flex: 1;
+        }
+
+        .approval-step small {
+            font-size: 11px;
+            line-height: 1.45;
+            font-weight: 700;
+        }
+
+        .approval-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #d8e2da;
+            border: 3px solid #f8fbf8;
+            box-shadow: 0 0 0 2px rgba(216, 226, 218, 0.9);
+        }
+
+        .approval-step.is-done {
+            color: #123524;
+        }
+
+        .approval-step.is-done .approval-dot {
+            background: linear-gradient(135deg, #0b6b3a, #24a35d);
+            box-shadow: 0 0 0 2px rgba(36, 163, 93, 0.18);
+        }
+
+        .approval-progress-note {
+            display: inline-flex;
+            margin-top: 10px;
+            color: #c2410c;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .approval-progress.is-rejected .approval-dot {
+            background: #f4d7d7;
+            box-shadow: 0 0 0 2px rgba(244, 215, 215, 0.8);
         }
 
         .btn-delete-action {
@@ -663,6 +845,10 @@
 
         @media (max-width: 1199.98px) {
             .dashboard-hero {
+                grid-template-columns: 1fr;
+            }
+
+            .approval-overview-grid {
                 grid-template-columns: 1fr;
             }
         }
