@@ -10,6 +10,18 @@
         $approvedCount = $orders->filter(fn($order) => in_array($order->status, ['approved', 'in_progress', 'completed']))->count();
         $inProgressCount = $orders->where('status', 'in_progress')->count();
         $completedCount = $orders->where('status', 'completed')->count();
+        $calendarOrders = $orders->map(function ($order) {
+            return [
+                'id' => $order->id,
+                'visitor' => $order->full_name,
+                'date' => $order->visit_date,
+                'time' => $order->visit_time,
+                'host' => $order->host_employee,
+                'purpose' => $order->visit_purpose,
+                'status' => $order->status,
+                'order_number' => $order->order_number,
+            ];
+        })->values();
     @endphp
 
     <div class="pc-container">
@@ -137,6 +149,11 @@
                         </div>
 
                         <div class="section-chips">
+                            <button type="button" class="calendar-launch-btn" data-bs-toggle="modal"
+                                data-bs-target="#ordersCalendarModal">
+                                <i class="ti ti-calendar-event"></i>
+                                عرض التقويم
+                            </button>
                             <span class="section-chip">قيد الانتظار: {{ $pendingCount }}</span>
                             <span class="section-chip">موافقة المستضيف: {{ $hostApprovedCount }}</span>
                             <span class="section-chip">اعتماد مدير الأمن: {{ $approvedCount }}</span>
@@ -299,6 +316,91 @@
                         </div>
                     </div>
                 </section>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade orders-calendar-modal" id="ordersCalendarModal" tabindex="-1"
+        aria-labelledby="ordersCalendarModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="orders-calendar-shell">
+                        <div class="orders-calendar-panel">
+                            <div class="orders-calendar-badge">Orders Calendar</div>
+                            <h3 id="ordersCalendarModalLabel">تقويم الطلبات</h3>
+                            <p>
+                                متابعة جميع الطلبات المجدولة بصيغة تقويم واضحة تساعدك على معرفة الأيام المزدحمة
+                                والتنقل بين المواعيد بسهولة.
+                            </p>
+
+                            <div class="orders-calendar-stats">
+                                <div class="orders-calendar-stat">
+                                    <strong>{{ $orders_count }}</strong>
+                                    <span>إجمالي الطلبات</span>
+                                </div>
+                                <div class="orders-calendar-stat">
+                                    <strong>{{ $pendingCount }}</strong>
+                                    <span>بانتظار الموافقة</span>
+                                </div>
+                                <div class="orders-calendar-stat">
+                                    <strong>{{ $approvedCount }}</strong>
+                                    <span>معتمدة</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="orders-calendar-main">
+                            <div class="orders-calendar-toolbar">
+                                <div class="orders-calendar-nav">
+                                    <button type="button" class="calendar-nav-btn" id="calendarPrevBtn">
+                                        <i class="ti ti-chevron-right"></i>
+                                    </button>
+                                    <div>
+                                        <h4 id="calendarMonthLabel">-</h4>
+                                        <small id="calendarMonthMeta">-</small>
+                                    </div>
+                                    <button type="button" class="calendar-nav-btn" id="calendarNextBtn">
+                                        <i class="ti ti-chevron-left"></i>
+                                    </button>
+                                </div>
+
+                                <button type="button" class="calendar-today-btn" id="calendarTodayBtn">
+                                    <i class="ti ti-current-location"></i>
+                                    هذا الشهر
+                                </button>
+                            </div>
+
+                            <div class="calendar-weekdays">
+                                <span>الأحد</span>
+                                <span>الاثنين</span>
+                                <span>الثلاثاء</span>
+                                <span>الأربعاء</span>
+                                <span>الخميس</span>
+                                <span>الجمعة</span>
+                                <span>السبت</span>
+                            </div>
+
+                            <div class="calendar-grid" id="ordersCalendarGrid"></div>
+
+                            <div class="calendar-agenda-card">
+                                <div class="calendar-agenda-head">
+                                    <div>
+                                        <h5 class="mb-1">طلبات اليوم المحدد</h5>
+                                        <p id="selectedDateLabel" class="mb-0">اختر يوماً من التقويم لعرض الطلبات.</p>
+                                    </div>
+                                    <span class="agenda-count" id="selectedDateCount">0 طلب</span>
+                                </div>
+
+                                <div id="selectedDateOrders" class="agenda-list"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="calendar-modal-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="ti ti-x"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -626,6 +728,25 @@
             font-weight: 700;
         }
 
+        .calendar-launch-btn {
+            border: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 16px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #0b6b3a, #1fa25e);
+            color: #fff;
+            font-weight: 800;
+            box-shadow: 0 16px 30px rgba(12, 87, 47, 0.18);
+            transition: 0.2s ease;
+        }
+
+        .calendar-launch-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 20px 34px rgba(12, 87, 47, 0.22);
+        }
+
         .orders-table-card {
             border-radius: 28px;
             overflow: hidden;
@@ -843,12 +964,390 @@
             transform: translateY(-1px);
         }
 
+        .orders-calendar-modal .modal-dialog {
+            max-width: min(1400px, calc(100vw - 32px));
+        }
+
+        .orders-calendar-modal .modal-content {
+            border: 0;
+            border-radius: 32px;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .orders-calendar-shell {
+            display: grid;
+            grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+            min-height: 80vh;
+            background: #f6faf7;
+        }
+
+        .orders-calendar-panel {
+            position: relative;
+            overflow: hidden;
+            padding: 32px 28px;
+            background:
+                radial-gradient(circle at top right, rgba(255, 255, 255, 0.16), transparent 34%),
+                linear-gradient(160deg, #0a5f35 0%, #12834a 58%, #1fa25e 100%);
+            color: #fff;
+        }
+
+        .orders-calendar-panel::after {
+            content: "";
+            position: absolute;
+            inset: auto -40px -60px auto;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .orders-calendar-badge {
+            display: inline-flex;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            font-size: 12px;
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+        .orders-calendar-panel h3 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 14px;
+        }
+
+        .orders-calendar-panel p {
+            color: rgba(255, 255, 255, 0.82);
+            line-height: 1.9;
+            margin-bottom: 24px;
+        }
+
+        .orders-calendar-stats {
+            display: grid;
+            gap: 12px;
+        }
+
+        .orders-calendar-stat {
+            padding: 18px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            backdrop-filter: blur(10px);
+        }
+
+        .orders-calendar-stat strong {
+            display: block;
+            font-size: 30px;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .orders-calendar-stat span {
+            color: rgba(255, 255, 255, 0.78);
+            font-weight: 600;
+        }
+
+        .orders-calendar-main {
+            padding: 28px;
+            display: grid;
+            gap: 18px;
+        }
+
+        .orders-calendar-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .orders-calendar-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .orders-calendar-nav h4 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 800;
+            color: #123524;
+        }
+
+        .orders-calendar-nav small {
+            color: #6d7f73;
+            font-weight: 600;
+        }
+
+        .calendar-nav-btn,
+        .calendar-today-btn,
+        .calendar-modal-close {
+            border: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s ease;
+        }
+
+        .calendar-nav-btn {
+            width: 46px;
+            height: 46px;
+            border-radius: 16px;
+            background: #fff;
+            color: #123524;
+            box-shadow: 0 12px 24px rgba(12, 54, 33, 0.08);
+        }
+
+        .calendar-nav-btn:hover,
+        .calendar-today-btn:hover,
+        .calendar-modal-close:hover {
+            transform: translateY(-1px);
+        }
+
+        .calendar-today-btn {
+            gap: 8px;
+            padding: 12px 16px;
+            border-radius: 16px;
+            background: #fff;
+            color: #0b6b3a;
+            font-weight: 800;
+            box-shadow: 0 12px 24px rgba(12, 54, 33, 0.08);
+        }
+
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+            gap: 12px;
+            color: #6d7f73;
+            font-size: 13px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .calendar-day-card {
+            min-height: 126px;
+            padding: 14px;
+            border-radius: 22px;
+            background: #fff;
+            border: 1px solid rgba(13, 68, 40, 0.08);
+            box-shadow: 0 16px 28px rgba(12, 54, 33, 0.04);
+            display: grid;
+            align-content: space-between;
+            gap: 12px;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .calendar-day-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 36px rgba(12, 54, 33, 0.08);
+        }
+
+        .calendar-day-card.is-muted {
+            opacity: 0.46;
+        }
+
+        .calendar-day-card.is-today {
+            border-color: rgba(11, 107, 58, 0.24);
+            box-shadow: inset 0 0 0 1px rgba(11, 107, 58, 0.08), 0 18px 32px rgba(12, 54, 33, 0.08);
+        }
+
+        .calendar-day-card.is-selected {
+            background: linear-gradient(160deg, #0b6b3a, #1f8a52);
+            border-color: transparent;
+            box-shadow: 0 22px 40px rgba(12, 87, 47, 0.2);
+        }
+
+        .calendar-day-card.is-selected .calendar-day-number,
+        .calendar-day-card.is-selected .calendar-day-subtitle,
+        .calendar-day-card.is-selected .calendar-day-count,
+        .calendar-day-card.is-selected .calendar-day-chip {
+            color: #fff;
+        }
+
+        .calendar-day-meta {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .calendar-day-number {
+            font-size: 20px;
+            font-weight: 800;
+            color: #123524;
+            line-height: 1;
+        }
+
+        .calendar-day-subtitle {
+            display: block;
+            margin-top: 4px;
+            color: #819287;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .calendar-day-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 32px;
+            height: 32px;
+            padding: 0 10px;
+            border-radius: 999px;
+            background: rgba(11, 107, 58, 0.08);
+            color: #0b6b3a;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .calendar-day-events {
+            display: grid;
+            gap: 6px;
+        }
+
+        .calendar-day-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            width: 100%;
+            padding: 8px 10px;
+            border-radius: 14px;
+            background: #f6faf7;
+            color: #45604f;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .calendar-day-chip .chip-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .calendar-day-chip.more-chip {
+            justify-content: center;
+            background: rgba(17, 24, 39, 0.04);
+            color: #4b5563;
+        }
+
+        .calendar-agenda-card {
+            margin-top: 6px;
+            padding: 22px;
+            border-radius: 24px;
+            background: #fff;
+            border: 1px solid rgba(13, 68, 40, 0.08);
+            box-shadow: 0 18px 34px rgba(12, 54, 33, 0.05);
+        }
+
+        .calendar-agenda-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .calendar-agenda-head h5 {
+            color: #123524;
+            font-weight: 800;
+        }
+
+        .calendar-agenda-head p {
+            color: #708274;
+        }
+
+        .agenda-count {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(11, 107, 58, 0.08);
+            color: #0b6b3a;
+            font-weight: 800;
+        }
+
+        .agenda-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .agenda-order-item {
+            display: grid;
+            gap: 10px;
+            padding: 18px;
+            border-radius: 20px;
+            background: #f8fbf8;
+            border: 1px solid rgba(13, 68, 40, 0.08);
+        }
+
+        .agenda-order-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .agenda-order-top strong {
+            color: #123524;
+            font-size: 16px;
+        }
+
+        .agenda-order-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            color: #6b7d70;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .agenda-empty {
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            background: #f8fbf8;
+            color: #708274;
+            font-weight: 700;
+        }
+
+        .calendar-modal-close {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            width: 46px;
+            height: 46px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.92);
+            color: #123524;
+            box-shadow: 0 12px 24px rgba(12, 54, 33, 0.08);
+        }
+
         @media (max-width: 1199.98px) {
             .dashboard-hero {
                 grid-template-columns: 1fr;
             }
 
             .approval-overview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .orders-calendar-shell {
                 grid-template-columns: 1fr;
             }
         }
@@ -869,6 +1368,26 @@
 
             .visitor-cell {
                 min-width: 200px;
+            }
+
+            .orders-calendar-main,
+            .orders-calendar-panel {
+                padding: 20px;
+            }
+
+            .calendar-grid,
+            .calendar-weekdays {
+                gap: 8px;
+            }
+
+            .calendar-day-card {
+                min-height: 104px;
+                padding: 10px;
+                border-radius: 18px;
+            }
+
+            .calendar-day-number {
+                font-size: 16px;
             }
         }
     </style>
@@ -892,6 +1411,235 @@
                         previous: "السابق"
                     }
                 }
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendarOrders = @json($calendarOrders);
+            const modal = document.getElementById('ordersCalendarModal');
+            const grid = document.getElementById('ordersCalendarGrid');
+            const monthLabel = document.getElementById('calendarMonthLabel');
+            const monthMeta = document.getElementById('calendarMonthMeta');
+            const selectedDateLabel = document.getElementById('selectedDateLabel');
+            const selectedDateCount = document.getElementById('selectedDateCount');
+            const selectedDateOrders = document.getElementById('selectedDateOrders');
+            const prevBtn = document.getElementById('calendarPrevBtn');
+            const nextBtn = document.getElementById('calendarNextBtn');
+            const todayBtn = document.getElementById('calendarTodayBtn');
+
+            const statusMap = {
+                pending: {
+                    label: 'قيد الانتظار',
+                    color: '#c08100'
+                },
+                host_approved: {
+                    label: 'موافقة المستضيف',
+                    color: '#175cd3'
+                },
+                approved: {
+                    label: 'معتمد',
+                    color: '#0b6b3a'
+                },
+                in_progress: {
+                    label: 'جاري التنفيذ',
+                    color: '#7c3aed'
+                },
+                completed: {
+                    label: 'مكتمل',
+                    color: '#166246'
+                },
+                rejected: {
+                    label: 'مرفوض',
+                    color: '#b42318'
+                }
+            };
+
+            const ordersByDate = calendarOrders.reduce((acc, order) => {
+                if (!order.date) return acc;
+                if (!acc[order.date]) acc[order.date] = [];
+                acc[order.date].push(order);
+                return acc;
+            }, {});
+
+            const orderDates = Object.keys(ordersByDate).sort();
+            const firstOrderDate = orderDates.length ? new Date(orderDates[0] + 'T00:00:00') : new Date();
+
+            let currentMonth = new Date(firstOrderDate.getFullYear(), firstOrderDate.getMonth(), 1);
+            let selectedDateKey = orderDates[0] || formatDateKey(new Date());
+
+            function formatDateKey(date) {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            }
+
+            function formatArabicDate(dateString) {
+                const date = new Date(dateString + 'T00:00:00');
+                return new Intl.DateTimeFormat('ar-EG', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                }).format(date);
+            }
+
+            function getMonthLabel(date) {
+                return new Intl.DateTimeFormat('ar-EG', {
+                    month: 'long',
+                    year: 'numeric'
+                }).format(date);
+            }
+
+            function getStatusInfo(status) {
+                return statusMap[status] || {
+                    label: status,
+                    color: '#708274'
+                };
+            }
+
+            function renderAgenda() {
+                const dayOrders = ordersByDate[selectedDateKey] || [];
+
+                selectedDateLabel.textContent = dayOrders.length ?
+                    formatArabicDate(selectedDateKey) :
+                    `لا توجد طلبات بتاريخ ${formatArabicDate(selectedDateKey)}`;
+                selectedDateCount.textContent = `${dayOrders.length} طلب`;
+
+                if (!dayOrders.length) {
+                    selectedDateOrders.innerHTML = '<div class="agenda-empty">لا توجد طلبات مجدولة في هذا اليوم.</div>';
+                    return;
+                }
+
+                selectedDateOrders.innerHTML = dayOrders.map(order => {
+                    const status = getStatusInfo(order.status);
+                    return `
+                        <article class="agenda-order-item">
+                            <div class="agenda-order-top">
+                                <div>
+                                    <strong>${order.visitor}</strong>
+                                </div>
+                                <span class="status-pill" style="background:${status.color}14; color:${status.color};">
+                                    ${status.label}
+                                </span>
+                            </div>
+                            <div class="agenda-order-meta">
+                                <span><i class="ti ti-clock"></i> ${order.time || 'بدون وقت'}</span>
+                                <span><i class="ti ti-user"></i> ${order.host || 'بدون مستضيف'}</span>
+                                <span><i class="ti ti-briefcase"></i> ${order.purpose || 'بدون غرض زيارة'}</span>
+                                <span><i class="ti ti-ticket"></i> ${order.order_number || '-'}</span>
+                            </div>
+                        </article>
+                    `;
+                }).join('');
+            }
+
+            function renderCalendar() {
+                const todayKey = formatDateKey(new Date());
+                const start = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1);
+                const end = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0);
+                const startOffset = start.getDay();
+                const totalDays = end.getDate();
+                const prevMonthLastDay = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 0).getDate();
+                const cells = [];
+
+                monthLabel.textContent = getMonthLabel(currentMonth);
+                monthMeta.textContent = `يعرض جميع الطلبات المجدولة خلال الشهر`;
+
+                for (let i = startOffset - 1; i >= 0; i--) {
+                    const dayNumber = prevMonthLastDay - i;
+                    const cellDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, dayNumber);
+                    cells.push(createDayCard(cellDate, true, todayKey));
+                }
+
+                for (let day = 1; day <= totalDays; day++) {
+                    const cellDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
+                    cells.push(createDayCard(cellDate, false, todayKey));
+                }
+
+                const remainingCells = (7 - (cells.length % 7)) % 7;
+                for (let day = 1; day <= remainingCells; day++) {
+                    const cellDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, day);
+                    cells.push(createDayCard(cellDate, true, todayKey));
+                }
+
+                grid.innerHTML = cells.join('');
+                grid.querySelectorAll('.calendar-day-card').forEach(card => {
+                    card.addEventListener('click', function() {
+                        selectedDateKey = this.dataset.date;
+                        renderCalendar();
+                        renderAgenda();
+                    });
+                });
+            }
+
+            function createDayCard(date, isMuted, todayKey) {
+                const dateKey = formatDateKey(date);
+                const dayOrders = ordersByDate[dateKey] || [];
+                const visibleOrders = dayOrders.slice(0, 2);
+                const moreCount = dayOrders.length - visibleOrders.length;
+                const subtitle = new Intl.DateTimeFormat('ar-EG', {
+                    month: 'short'
+                }).format(date);
+
+                const classes = [
+                    'calendar-day-card',
+                    isMuted ? 'is-muted' : '',
+                    dateKey === todayKey ? 'is-today' : '',
+                    dateKey === selectedDateKey ? 'is-selected' : ''
+                ].filter(Boolean).join(' ');
+
+                return `
+                    <button type="button" class="${classes}" data-date="${dateKey}">
+                        <div class="calendar-day-meta">
+                            <div>
+                                <span class="calendar-day-number">${date.getDate()}</span>
+                                <span class="calendar-day-subtitle">${subtitle}</span>
+                            </div>
+                            <span class="calendar-day-count">${dayOrders.length}</span>
+                        </div>
+                        <div class="calendar-day-events">
+                            ${visibleOrders.map(order => {
+                                const status = getStatusInfo(order.status);
+                                return `
+                                    <span class="calendar-day-chip">
+                                        <span class="chip-dot" style="background:${status.color};"></span>
+                                        ${order.visitor}
+                                    </span>
+                                `;
+                            }).join('')}
+                            ${moreCount > 0 ? `<span class="calendar-day-chip more-chip">+${moreCount} المزيد</span>` : ''}
+                        </div>
+                    </button>
+                `;
+            }
+
+            prevBtn.addEventListener('click', function() {
+                currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1, 1);
+                renderCalendar();
+            });
+
+            nextBtn.addEventListener('click', function() {
+                currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 1);
+                renderCalendar();
+            });
+
+            todayBtn.addEventListener('click', function() {
+                const now = new Date();
+                currentMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+                selectedDateKey = formatDateKey(now);
+                renderCalendar();
+                renderAgenda();
+            });
+
+            modal.addEventListener('shown.bs.modal', function() {
+                if (!ordersByDate[selectedDateKey]) {
+                    selectedDateKey = Object.keys(ordersByDate)[0] || formatDateKey(new Date());
+                }
+                renderCalendar();
+                renderAgenda();
             });
         });
     </script>
