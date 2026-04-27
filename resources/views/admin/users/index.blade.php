@@ -1,8 +1,44 @@
 @extends('admin.layout')
 
+@push('css')
+    <style>
+        .users-filter-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.25rem;
+        }
+
+        .users-filter-group {
+            min-width: 260px;
+        }
+
+        .users-filter-label {
+            display: block;
+            margin-bottom: 0.45rem;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .users-role-filter {
+            border-radius: 10px;
+            min-height: 44px;
+        }
+
+        .employee-steps-box {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 1rem;
+        }
+    </style>
+@endpush
+
 @section('content')
     <section class="pc-container">
-        <div class="pc-content">
+        <div class="pc-content"> 
             <div class="row">
 
                 @if ($users->count())
@@ -21,6 +57,19 @@
                             </div>
 
                             <div class="card-body">
+                                <div class="users-filter-bar">
+                                    <div class="users-filter-group">
+                                        <label for="roleFilter" class="users-filter-label">بحث حسب نوع المستخدم</label>
+                                        <select id="roleFilter" class="form-select users-role-filter">
+                                            <option value="">جميع الأدوار</option>
+                                            <option value="مدير المنصة">مدير المنصة</option>
+                                            <option value="مدير الأمن">مدير الأمن</option>
+                                            <option value="موظف الأمن">موظف الأمن</option>
+                                            <option value="موظف جديد">موظف جديد</option>
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div class="dt-responsive table-responsive">
                                     <table id="simpletable" class="table table-striped table-bordered nowrap">
                                         <thead>
@@ -107,7 +156,7 @@
 
                                     <div class="col-6 mb-3">
                                         <label class="form-label">نوع المستخدم </label>
-                                        <select name="role" class="form-select">
+                                        <select name="role" id="createUserRole" class="form-select">
                                             <option value="" selected>— اختر الدور —</option>
                                             <option value="admin">مدير المنصة</option>
                                             <option value="security_manager">مدير الأمن</option>
@@ -138,6 +187,22 @@
                                     <div class="col-6 mb-3">
                                         <label class="form-label">تأكيد كلمة المرور</label>
                                         <input type="password" name="password_confirmation" class="form-control">
+                                    </div>
+
+                                    <div class="col-12 mb-3" id="createEmployeeStepsWrapper"
+                                        style="display: {{ old('role') === 'employee' ? 'block' : 'none' }};">
+                                        <div class="employee-steps-box">
+                                            <label class="form-label">خطوات الموظف الجديد</label>
+                                            <textarea name="onboarding_steps_text" rows="5"
+                                                class="form-control @error('onboarding_steps_text') is-invalid @enderror"
+                                                placeholder="اكتب كل خطوة في سطر مستقل&#10;زيارة الموارد البشرية&#10;زيارة تقنية المعلومات&#10;مقابلة مدير القسم">{{ old('onboarding_steps_text') }}</textarea>
+                                            <small class="text-muted d-block mt-2">
+                                                هذا الحقل اختياري ويظهر فقط للموظف الجديد داخل صفحة الإحصائيات.
+                                            </small>
+                                            @error('onboarding_steps_text')
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -193,7 +258,7 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            $('#simpletable').DataTable({
+            const usersTable = $('#simpletable').DataTable({
                 language: {
                     lengthMenu: "عرض _MENU_ مدخلات",
                     search: "بحث:",
@@ -208,6 +273,22 @@
                         previous: "السابق"
                     }
                 }
+            });
+
+            $('#roleFilter').on('change', function() {
+                const selectedRole = $(this).val();
+                usersTable.column(2).search(selectedRole ? '^' + selectedRole + '$' : '', true, false).draw();
+            });
+
+            function toggleEmployeeSteps(selectSelector, wrapperSelector) {
+                const isEmployee = $(selectSelector).val() === 'employee';
+                $(wrapperSelector).toggle(isEmployee);
+            }
+
+            toggleEmployeeSteps('#createUserRole', '#createEmployeeStepsWrapper');
+
+            $('#createUserRole').on('change', function() {
+                toggleEmployeeSteps('#createUserRole', '#createEmployeeStepsWrapper');
             });
         });
     </script>

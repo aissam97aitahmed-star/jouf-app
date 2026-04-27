@@ -4,6 +4,10 @@
 
     <div class="row">
 
+        @php
+            $employeeOnboardingSteps = $employeeOnboardingSteps ?? [];
+        @endphp
+
 
 
         <div class="col-xl-8">
@@ -67,7 +71,52 @@
             </div>
         </div>
 
-        <div class="col-xl-4">
+        @if (count($employeeOnboardingSteps))
+            <div class="col-xl-12">
+                <div class="card border-0 shadow-sm"
+                    style="border-radius: 24px; background: linear-gradient(135deg, #f8fff9 0%, #ffffff 100%); border: 1px solid #e7f6ea; box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);">
+                    <div class="card-body p-4 p-xl-4">
+                        <div class="mb-4">
+                            <h5 class="tajawal-bold mb-1" style="color: #111827;">تقدمك الوظيفي</h5>
+                            <p class="tajawal-regular mb-0" style="font-size: 14px; color: #6B7280;">
+                                الخطوات التالية تم إعدادها لك من الإدارة وتظهر هنا كمسار واضح وبسيط.
+                            </p>
+                        </div>
+
+                        <div class="d-flex flex-wrap align-items-start gap-3">
+                            @foreach ($employeeOnboardingSteps as $stepIndex => $step)
+                                <div class="d-flex align-items-center"
+                                    style="flex: 0 0 calc(33.333% - 0.75rem); max-width: calc(33.333% - 0.75rem); min-width: 220px;">
+                                    <div class="d-flex align-items-center flex-grow-1">
+                                        <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                                            style="width: 48px; height: 48px; background: linear-gradient(135deg, #DCFCE7 0%, #BBF7D0 100%); border: 2px solid #86EFAC; color: #166534; box-shadow: 0 8px 18px rgba(34, 197, 94, 0.14);">
+                                            <i class="bi bi-check2-circle fs-5"></i>
+                                        </div>
+
+                                        <div class="me-3">
+                                            <div class="tajawal-bold" style="font-size: 14px; color: #111827;">
+                                                {{ $step }}
+                                            </div>
+                                            <div class="tajawal-regular" style="font-size: 12px; color: #6B7280;">
+                                                خطوة {{ $stepIndex + 1 }}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @if (!$loop->last)
+                                        <div class="d-none d-xl-block ms-3 flex-grow-1"
+                                            style="height: 2px; min-width: 30px; background: linear-gradient(90deg, #BBF7D0 0%, #E5F7EA 100%);">
+                                        </div>
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        <div class="col-xl-4 mt-5">
             <div class="d-flex align-items-center mb-3">
                 <h5 class="tajawal-bold fs-18 mb-0">ميزات الموظفين</h5>
             </div>
@@ -109,6 +158,8 @@
                 </div>
             </div>
         </div>
+
+
 
 
     </div>

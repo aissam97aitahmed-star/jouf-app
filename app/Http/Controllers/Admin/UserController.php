@@ -42,6 +42,7 @@ class UserController extends Controller
             'role' => 'required|in:security_manager,security_officer,employee,admin',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
+            'onboarding_steps_text' => 'nullable|string',
         ]);
 
         User::create([
@@ -50,6 +51,7 @@ class UserController extends Controller
             'role' => $request->role,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'onboarding_steps' => $this->prepareOnboardingSteps($request),
         ]);
 
         ToastMagic::success('تم إضافة المستخدم بنجاح');
@@ -84,6 +86,7 @@ class UserController extends Controller
             'role' => 'required|in:security_manager,security_officer,employee,admin',
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:8|confirmed',
+            'onboarding_steps_text' => 'nullable|string',
         ]);
 
         $data = [
@@ -91,6 +94,7 @@ class UserController extends Controller
             'username' => $request->username,
             'role' => $request->role,
             'email' => $request->email,
+            'onboarding_steps' => $this->prepareOnboardingSteps($request),
         ];
 
         // تحديث كلمة المرور فقط إذا تم إدخالها
@@ -128,7 +132,23 @@ class UserController extends Controller
         ToastMagic::success('تم استيراد الموظفين بنجاح!');
         return back();
     }
-}
 
+    protected function prepareOnboardingSteps(Request $request): ?array
+    {
+        if ($request->role !== 'employee') {
+            return null;
+        }
+
+        $steps = collect(preg_split('/\r\n|\r|\n/', (string) $request->input('onboarding_steps_text')))
+            ->map(function ($step) {
+                return trim((string) $step);
+            })
+            ->filter()
+            ->values()
+            ->all();
+
+        return empty($steps) ? null : $steps;
+    }
+}
 
 

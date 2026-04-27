@@ -14,6 +14,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
         $serviceContacts = EmployeeServiceContact::where('is_active', true)
             ->orderBy('service_key')
             ->orderBy('sort_order')
@@ -26,6 +27,7 @@ class DashboardController extends Controller
             'videos' => Video::count() ?? 0,
             'employees' => Employee::count() ?? 0,
             'serviceContacts' => $serviceContacts,
+            'employeeOnboardingSteps' => $user?->onboarding_steps ?? [],
         ]);
     }
 

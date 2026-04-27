@@ -10,6 +10,13 @@
         .br-6 {
             border-radius: 6px;
         }
+
+        .employee-steps-box {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 1rem;
+        }
     </style>
 @endpush
 
@@ -62,7 +69,8 @@
                                     {{-- Role --}}
                                     <div class="col-6 mb-3">
                                         <label class="form-label">نوع المستخدم</label>
-                                        <select name="role" class="form-select @error('role') is-invalid @enderror">
+                                        <select name="role" id="editUserRole"
+                                            class="form-select @error('role') is-invalid @enderror">
                                             <option value="">— اختر الدور —</option>
                                             <option value="security_manager"
                                                 {{ old('role', $user->role) == 'security_manager' ? 'selected' : '' }}>
@@ -109,6 +117,22 @@
                                         <input type="password" name="password_confirmation" class="form-control">
                                     </div>
 
+                                    <div class="col-12 mb-3" id="editEmployeeStepsWrapper"
+                                        style="display: {{ old('role', $user->role) === 'employee' ? 'block' : 'none' }};">
+                                        <div class="employee-steps-box">
+                                            <label class="form-label">خطوات الموظف الجديد</label>
+                                            <textarea name="onboarding_steps_text" rows="5"
+                                                class="form-control @error('onboarding_steps_text') is-invalid @enderror"
+                                                placeholder="اكتب كل خطوة في سطر مستقل&#10;زيارة الموارد البشرية&#10;زيارة تقنية المعلومات&#10;مقابلة مدير القسم">{{ old('onboarding_steps_text', implode("\n", $user->onboarding_steps ?? [])) }}</textarea>
+                                            <small class="text-muted d-block mt-2">
+                                                هذا الحقل اختياري. إذا لم يكن الموظف يحتاج خطوات، اتركه فارغاً.
+                                            </small>
+                                            @error('onboarding_steps_text')
+                                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
 
@@ -127,3 +151,17 @@
         </div>
     </section>
 @endsection
+
+@push('js')
+    <script>
+        $(document).ready(function() {
+            function toggleEmployeeSteps() {
+                $('#editEmployeeStepsWrapper').toggle($('#editUserRole').val() === 'employee');
+            }
+
+            toggleEmployeeSteps();
+
+            $('#editUserRole').on('change', toggleEmployeeSteps);
+        });
+    </script>
+@endpush
